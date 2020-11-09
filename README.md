@@ -1,16 +1,17 @@
-# state_tests
+# State Tests
 
-A new Flutter application.
+Flutter state samples using various state libraries
 
-## Getting Started
+## Libraries Used
 
-This project is a starting point for a Flutter application.
+Binder: https://pub.dev/packages/binder
+Bloc: https://pub.dev/packages/bloc
+Command: https://pub.dev/packages/flutter_command
+MobX: https://pub.dev/packages/mobx
+Rebuilder: https://pub.dev/packages/states_rebuilder
+RiverPod: https://pub.dev/packages/riverpod
 
-A few resources to get you started if this is your first Flutter project:
+## References Used
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+General: https://poetryincode.dev/flutter-state-5-ways
+Rebuilder: https://medium.com/flutter-community/state-management-gymnastics-using-states-rebuilder-part-1-3ba3a6abf9c7
