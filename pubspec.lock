@@ -29,17 +29,17 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.5.0-nullsafety.2"
-  states.binder:
+  binder:
     dependency: "direct main"
     description:
-      name: states.binder
+      name: binder
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
-  states.bloc:
+    version: "0.2.1"
+  bloc:
     dependency: "direct main"
     description:
-      name: states.bloc
+      name: bloc
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.0"
@@ -333,10 +333,10 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.7"
-  states.mobx:
+  mobx:
     dependency: "direct main"
     description:
-      name: states.mobx
+      name: mobx
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.1+4"
