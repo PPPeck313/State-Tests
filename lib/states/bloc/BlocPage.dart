@@ -8,25 +8,7 @@ import 'package:state_tests/common/pages/StatePage.dart';
 
 import 'models/NotesCubit.dart';
 
-class BlocPage extends StatefulWidget {
-
-  //============================================================================
-  // Constructors
-  //============================================================================
-
-  const BlocPage({Key key}) : super(key: key);
-
-  //============================================================================
-  // Lifecycle Methods
-  //============================================================================
-
-  @override
-  _BlocPageState createState() => _BlocPageState();
-}
-
-
-
-class _BlocPageState extends State<BlocPage> implements StatePage {
+class BlocPage extends StatelessWidget implements StatePage {
 
   //============================================================================
   // Lifecycle Methods

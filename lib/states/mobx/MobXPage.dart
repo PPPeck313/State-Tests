@@ -1,31 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:state_tests/common/widgets/NotesList.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
 
 import 'models/NotesStore.dart';
 
-class MobxPage extends StatefulWidget {
-
-  //============================================================================
-  // Constructors
-  //============================================================================
-
-  const MobxPage({Key key}) : super(key: key);
-
-  //============================================================================
-  // Lifecycle Methods
-  //============================================================================
-
-  @override
-  _MobxPageState createState() => _MobxPageState();
-}
-
-
-
-class _MobxPageState extends State<MobxPage> implements StatePage {
+class MobxPage extends StatelessWidget implements StatePage {
 
   //============================================================================
   // Fields

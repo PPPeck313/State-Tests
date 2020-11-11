@@ -7,25 +7,7 @@ import 'package:state_tests/common/pages/StatePage.dart';
 
 import 'models/NotesNotifier.dart';
 
-class RiverPodPage extends StatefulWidget {
-
-  //============================================================================
-  // Constructors
-  //============================================================================
-
-  const RiverPodPage({Key key}) : super(key: key);
-
-  //============================================================================
-  // Lifecycle Methods
-  //============================================================================
-
-  @override
-  _RiverPodPageState createState() => _RiverPodPageState();
-}
-
-
-
-class _RiverPodPageState extends State<RiverPodPage> implements StatePage {
+class RiverPodPage extends StatelessWidget implements StatePage {
 
   //============================================================================
   // Lifecycle Methods

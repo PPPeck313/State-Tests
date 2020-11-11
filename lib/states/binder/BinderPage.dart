@@ -8,25 +8,7 @@ import 'package:state_tests/common/pages/StatePage.dart';
 
 import 'models/NotesLogic.dart';
 
-class BinderPage extends StatefulWidget {
-
-  //============================================================================
-  // Constructors
-  //============================================================================
-
-  const BinderPage({Key key}) : super(key: key);
-
-  //============================================================================
-  // Lifecycle Methods
-  //============================================================================
-
-  @override
-  _BinderPageState createState() => _BinderPageState();
-}
-
-
-
-class _BinderPageState extends State<BinderPage> implements StatePage {
+class BinderPage extends StatelessWidget implements StatePage {
 
   //============================================================================
   // Lifecycle Methods

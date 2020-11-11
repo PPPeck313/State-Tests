@@ -7,25 +7,7 @@ import 'package:states_rebuilder/states_rebuilder.dart';
 
 import 'models/NotesReactiveModel.dart';
 
-class RebuilderPage extends StatefulWidget {
-
-  //============================================================================
-  // Constructors
-  //============================================================================
-
-  const RebuilderPage({Key key}) : super(key: key);
-
-  //============================================================================
-  // Lifecycle Methods
-  //============================================================================
-
-  @override
-  _RebuilderPageState createState() => _RebuilderPageState();
-}
-
-
-
-class _RebuilderPageState extends State<RebuilderPage> implements StatePage {
+class RebuilderPage extends StatelessWidget implements StatePage {
 
   //============================================================================
   // Fields

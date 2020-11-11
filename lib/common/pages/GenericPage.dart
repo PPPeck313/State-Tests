@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:state_tests/common/models/Note.dart';
-import 'package:state_tests/common/models/NotesState.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
 
 class GenericPage extends StatefulWidget {
