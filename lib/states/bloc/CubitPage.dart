@@ -1,14 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:state_tests/common/models/NotesActions.dart';
 import 'package:state_tests/common/models/NotesState.dart';
+import 'package:state_tests/common/widgets/NotesList.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
-import 'package:state_tests/common/widgets/NotesList.dart';
 
-import 'models/NotesBloc.dart';
+import 'models/NotesCubit.dart';
 
-class BlocPage extends StatelessWidget implements StatePage {
+class CubitPage extends StatelessWidget implements StatePage {
 
   //============================================================================
   // Lifecycle Methods
@@ -16,8 +16,8 @@ class BlocPage extends StatelessWidget implements StatePage {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NotesBloc>(create: (_) => NotesBloc(),
-        child: GenericPage(this)
+    return BlocProvider<NotesCubit>(create: (_) => NotesCubit(),
+      child: GenericPage(this)
     );
   }
 
@@ -26,25 +26,22 @@ class BlocPage extends StatelessWidget implements StatePage {
   //============================================================================
 
   @override
-  String getTag() => "Bloc";
+  String getTag() => "Cubit";
 
 
 
   @override
   Widget getList(BuildContext context) {
-    return BlocBuilder<NotesBloc, NotesState>(
-        builder: (context, state) => NotesList(state)
+    return BlocBuilder<NotesCubit, NotesState>(
+      builder: (context, state) => NotesList(state)
     );
   }
 
 
 
   @override
-  void getAddNoteFunction(BuildContext context) => context.bloc<NotesBloc>().add(AddNoteAction());
+  void getAddNoteFunction(BuildContext context) => context.bloc<NotesCubit>().addNote();
 
   @override
-  Function(String p1) getUpdateInputFunction(BuildContext context) => (p1) {
-    context.bloc<NotesBloc>().add(UpdateInputAction(p1));
-  };
+  Function(String p1) getUpdateInputFunction(BuildContext context) => context.bloc<NotesCubit>().updateInput;
 }
-

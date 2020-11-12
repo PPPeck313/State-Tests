@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:state_tests/common/models/NotesState.dart';
 import 'package:state_tests/common/widgets/NotesList.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
@@ -10,12 +11,6 @@ import 'models/NotesReactiveModel.dart';
 class RebuilderPage extends StatelessWidget implements StatePage {
 
   //============================================================================
-  // Fields
-  //============================================================================
-
-  ReactiveModel<NotesReactiveModel> _state;
-
-  //============================================================================
   // Lifecycle Methods
   //============================================================================
 
@@ -23,14 +18,14 @@ class RebuilderPage extends StatelessWidget implements StatePage {
   Widget build(BuildContext context) {
     return Injector(
         inject: [
-          Inject<NotesReactiveModel>(() => NotesReactiveModel.initial())
+          Inject<NotesReactiveModel>(() => NotesReactiveModel())
         ],
         initState: () {}, //to be executed in the initState of statefulWidget
         afterInitialBuild: (BuildContext context) {}, //to be executed after each rebuild of the widget
         dispose: () {}, //to be executed in the dispose of statefulWidget
         appLifeCycle: (AppLifecycleState state) {}, //to be executed each time the application state changed; Android: onResume, onPause; iOS: viewWillAppear, viewWillDisappear
         builder: (context) {
-          _state = RM.get<NotesReactiveModel>(name: "NotesReactiveModel", context: context);
+          RM.get<NotesReactiveModel>(name: "NotesReactiveModel", context: context);
           return GenericPage(this);
         }
     );
@@ -47,14 +42,14 @@ class RebuilderPage extends StatelessWidget implements StatePage {
 
   @override
   Widget getList(BuildContext context) {
-    var state = _state.state.state;
+    NotesState state = RM.get<NotesReactiveModel>().state.state;
     return NotesList(state);
   }
 
 
 
   @override
-  void getAddNoteFunction(BuildContext context) => _state.setState((s) => s.addNote());
+  void getAddNoteFunction(BuildContext context) => RM.get<NotesReactiveModel>().setState((s) => s.addNote());
 
   @override
   Function(String p1) getUpdateInputFunction(BuildContext context) => IN.get<NotesReactiveModel>().updateInput;

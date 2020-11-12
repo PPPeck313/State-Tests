@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/all.dart';
+import 'package:state_tests/common/models/NotesState.dart';
 import 'package:state_tests/common/widgets/NotesList.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
@@ -33,7 +34,7 @@ class RiverPodPage extends StatelessWidget implements StatePage {
   Widget getList(BuildContext context) {
     return Consumer(
       builder: (context, watch, child) {
-        var state = watch(NotesNotifier.notesProvider.state);
+        NotesState state = watch(NotesNotifier.notesProvider.state);
         return NotesList(state);
       }
     );

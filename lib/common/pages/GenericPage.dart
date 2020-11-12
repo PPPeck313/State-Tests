@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:state_tests/common/models/Callback.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
 
 class GenericPage extends StatefulWidget {
@@ -93,7 +94,7 @@ class _GenericPageState extends State<GenericPage> {
   Widget makeUpdateInputTextField() {
     return TextField(
       controller: _controller,
-      onChanged: (value) => Function.apply(statePage.getUpdateInputFunction(context), [value]),
+      onChanged: (value) => Callback(statePage.getUpdateInputFunction(context)).runArg(value),
       decoration: InputDecoration.collapsed(hintText: 'Add a note'),
     );
   }

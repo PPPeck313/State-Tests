@@ -13,9 +13,7 @@ class NotesReactiveModel {
   // Constructors
   //============================================================================
 
-  NotesReactiveModel(this.state);
-
-  NotesReactiveModel.initial() {
+  NotesReactiveModel() {
     state = NotesState.initial();
   }
 
@@ -28,5 +26,5 @@ class NotesReactiveModel {
     state = state.copyWith(notes: notes, input: '');
   }
 
-  void updateInput(String input) => state.copyWith(input: input);
+  void updateInput(String input) => state = state.copyWith(input: input);
 }

@@ -4,7 +4,7 @@ import 'package:state_tests/common/widgets/NotesList.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
 
-import 'models/NotesStore.dart';
+import 'models/NotesStoreX.dart';
 
 class MobxPage extends StatelessWidget implements StatePage {
 
@@ -12,7 +12,7 @@ class MobxPage extends StatelessWidget implements StatePage {
   // Fields
   //============================================================================
 
-  NotesStore _state = NotesStore();
+  NotesStoreX _state = NotesStoreX();
 
   //============================================================================
   // Lifecycle Methods

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:state_tests/common/models/NotesState.dart';
-import 'package:state_tests/states/mobx/models/NotesStore.dart';
+import 'package:state_tests/states/mobx/models/NotesStoreX.dart';
 
 import '../models/Note.dart';
 
@@ -12,7 +12,7 @@ class NotesList extends StatelessWidget {
   //============================================================================
 
   NotesState notesState;
-  NotesStore notesStore;
+  NotesStoreX notesStoreX;
 
   //============================================================================
   // Constructors
@@ -20,7 +20,7 @@ class NotesList extends StatelessWidget {
 
   NotesList(this.notesState);
 
-  NotesList.mobX(this.notesStore);
+  NotesList.mobX(this.notesStoreX);
 
   //============================================================================
   // Lifecycle Methods
@@ -34,8 +34,8 @@ class NotesList extends StatelessWidget {
   Widget getList() {
     return Expanded(
       child: ListView.builder(
-        itemBuilder: (context, index) => Note(text: notesState != null ? notesState.notes[index] : notesStore.notes[index]),
-        itemCount: notesState != null ? notesState.notes.length : notesStore.notes.length,
+        itemBuilder: (context, index) => Note(text: notesState != null ? notesState.notes[index] : notesStoreX.notes[index]),
+        itemCount: notesState != null ? notesState.notes.length : notesStoreX.notes.length,
       ),
     );
   }

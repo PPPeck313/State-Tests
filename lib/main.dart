@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:state_tests/common/Drawables.dart';
 import 'package:state_tests/states/binder/BinderPage.dart';
 import 'package:state_tests/states/bloc/BlocPage.dart';
+import 'package:state_tests/states/bloc/CubitPage.dart';
 import 'package:state_tests/states/command/CommandPage.dart';
 import 'package:state_tests/states/mobx/MobXPage.dart';
 import 'package:state_tests/states/rebuilder/RebuilderPage.dart';
+import 'package:state_tests/states/redux/ReduxPage.dart';
 import 'package:state_tests/states/river_pod/RiverPodPage.dart';
 
 import 'common/widgets/RetainedTab.dart';
@@ -25,9 +28,11 @@ class MyApp extends StatelessWidget {
         home: makeTopTabScreen(context, [
             RetainedTab(BinderPage()),
             RetainedTab(BlocPage()),
+            RetainedTab(CubitPage()),
             RetainedTab(CommandPage()),
             RetainedTab(MobxPage()),
             RetainedTab(RebuilderPage()),
+            RetainedTab(ReduxPage()),
             RetainedTab(RiverPodPage()),
           ]
         ),
@@ -69,12 +74,14 @@ class MyApp extends StatelessWidget {
   Widget makeTabBar() {
     return TabBar(
         tabs: [
-          Tab(icon: Icon(Icons.book), text: "Binder"),
-          Tab(icon: Icon(Icons.crop_square), text: "Bloc"),
-          Tab(icon: Icon(Icons.message), text: "Command"),
-          Tab(icon: Icon(Icons.clear), text: "MobX"),
-          Tab(icon: Icon(Icons.handyman), text: "Rebuilder"),
-          Tab(icon: Icon(Icons.water_damage), text: "RiverPod")
+          Tab(icon: Image.asset(Drawables.binder_logo), text: "Bi"),
+          Tab(icon: Image.asset(Drawables.bloc_logo), text: "Bl"),
+          Tab(icon: Image.asset(Drawables.cubit_logo), text: "Cb"),
+          Tab(icon: Image.asset(Drawables.command_logo), text: "Co"),
+          Tab(icon: Image.asset(Drawables.mobx_logo), text: "MX"),
+          Tab(icon: Image.asset(Drawables.rebuilder_logo), text: "Rb"),
+          Tab(icon: Image.asset(Drawables.redux_logo), text: "Rd"),
+          Tab(icon: Image.asset(Drawables.riverpod_logo), text: "Rp")
         ]
     );
   }

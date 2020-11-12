@@ -1,10 +1,10 @@
 import 'package:mobx/mobx.dart';
 
-part 'NotesStore.g.dart';
+part 'NotesStoreX.g.dart';
 
-class NotesStore = NotesStoreBase with _$NotesStore;
+class NotesStoreX = NotesStoreXBase with _$NotesStoreX;
 
-abstract class NotesStoreBase with Store {
+abstract class NotesStoreXBase with Store {
 
   //============================================================================
   // Fields

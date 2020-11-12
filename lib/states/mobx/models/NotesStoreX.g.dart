@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'NotesStore.dart';
+part of 'NotesStoreX.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'NotesStore.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$NotesStore on NotesStoreBase, Store {
-  final _$inputAtom = Atom(name: 'NotesStoreBase.input');
+mixin _$NotesStoreX on NotesStoreXBase, Store {
+  final _$inputAtom = Atom(name: 'NotesStoreXBase.input');
 
   @override
   String get input {
@@ -24,7 +24,7 @@ mixin _$NotesStore on NotesStoreBase, Store {
     });
   }
 
-  final _$notesAtom = Atom(name: 'NotesStoreBase.notes');
+  final _$notesAtom = Atom(name: 'NotesStoreXBase.notes');
 
   @override
   ObservableList<String> get notes {
@@ -39,28 +39,28 @@ mixin _$NotesStore on NotesStoreBase, Store {
     });
   }
 
-  final _$NotesStoreBaseActionController =
-      ActionController(name: 'NotesStoreBase');
+  final _$NotesStoreXBaseActionController =
+      ActionController(name: 'NotesStoreXBase');
 
   @override
   void updateInput(String val) {
-    final _$actionInfo = _$NotesStoreBaseActionController.startAction(
-        name: 'NotesStoreBase.updateInput');
+    final _$actionInfo = _$NotesStoreXBaseActionController.startAction(
+        name: 'NotesStoreXBase.updateInput');
     try {
       return super.updateInput(val);
     } finally {
-      _$NotesStoreBaseActionController.endAction(_$actionInfo);
+      _$NotesStoreXBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void addNote() {
-    final _$actionInfo = _$NotesStoreBaseActionController.startAction(
-        name: 'NotesStoreBase.addNote');
+    final _$actionInfo = _$NotesStoreXBaseActionController.startAction(
+        name: 'NotesStoreXBase.addNote');
     try {
       return super.addNote();
     } finally {
-      _$NotesStoreBaseActionController.endAction(_$actionInfo);
+      _$NotesStoreXBaseActionController.endAction(_$actionInfo);
     }
   }
 
