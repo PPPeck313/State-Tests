@@ -1,33 +1,26 @@
-import 'package:equatable/equatable.dart';
+import 'package:state_tests/common/models/counter/CounterState.dart';
 
-class NotesState extends Equatable {
+class CounterReactiveModel {
 
   //============================================================================
   // Fields
   //============================================================================
 
-  final List<String> notes;
-  final String input;
+  CounterState state;
 
   //============================================================================
   // Constructors
   //============================================================================
 
-  NotesState(this.notes, this.input);
-
-  NotesState.initial() : notes = [], input = '';
-
-  NotesState copyWith({List<String> notes, String input,}) {
-    return NotesState(notes ?? this.notes, input ?? this.input);
+  CounterReactiveModel() {
+    state = CounterState.initial();
   }
 
   //============================================================================
-  // Equatable Methods
+  // Instance Methods
   //============================================================================
 
-  @override
-  List<Object> get props => [notes, input];
+  void decrement() => state.decrement();
 
-  @override
-  bool get stringify => true;
+  void increment() => state.increment();
 }

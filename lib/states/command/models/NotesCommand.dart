@@ -1,6 +1,5 @@
 import 'package:flutter_command/flutter_command.dart';
-import 'package:state_tests/common/models/NotesState.dart';
-import 'package:state_tests/common/ListExtension.dart';
+import 'package:state_tests/common/models/note/NotesState.dart';
 
 class NotesCommand {
 
@@ -10,18 +9,19 @@ class NotesCommand {
 
   NotesState state = NotesState.initial();
 
-  Command<String, String> inputChangedCommand;
-  Command<String, NotesState> updateNotesCommand;
+  Command<String, String> updateInputCommand;
+  Command<String, NotesState> addNoteCommand;
 
   //============================================================================
   // Constructors
   //============================================================================
 
   NotesCommand() {
-    inputChangedCommand = Command.createSync((x) => x, '');
-    updateNotesCommand = Command.createSync((input) {
-      state = state.copyWith(notes: state.notes.concat(input));
-      inputChangedCommand.execute('');
+    updateInputCommand = Command.createSync((input) => input, '');
+
+    addNoteCommand = Command.createSync((_) {
+      state = state.addNoteWithInputNew(updateInputCommand.value);
+      updateInputCommand.execute('');
 
       return state;
     }, NotesState.initial());

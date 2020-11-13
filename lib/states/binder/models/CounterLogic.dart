@@ -1,20 +1,20 @@
 import 'package:binder/binder.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
+import 'package:state_tests/common/models/counter/CounterState.dart';
 
-class NotesLogic with Logic {
+class CounterLogic with Logic {
 
   //============================================================================
   // Static Fields
   //============================================================================
 
-  static final notesRef = StateRef(NotesState.initial());
-  static final notesLogicRef = LogicRef((scope) => NotesLogic(scope));
+  static final counterRef = StateRef(CounterState.initial());
+  static final counterLogicRef = LogicRef((scope) => CounterLogic(scope));
 
   //============================================================================
   // Constructors
   //============================================================================
 
-  const NotesLogic(this.scope);
+  const CounterLogic(this.scope);
 
   //============================================================================
   // Logic Methods
@@ -27,13 +27,13 @@ class NotesLogic with Logic {
   // Instance Methods
   //============================================================================
 
-  void addNote() {
-    NotesState state = read(notesRef).addNoteNew();
-    write(notesRef, state);
+  void decrement() {
+    CounterState state = read(counterRef).decrementNew();
+    write(counterRef, state);
   }
 
-  void updateInput(String input) {
-    NotesState state = read(notesRef).updateInputNew(input);
-    write(notesRef, state);
+  void increment() {
+    CounterState state = read(counterRef).incrementNew();
+    write(counterRef, state);
   }
 }

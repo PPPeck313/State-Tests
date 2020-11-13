@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:state_tests/common/models/NotesState.dart';
+import 'package:state_tests/common/models/note/NotesState.dart';
 import 'package:state_tests/states/mobx/models/NotesStoreX.dart';
 
-import '../models/Note.dart';
+import '../models/note/Note.dart';
 
 class NotesList extends StatelessWidget {
 

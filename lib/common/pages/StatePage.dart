@@ -3,8 +3,11 @@ import 'package:flutter/widgets.dart';
 abstract class StatePage {
   String getTag();
 
-  Widget getList(BuildContext context);
+  Widget getCounterText(BuildContext context);
+  void increment(BuildContext context);
+  void decrement(BuildContext context);
 
-  void getAddNoteFunction(BuildContext context);
-  Function(String) getUpdateInputFunction(BuildContext context);
+  Widget getNotesList(BuildContext context);
+  void addNote(BuildContext context);
+  void updateInput(BuildContext context, String input);
 }

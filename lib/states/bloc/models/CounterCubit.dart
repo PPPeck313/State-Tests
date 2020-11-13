@@ -1,19 +1,19 @@
 import 'package:bloc/bloc.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
+import 'package:state_tests/common/models/counter/CounterState.dart';
 
-class NotesCubit extends Cubit<NotesState> {
+class CounterCubit extends Cubit<CounterState> {
 
   //============================================================================
   // Constructors
   //============================================================================
 
-  NotesCubit() : super(NotesState.initial());
+  CounterCubit() : super(CounterState.initial());
 
   //============================================================================
   // Instance Methods
   //============================================================================
 
-  void addNote() => emit(state.addNoteNew());
+  void decrement() => emit(state.decrementNew());
 
-  void updateInput(String input) => emit(state.updateInputNew(input));
+  void increment() => emit(state.incrementNew());
 }

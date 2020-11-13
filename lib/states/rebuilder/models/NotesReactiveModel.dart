@@ -1,5 +1,4 @@
-import 'package:state_tests/common/models/NotesState.dart';
-import 'package:state_tests/common/ListExtension.dart';
+import 'package:state_tests/common/models/note/NotesState.dart';
 
 class NotesReactiveModel {
 
@@ -21,10 +20,7 @@ class NotesReactiveModel {
   // Instance Methods
   //============================================================================
 
-  void addNote() {
-    var notes = state.notes.concat(state.input);
-    state = state.copyWith(notes: notes, input: '');
-  }
+  void addNote() => state.addNote();
 
-  void updateInput(String input) => state = state.copyWith(input: input);
+  void updateInput(String input) => state.updateInput(input);
 }

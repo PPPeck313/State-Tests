@@ -1,10 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:state_tests/common/models/NotesActions.dart';
-import 'package:state_tests/common/models/NotesState.dart';
+import 'package:state_tests/common/models/counter/CounterActions.dart';
+import 'package:state_tests/common/models/counter/CounterState.dart';
+import 'package:state_tests/common/models/note/NotesActions.dart';
+import 'package:state_tests/common/models/note/NotesState.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
 import 'package:state_tests/common/widgets/NotesList.dart';
+import 'package:state_tests/states/bloc/models/CounterBloc.dart';
 
 import 'models/NotesBloc.dart';
 
@@ -16,8 +19,10 @@ class BlocPage extends StatelessWidget implements StatePage {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NotesBloc>(create: (_) => NotesBloc(),
-        child: GenericPage(this)
+    return  BlocProvider<CounterBloc>(create: (_) => CounterBloc(),
+      child: BlocProvider<NotesBloc>(create: (_) => NotesBloc(),
+          child: GenericPage(this)
+      ),
     );
   }
 
@@ -31,20 +36,31 @@ class BlocPage extends StatelessWidget implements StatePage {
 
 
   @override
-  Widget getList(BuildContext context) {
+  Widget getCounterText(BuildContext context) {
+    return BlocBuilder<CounterBloc, CounterState>(
+        builder: (context, state) => Text('${state.count}', style: new TextStyle(fontSize: 60.0))
+    );
+  }
+
+  @override
+  void decrement(BuildContext context) => context.bloc<CounterBloc>().add(DecrementAction());
+
+  @override
+  void increment(BuildContext context) => context.bloc<CounterBloc>().add(IncrementAction());
+
+
+
+  @override
+  Widget getNotesList(BuildContext context) {
     return BlocBuilder<NotesBloc, NotesState>(
         builder: (context, state) => NotesList(state)
     );
   }
 
-
+  @override
+  void addNote(BuildContext context) => context.bloc<NotesBloc>().add(AddNoteAction());
 
   @override
-  void getAddNoteFunction(BuildContext context) => context.bloc<NotesBloc>().add(AddNoteAction());
-
-  @override
-  Function(String p1) getUpdateInputFunction(BuildContext context) => (p1) {
-    context.bloc<NotesBloc>().add(UpdateInputAction(p1));
-  };
+  void updateInput(BuildContext context, String input) => context.bloc<NotesBloc>().add(UpdateInputAction(input));
 }
 

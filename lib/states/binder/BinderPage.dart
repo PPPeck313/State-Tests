@@ -1,11 +1,13 @@
 import 'package:binder/binder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:state_tests/common/models/counter/CounterState.dart';
 import 'package:state_tests/common/widgets/NotesList.dart';
-import 'package:state_tests/common/models/NotesState.dart';
+import 'package:state_tests/common/models/note/NotesState.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
 
+import 'models/CounterLogic.dart';
 import 'models/NotesLogic.dart';
 
 class BinderPage extends StatelessWidget implements StatePage {
@@ -31,16 +33,40 @@ class BinderPage extends StatelessWidget implements StatePage {
 
 
   @override
-  Widget getList(BuildContext context) {
+  Widget getCounterText(BuildContext context) {
+    CounterState state = context.watch(CounterLogic.counterRef);
+    return Text('${state.count}', style: new TextStyle(fontSize: 60.0));
+  }
+
+  @override
+  void decrement(BuildContext context) {
+    CounterLogic counterLogic = context.use(CounterLogic.counterLogicRef);
+    counterLogic.decrement();
+  }
+
+  @override
+  void increment(BuildContext context) {
+    CounterLogic counterLogic = context.use(CounterLogic.counterLogicRef);
+    counterLogic.increment();
+  }
+
+
+
+  @override
+  Widget getNotesList(BuildContext context) {
     NotesState state = context.watch(NotesLogic.notesRef);
     return NotesList(state);
-  }// Use Observer to subscribe to updates to the NotesStore.
-
-
+  }
 
   @override
-  void getAddNoteFunction(BuildContext context) => context.use(NotesLogic.notesLogicRef).addNote();
+  void addNote(BuildContext context) {
+    NotesLogic notesLogic = context.use(NotesLogic.notesLogicRef);
+    notesLogic.addNote();
+  }
 
   @override
-  Function(String p1) getUpdateInputFunction(BuildContext context) => context.use(NotesLogic.notesLogicRef).updateInput;
+  void updateInput(BuildContext context, String input) {
+    NotesLogic notesLogic = context.use(NotesLogic.notesLogicRef);
+    notesLogic.updateInput(input);
+  }
 }

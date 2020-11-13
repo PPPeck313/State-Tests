@@ -1,19 +1,29 @@
-import 'package:bloc/bloc.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
+import 'package:mobx/mobx.dart';
 
-class NotesCubit extends Cubit<NotesState> {
+part 'CounterStoreX.g.dart';
+
+class CounterStoreX = CounterStoreXBase with _$CounterStoreX;
+
+abstract class CounterStoreXBase with Store {
 
   //============================================================================
-  // Constructors
+  // Fields
   //============================================================================
 
-  NotesCubit() : super(NotesState.initial());
+  @observable
+  int count = 0;
 
   //============================================================================
   // Instance Methods
   //============================================================================
 
-  void addNote() => emit(state.addNoteNew());
+  @action
+  void decrement() {
+    --count;
+  }
 
-  void updateInput(String input) => emit(state.updateInputNew(input));
+  @action
+  void increment() {
+    ++count;
+  }
 }

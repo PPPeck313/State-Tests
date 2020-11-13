@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:state_tests/common/models/NotesActions.dart';
-import 'package:state_tests/common/models/NotesState.dart';
-import 'package:state_tests/common/ListExtension.dart';
+import 'package:state_tests/common/models/note/NotesActions.dart';
+import 'package:state_tests/common/models/note/NotesState.dart';
 
 class NotesBloc extends Bloc<NotesActions, NotesState> {
 
@@ -21,11 +20,11 @@ class NotesBloc extends Bloc<NotesActions, NotesState> {
   @override
   Stream<NotesState> mapEventToState(NotesActions event) async* {
     if (event is AddNoteAction) {
-      yield state.copyWith(notes: state.notes.concat(state.input), input: '');
+      yield state.addNoteNew();
     }
 
     else if (event is UpdateInputAction) {
-      yield state.copyWith(input: event.input);
+      yield state.updateInputNew(event.input);
     }
   }
 }

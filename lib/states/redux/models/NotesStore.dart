@@ -1,9 +1,7 @@
 import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
-import 'package:state_tests/common/models/NotesState.dart';
-import 'package:state_tests/common/ListExtension.dart';
-
-import '../../../common/models/NotesActions.dart';
+import 'package:state_tests/common/models/note/NotesActions.dart';
+import 'package:state_tests/common/models/note/NotesState.dart';
 
 class NotesStore extends Store<NotesState> {
 
@@ -13,11 +11,11 @@ class NotesStore extends Store<NotesState> {
 
   NotesStore() : super((NotesState state, dynamic action) {
     if (action is AddNoteAction) {
-      return state.copyWith(notes: state.notes.concat(state.input), input: '');
+      return state.addNoteNew();
     }
 
     else if (action is UpdateInputAction) {
-      return state.copyWith(input: action.input);
+      return state.updateInputNew(action.input);
     }
 
     return state;

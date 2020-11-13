@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:state_tests/common/models/NotesState.dart';
+import 'package:state_tests/common/models/counter/CounterState.dart';
+import 'package:state_tests/common/models/note/NotesState.dart';
 import 'package:state_tests/common/widgets/NotesList.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
+import 'package:state_tests/states/rebuilder/models/CounterReactiveModel.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 import 'models/NotesReactiveModel.dart';
@@ -18,6 +20,7 @@ class RebuilderPage extends StatelessWidget implements StatePage {
   Widget build(BuildContext context) {
     return Injector(
         inject: [
+          Inject<CounterReactiveModel>(() => CounterReactiveModel()),
           Inject<NotesReactiveModel>(() => NotesReactiveModel())
         ],
         initState: () {}, //to be executed in the initState of statefulWidget
@@ -25,6 +28,7 @@ class RebuilderPage extends StatelessWidget implements StatePage {
         dispose: () {}, //to be executed in the dispose of statefulWidget
         appLifeCycle: (AppLifecycleState state) {}, //to be executed each time the application state changed; Android: onResume, onPause; iOS: viewWillAppear, viewWillDisappear
         builder: (context) {
+          RM.get<CounterReactiveModel>(name: "CounterReactiveModel", context: context);
           RM.get<NotesReactiveModel>(name: "NotesReactiveModel", context: context);
           return GenericPage(this);
         }
@@ -41,16 +45,41 @@ class RebuilderPage extends StatelessWidget implements StatePage {
 
 
   @override
-  Widget getList(BuildContext context) {
-    NotesState state = RM.get<NotesReactiveModel>().state.state;
-    return NotesList(state);
+  Widget getCounterText(BuildContext context) {
+    CounterState state = RM.get<CounterReactiveModel>().state.state;
+    return Text('${state.count}', style: new TextStyle(fontSize: 60.0));
+  }
+
+  @override
+  void decrement(BuildContext context) {
+    ReactiveModel<CounterReactiveModel> reactiveModel = RM.get<CounterReactiveModel>();
+    reactiveModel.setState((s) => s.decrement());
+  }
+
+  @override
+  void increment(BuildContext context) {
+    ReactiveModel<CounterReactiveModel> reactiveModel = RM.get<CounterReactiveModel>();
+    reactiveModel.setState((s) => s.increment());
   }
 
 
 
   @override
-  void getAddNoteFunction(BuildContext context) => RM.get<NotesReactiveModel>().setState((s) => s.addNote());
+  Widget getNotesList(BuildContext context) {
+    NotesState state = RM.get<NotesReactiveModel>().state.state;
+    return NotesList(state);
+  }
 
   @override
-  Function(String p1) getUpdateInputFunction(BuildContext context) => IN.get<NotesReactiveModel>().updateInput;
+  void addNote(BuildContext context) {
+    ReactiveModel<NotesReactiveModel> reactiveModel = RM.get<NotesReactiveModel>();
+    reactiveModel.setState((state) => state.addNote());
+  }
+
+  @override
+  void updateInput(BuildContext context, String input) {
+    //IN.get<NotesReactiveModel>().updateInput(input);
+    ReactiveModel<NotesReactiveModel> reactiveModel = RM.get<NotesReactiveModel>();
+    reactiveModel.setState((s) => s.updateInput(input));
+  }
 }

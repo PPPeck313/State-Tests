@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:state_tests/common/widgets/NotesList.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
 
+import 'models/CounterStoreX.dart';
 import 'models/NotesStoreX.dart';
 
 class MobxPage extends StatelessWidget implements StatePage {
@@ -12,7 +14,8 @@ class MobxPage extends StatelessWidget implements StatePage {
   // Fields
   //============================================================================
 
-  NotesStoreX _state = NotesStoreX();
+  CounterStoreX _counterStoreX = CounterStoreX();
+  NotesStoreX _notesStoreX = NotesStoreX();
 
   //============================================================================
   // Lifecycle Methods
@@ -33,15 +36,22 @@ class MobxPage extends StatelessWidget implements StatePage {
 
 
   @override
-  Widget getList(BuildContext context) {
-    return NotesList.mobX(_state);
-  }// Use Observer to subscribe to updates to the NotesStore.
+  Widget getCounterText(BuildContext context) => Observer(builder: (_) => Text('${_counterStoreX.count}', style: new TextStyle(fontSize: 60.0)));
+
+  @override
+  void decrement(BuildContext context) => _counterStoreX.decrement();
+
+  @override
+  void increment(BuildContext context) => _counterStoreX.increment();
 
 
 
   @override
-  void getAddNoteFunction(BuildContext context) => _state.addNote();
+  Widget getNotesList(BuildContext context) => NotesList.mobX(_notesStoreX);// Use Observer to subscribe to updates to the NotesStore.
 
   @override
-  Function(String p1) getUpdateInputFunction(BuildContext context) => _state.updateInput;
+  void addNote(BuildContext context) => _notesStoreX.addNote();
+
+  @override
+  void updateInput(BuildContext context, String input) => _notesStoreX.updateInput(input);
 }

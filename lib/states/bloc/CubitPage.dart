@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:state_tests/common/models/NotesState.dart';
+import 'package:state_tests/common/models/counter/CounterState.dart';
+import 'package:state_tests/common/models/note/NotesState.dart';
 import 'package:state_tests/common/widgets/NotesList.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
 
+import 'models/CounterCubit.dart';
 import 'models/NotesCubit.dart';
 
 class CubitPage extends StatelessWidget implements StatePage {
@@ -16,8 +18,10 @@ class CubitPage extends StatelessWidget implements StatePage {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NotesCubit>(create: (_) => NotesCubit(),
-      child: GenericPage(this)
+    return BlocProvider<CounterCubit>(create: (_) => CounterCubit(),
+      child: BlocProvider<NotesCubit>(create: (_) => NotesCubit(),
+        child: GenericPage(this)
+      ),
     );
   }
 
@@ -31,17 +35,30 @@ class CubitPage extends StatelessWidget implements StatePage {
 
 
   @override
-  Widget getList(BuildContext context) {
-    return BlocBuilder<NotesCubit, NotesState>(
-      builder: (context, state) => NotesList(state)
+  Widget getCounterText(BuildContext context) {
+    return BlocBuilder<CounterCubit, CounterState>(
+        builder: (context, state) => Text('${state.count}', style: new TextStyle(fontSize: 60.0))
     );
   }
 
+  @override
+  void decrement(BuildContext context) => context.bloc<CounterCubit>().decrement();
+
+  @override
+  void increment(BuildContext context) => context.bloc<CounterCubit>().increment();
+
 
 
   @override
-  void getAddNoteFunction(BuildContext context) => context.bloc<NotesCubit>().addNote();
+  Widget getNotesList(BuildContext context) {
+    return BlocBuilder<NotesCubit, NotesState>(
+        builder: (context, state) => NotesList(state)
+    );
+  }
 
   @override
-  Function(String p1) getUpdateInputFunction(BuildContext context) => context.bloc<NotesCubit>().updateInput;
+  void addNote(BuildContext context) => context.bloc<NotesCubit>().addNote();
+
+  @override
+  void updateInput(BuildContext context, String input) => context.bloc<NotesCubit>().updateInput(input);
 }

@@ -1,25 +1,25 @@
 import 'package:flutter_riverpod/all.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
+import 'package:state_tests/common/models/counter/CounterState.dart';
 
-class NotesNotifier extends StateNotifier<NotesState> {
+class CounterNotifier extends StateNotifier<CounterState> {
 
   //============================================================================
   // Static Fields
   //============================================================================
 
-  static final notesProvider = StateNotifierProvider((ref) => NotesNotifier());
+  static final counterProvider = StateNotifierProvider((ref) => CounterNotifier());
 
   //============================================================================
   // Constructors
   //============================================================================
 
-  NotesNotifier() : super(NotesState.initial());
+  CounterNotifier() : super(CounterState.initial());
 
   //============================================================================
   // Instance Methods
   //============================================================================
 
-  void addNote() => state = state.addNoteNew();
+  void decrement() => state = state.decrementNew();
 
-  void updateInput(String input) => state = state.updateInputNew(input);
+  void increment() => state = state.incrementNew();
 }
