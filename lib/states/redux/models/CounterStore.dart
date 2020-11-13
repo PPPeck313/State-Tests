@@ -11,11 +11,11 @@ class CounterStore extends Store<CounterState> {
 
   CounterStore() : super((CounterState state, dynamic action) {
     if (action is DecrementAction) {
-      return state.decrementNew();
+      state.decrement();
     }
 
     else if (action is IncrementAction) {
-      return state.incrementNew();
+      state.increment();
     }
 
     return state;

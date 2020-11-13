@@ -11,11 +11,11 @@ class NotesStore extends Store<NotesState> {
 
   NotesStore() : super((NotesState state, dynamic action) {
     if (action is AddNoteAction) {
-      return state.addNoteNew();
+      state.addNote();
     }
 
     else if (action is UpdateInputAction) {
-      return state.updateInputNew(action.input);
+      state.updateInput(action.input);
     }
 
     return state;
