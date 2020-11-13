@@ -9,6 +9,7 @@ Bloc: https://pub.dev/packages/bloc<br/>
 Command: https://pub.dev/packages/flutter_command<br/>
 MobX: https://pub.dev/packages/mobx<br/>
 Rebuilder: https://pub.dev/packages/states_rebuilder<br/>
+Redux: https://pub.dev/packages/flutter_redux<br/>
 RiverPod: https://pub.dev/packages/riverpod<br/>
 
 ## References Used
