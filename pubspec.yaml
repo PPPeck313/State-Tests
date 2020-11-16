@@ -57,6 +57,7 @@ flutter:
     - assets/images/bloc_logo.png
     - assets/images/cubit_logo.png
     - assets/images/command_logo.png
+    - assets/images/getx_logo.png
     - assets/images/mobx_logo.png
     - assets/images/rebuilder_logo.png
     - assets/images/redux_logo.png

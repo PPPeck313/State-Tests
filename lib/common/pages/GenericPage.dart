@@ -63,7 +63,7 @@ class _GenericPageState extends State<GenericPage> {
     return Scaffold(
       appBar: AppBar(title: Text(statePage.getTag())),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.fromLTRB(8.0, 32.0, 8.0, 8.0),
         child: Column(
           children: [
             makeCounter(),
@@ -115,12 +115,15 @@ class _GenericPageState extends State<GenericPage> {
 
 
   Widget makeCreateNoteButton() {
-    return FlatButton(
-        onPressed: () {
-          statePage.addNote(context);
-          _controller.clear();
-        },
-        child: Text('Create Note')
+    return Padding(
+      padding: const EdgeInsets.only(top: 32.0),
+      child: FlatButton(
+          onPressed: () {
+            statePage.addNote(context);
+            _controller.clear();
+          },
+          child: Text('Create Note')
+      ),
     );
   }
 

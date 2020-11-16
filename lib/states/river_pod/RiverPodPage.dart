@@ -45,13 +45,13 @@ class RiverPodPage extends StatelessWidget implements StatePage {
   @override
   void decrement(BuildContext context) {
     CounterNotifier counterNotifier = context.read(CounterNotifier.counterProvider);
-    counterNotifier.increment();
+    counterNotifier.decrement();
   }
 
   @override
   void increment(BuildContext context) {
     CounterNotifier counterNotifier = context.read(CounterNotifier.counterProvider);
-    counterNotifier.decrement();
+    counterNotifier.increment();
   }
 
 

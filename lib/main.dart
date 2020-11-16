@@ -4,6 +4,7 @@ import 'package:state_tests/states/binder/BinderPage.dart';
 import 'package:state_tests/states/bloc/BlocPage.dart';
 import 'package:state_tests/states/bloc/CubitPage.dart';
 import 'package:state_tests/states/command/CommandPage.dart';
+import 'package:state_tests/states/getx/GetXPage.dart';
 import 'package:state_tests/states/mobx/MobXPage.dart';
 import 'package:state_tests/states/rebuilder/RebuilderPage.dart';
 import 'package:state_tests/states/redux/ReduxPage.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
             RetainedTab(BlocPage()),
             RetainedTab(CubitPage()),
             RetainedTab(CommandPage()),
+            RetainedTab(GetXPage()),
             RetainedTab(MobxPage()),
             RetainedTab(RebuilderPage()),
             RetainedTab(ReduxPage()),
@@ -78,6 +80,7 @@ class MyApp extends StatelessWidget {
           Tab(icon: Image.asset(Drawables.bloc_logo), text: "Bl"),
           Tab(icon: Image.asset(Drawables.cubit_logo), text: "Cb"),
           Tab(icon: Image.asset(Drawables.command_logo), text: "Co"),
+          Tab(icon: Image.asset(Drawables.getx_logo), text: "GX"),
           Tab(icon: Image.asset(Drawables.mobx_logo), text: "MX"),
           Tab(icon: Image.asset(Drawables.rebuilder_logo), text: "Rb"),
           Tab(icon: Image.asset(Drawables.redux_logo), text: "Rd"),
