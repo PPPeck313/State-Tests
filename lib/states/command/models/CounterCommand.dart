@@ -5,6 +5,14 @@ import 'package:state_tests/common/models/counter/CounterState.dart';
 class CounterCommand {
 
   //============================================================================
+  // Static Fields
+  //============================================================================
+
+  static CounterCommand _instance = CounterCommand._new();
+
+  factory CounterCommand() => _instance;
+
+  //============================================================================
   // Fields
   //============================================================================
 
@@ -17,7 +25,7 @@ class CounterCommand {
   //============================================================================
 
   //TResult needs to change between commands
-  CounterCommand() {
+  CounterCommand._new() {
     updateCountCommand = Command.createSync((command) {
       if (command is DecrementAction) {
         state = state.decrementNew();

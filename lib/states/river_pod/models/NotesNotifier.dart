@@ -7,13 +7,29 @@ class NotesNotifier extends StateNotifier<NotesState> {
   // Static Fields
   //============================================================================
 
-  static final notesProvider = StateNotifierProvider((ref) => NotesNotifier());
+  static StateNotifierProvider<NotesNotifier> notesProvider = StateNotifierProvider((ref) => NotesNotifier());
+
+  static NotesNotifier _instance = NotesNotifier._new();
+
+  factory NotesNotifier() => _instance;
 
   //============================================================================
   // Constructors
   //============================================================================
 
-  NotesNotifier() : super(NotesState.initial());
+  NotesNotifier._new() : super(NotesState.initial());
+
+  //============================================================================
+  // StateNotifier Methods
+  //============================================================================
+
+  //To listen for entire app open without putting at root
+  @override
+  void dispose() {}
+
+  void manualDispose() {
+    super.dispose();
+  }
 
   //============================================================================
   // Instance Methods

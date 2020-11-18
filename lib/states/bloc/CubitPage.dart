@@ -16,10 +16,11 @@ class CubitPage extends StatelessWidget implements StatePage {
   // Lifecycle Methods
   //============================================================================
 
+  //value vs create in order to reuse
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CounterCubit>(create: (_) => CounterCubit(),
-      child: BlocProvider<NotesCubit>(create: (_) => NotesCubit(),
+    return BlocProvider<CounterCubit>.value(value: CounterCubit(),
+      child: BlocProvider<NotesCubit>.value(value: NotesCubit(),
         child: GenericPage(this)
       ),
     );

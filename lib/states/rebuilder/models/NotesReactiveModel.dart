@@ -3,6 +3,14 @@ import 'package:state_tests/common/models/note/NotesState.dart';
 class NotesReactiveModel {
 
   //============================================================================
+  // Static Fields
+  //============================================================================
+
+  static NotesReactiveModel _instance = NotesReactiveModel._new(NotesState.initial());
+
+  factory NotesReactiveModel() => _instance;
+
+  //============================================================================
   // Fields
   //============================================================================
 
@@ -12,9 +20,7 @@ class NotesReactiveModel {
   // Constructors
   //============================================================================
 
-  NotesReactiveModel() {
-    state = NotesState.initial();
-  }
+  NotesReactiveModel._new(this.state);
 
   //============================================================================
   // Instance Methods

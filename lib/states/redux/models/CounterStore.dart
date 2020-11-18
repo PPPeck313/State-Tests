@@ -6,10 +6,18 @@ import 'package:state_tests/common/models/counter/CounterState.dart';
 class CounterStore extends Store<CounterState> {
 
   //============================================================================
-  // Constructors
-  //===========================================================================
+  // Static Fields
+  //============================================================================
 
-  CounterStore() : super((CounterState state, dynamic action) {
+  static CounterStore _instance = CounterStore._new();
+
+  factory CounterStore() => _instance;
+
+  //============================================================================
+  // Constructors
+  //============================================================================
+
+  CounterStore._new() : super((CounterState state, dynamic action) {
     if (action is DecrementAction) {
       state.decrement();
     }

@@ -14,8 +14,8 @@ class MobxPage extends StatelessWidget implements StatePage {
   // Fields
   //============================================================================
 
-  CounterStoreX _counterStoreX = CounterStoreX();
-  NotesStoreX _notesStoreX = NotesStoreX();
+  CounterStoreX _counterStoreX = CounterStoreXWrapper().counterStoreX;
+  NotesStoreX _notesStoreX = NotesStoreXWrapper().notesStoreX;
 
   //============================================================================
   // Lifecycle Methods

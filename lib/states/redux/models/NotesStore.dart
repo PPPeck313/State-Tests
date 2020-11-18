@@ -6,10 +6,18 @@ import 'package:state_tests/common/models/note/NotesState.dart';
 class NotesStore extends Store<NotesState> {
 
   //============================================================================
+  // Static Fields
+  //============================================================================
+
+  static NotesStore _instance = NotesStore._new();
+
+  factory NotesStore() => _instance;
+
+  //============================================================================
   // Constructors
   //===========================================================================
 
-  NotesStore() : super((NotesState state, dynamic action) {
+  NotesStore._new() : super((NotesState state, dynamic action) {
     if (action is AddNoteAction) {
       state.addNote();
     }

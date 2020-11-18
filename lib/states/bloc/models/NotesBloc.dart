@@ -5,10 +5,18 @@ import 'package:state_tests/common/models/note/NotesState.dart';
 class NotesBloc extends Bloc<NotesActions, NotesState> {
 
   //============================================================================
+  // Static Fields
+  //============================================================================
+
+  static NotesBloc _instance = NotesBloc._new();
+
+  factory NotesBloc() => _instance;
+
+  //============================================================================
   // Constructors
   //============================================================================
 
-  NotesBloc() : super(NotesState.initial());
+  NotesBloc._new() : super(NotesState.initial());
 
   //============================================================================
   // Bloc Methods
@@ -26,5 +34,13 @@ class NotesBloc extends Bloc<NotesActions, NotesState> {
     else if (event is UpdateInputAction) {
       yield state.updateInputNew(event.input);
     }
+  }
+
+  //============================================================================
+  // Instance Methods
+  //============================================================================
+
+  void dispose() {
+    _instance.dispose();
   }
 }

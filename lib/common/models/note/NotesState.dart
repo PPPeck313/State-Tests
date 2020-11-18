@@ -9,18 +9,18 @@ class NotesState extends Equatable {
   //============================================================================
 
   List<String> notes;
-  String _input;
+  String input;
 
   //============================================================================
   // Constructors
   //============================================================================
 
-  NotesState(this.notes, this._input);
+  NotesState(this.notes, this.input);
 
-  NotesState.initial() : notes = [], _input = '';
+  NotesState.initial() : notes = [], input = '';
 
   NotesState copyWith({List<String> notes, String input}) {
-    return NotesState(notes ?? this.notes, input ?? this._input);
+    return NotesState(notes ?? this.notes, input ?? this.input);
   }
 
   //============================================================================
@@ -28,18 +28,18 @@ class NotesState extends Equatable {
   //============================================================================
 
   void addNote() {
-    addNoteWithInput(_input);
+    addNoteWithInput(input);
   }
 
   NotesState addNoteNew() {
-    return copyWith(notes: notes.concat(_input), input: '');
+    return copyWith(notes: notes.concat(input), input: '');
   }
 
 
 
   void addNoteWithInput(String input) {
     notes.add(input);
-    _input = "";
+    input = "";
   }
 
   NotesState addNoteWithInputNew(String input) {
@@ -49,7 +49,7 @@ class NotesState extends Equatable {
 
 
   void updateInput(String input) {
-    _input = input;
+    this.input = input;
   }
 
   NotesState updateInputNew(String input) {
@@ -61,7 +61,7 @@ class NotesState extends Equatable {
   //============================================================================
 
   @override
-  List<Object> get props => [notes, _input];
+  List<Object> get props => [notes, input];
 
   @override
   bool get stringify => true;

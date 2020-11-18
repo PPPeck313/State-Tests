@@ -5,10 +5,18 @@ import 'package:state_tests/common/models/counter/CounterState.dart';
 class CounterBloc extends Bloc<CounterActions, CounterState> {
 
   //============================================================================
+  // Static Fields
+  //============================================================================
+
+  static CounterBloc _instance = CounterBloc._new();
+
+  factory CounterBloc() => _instance;
+
+  //============================================================================
   // Constructors
   //============================================================================
 
-  CounterBloc() : super(CounterState.initial());
+  CounterBloc._new() : super(CounterState.initial());
 
   //============================================================================
   // Bloc Methods
@@ -26,5 +34,13 @@ class CounterBloc extends Bloc<CounterActions, CounterState> {
     else if (event is IncrementAction) {
       yield state.incrementNew();
     }
+  }
+
+  //============================================================================
+  // Instance Methods
+  //============================================================================
+
+  void dispose() {
+    _instance.dispose();
   }
 }

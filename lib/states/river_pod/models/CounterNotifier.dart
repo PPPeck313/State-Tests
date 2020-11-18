@@ -7,13 +7,29 @@ class CounterNotifier extends StateNotifier<CounterState> {
   // Static Fields
   //============================================================================
 
-  static final counterProvider = StateNotifierProvider((ref) => CounterNotifier());
+  static StateNotifierProvider<CounterNotifier> counterProvider = StateNotifierProvider((ref) => CounterNotifier());
+
+  static CounterNotifier _instance = CounterNotifier._new();
+
+  factory CounterNotifier() => _instance;
 
   //============================================================================
   // Constructors
   //============================================================================
 
-  CounterNotifier() : super(CounterState.initial());
+  CounterNotifier._new() : super(CounterState.initial());
+
+  //============================================================================
+  // StateNotifier Methods
+  //============================================================================
+
+  //To listen for entire app open without putting at root
+  @override
+  void dispose() {}
+
+  void manualDispose() {
+    super.dispose();
+  }
 
   //============================================================================
   // Instance Methods

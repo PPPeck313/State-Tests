@@ -17,10 +17,11 @@ class BlocPage extends StatelessWidget implements StatePage {
   // Lifecycle Methods
   //============================================================================
 
+  //value vs create in order to reuse
   @override
   Widget build(BuildContext context) {
-    return  BlocProvider<CounterBloc>(create: (_) => CounterBloc(),
-      child: BlocProvider<NotesBloc>(create: (_) => NotesBloc(),
+    return  BlocProvider<CounterBloc>.value(value: CounterBloc(),
+      child: BlocProvider<NotesBloc>.value(value: NotesBloc(),
           child: GenericPage(this)
       ),
     );

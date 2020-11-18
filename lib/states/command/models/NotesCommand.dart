@@ -4,6 +4,14 @@ import 'package:state_tests/common/models/note/NotesState.dart';
 class NotesCommand {
 
   //============================================================================
+  // Static Fields
+  //============================================================================
+
+  static NotesCommand _instance = NotesCommand._new();
+
+  factory NotesCommand() => _instance;
+
+  //============================================================================
   // Fields
   //============================================================================
 
@@ -16,7 +24,7 @@ class NotesCommand {
   // Constructors
   //============================================================================
 
-  NotesCommand() {
+  NotesCommand._new() {
     updateInputCommand = Command.createSync((input) => input, '');
 
     addNoteCommand = Command.createSync((_) {

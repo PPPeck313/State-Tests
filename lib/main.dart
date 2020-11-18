@@ -9,6 +9,8 @@ import 'package:state_tests/states/mobx/MobXPage.dart';
 import 'package:state_tests/states/rebuilder/RebuilderPage.dart';
 import 'package:state_tests/states/redux/ReduxPage.dart';
 import 'package:state_tests/states/river_pod/RiverPodPage.dart';
+import 'package:state_tests/states/river_pod/models/CounterNotifier.dart';
+import 'package:state_tests/states/river_pod/models/NotesNotifier.dart';
 
 import 'common/widgets/RetainedTab.dart';
 
@@ -16,26 +18,45 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
 
   //============================================================================
   // Lifecycle Methods
   //============================================================================
 
   @override
+  _MyAppState createState() => _MyAppState();
+}
+
+
+
+class _MyAppState extends State<MyApp> {
+
+  //============================================================================
+  // Lifecycle Methods
+  //============================================================================
+
+  @override
+  void dispose() {
+    CounterNotifier().manualDispose();
+    NotesNotifier().manualDispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
 
     return MaterialApp(
         home: makeTopTabScreen(context, [
-            RetainedTab(BinderPage()),
-            RetainedTab(BlocPage()),
-            RetainedTab(CubitPage()),
-            RetainedTab(CommandPage()),
-            RetainedTab(GetXPage()),
-            RetainedTab(MobxPage()),
-            RetainedTab(RebuilderPage()),
-            RetainedTab(ReduxPage()),
-            RetainedTab(RiverPodPage()),
+            BinderPage(),
+            BlocPage(),
+            CubitPage(),
+            CommandPage(),
+            GetXPage(),
+            MobxPage(),
+            RebuilderPage(),
+            ReduxPage(),
+            RiverPodPage(),
           ]
         ),
         theme: ThemeData(
