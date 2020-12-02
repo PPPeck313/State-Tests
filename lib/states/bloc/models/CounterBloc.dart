@@ -41,6 +41,6 @@ class CounterBloc extends Bloc<CounterActions, CounterState> {
   //============================================================================
 
   void dispose() {
-    _instance.dispose();
+    close();
   }
 }

@@ -41,6 +41,6 @@ class NotesBloc extends Bloc<NotesActions, NotesState> {
   //============================================================================
 
   void dispose() {
-    _instance.dispose();
+    close();
   }
 }

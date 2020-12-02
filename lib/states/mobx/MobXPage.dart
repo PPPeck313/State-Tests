@@ -8,7 +8,7 @@ import 'package:state_tests/common/pages/StatePage.dart';
 import 'models/CounterStoreX.dart';
 import 'models/NotesStoreX.dart';
 
-class MobxPage extends StatelessWidget implements StatePage {
+class MobXPage extends StatelessWidget implements StatePage {
 
   //============================================================================
   // Fields

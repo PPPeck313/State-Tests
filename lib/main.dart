@@ -1,36 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:state_tests/common/Drawables.dart';
-import 'package:state_tests/states/binder/BinderPage.dart';
-import 'package:state_tests/states/bloc/BlocPage.dart';
-import 'package:state_tests/states/bloc/CubitPage.dart';
-import 'package:state_tests/states/command/CommandPage.dart';
-import 'package:state_tests/states/getx/GetXPage.dart';
-import 'package:state_tests/states/mobx/MobXPage.dart';
-import 'package:state_tests/states/rebuilder/RebuilderPage.dart';
-import 'package:state_tests/states/redux/ReduxPage.dart';
-import 'package:state_tests/states/river_pod/RiverPodPage.dart';
+import 'package:flutter/widgets.dart';
+import 'package:state_tests/states/bloc/models/CounterBloc.dart';
+import 'package:state_tests/states/bloc/models/NotesBloc.dart';
 import 'package:state_tests/states/river_pod/models/CounterNotifier.dart';
 import 'package:state_tests/states/river_pod/models/NotesNotifier.dart';
+import 'package:vnum/vnum.dart';
+import 'common/StatePageEnum.dart';
+import 'main.reflectable.dart';
 
-import 'common/widgets/RetainedTab.dart';
 
 void main() {
+  initializeReflectable();
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
 
   //============================================================================
   // Lifecycle Methods
   //============================================================================
 
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: HomeScreen()
+    );
+  }
 }
 
 
 
-class _MyAppState extends State<MyApp> {
+class HomeScreen extends StatefulWidget {
+
+  //============================================================================
+  // Lifecycle Methods
+  //============================================================================
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  //============================================================================
+  // Fields
+  //============================================================================
+
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  int currentIndex = 0;
 
   //============================================================================
   // Lifecycle Methods
@@ -40,25 +58,22 @@ class _MyAppState extends State<MyApp> {
   void dispose() {
     CounterNotifier().manualDispose();
     NotesNotifier().manualDispose();
+
+    CounterBloc().dispose();
+    NotesBloc().dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> pages = List<Widget>();
+
+    for (StatePageEnum statePageEnum in Vnum.allCasesFor(StatePageEnum)) {
+      pages.add(statePageEnum.statePage());
+    }
 
     return MaterialApp(
-        home: makeTopTabScreen(context, [
-            BinderPage(),
-            BlocPage(),
-            CubitPage(),
-            CommandPage(),
-            GetXPage(),
-            MobxPage(),
-            RebuilderPage(),
-            ReduxPage(),
-            RiverPodPage(),
-          ]
-        ),
+        home: makeHomeScreen(context, pages),
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -70,18 +85,22 @@ class _MyAppState extends State<MyApp> {
   // Widget Methods
   //============================================================================
 
-  Widget makeTopTabScreen(BuildContext context, List<Widget> tabs) {
+  Widget makeHomeScreen(BuildContext context, List<Widget> pages) {
     return DefaultTabController(
-      length: tabs.length,
+      length: pages.length,
       child: Scaffold(
+        key: _scaffoldKey,
         backgroundColor: Theme.of(context).primaryColor,
-        appBar: makeTopTabBar(),
-        body: TabBarView(
-            children: tabs
-        ),
+        appBar: AppBar(title: Text(Vnum.allCasesFor(StatePageEnum)[currentIndex].value)),
+        // makeTopTabBar(),
+        body: (Vnum.allCasesFor(StatePageEnum)[currentIndex] as StatePageEnum).statePage(),
+        //TabBarView(children: pages),
+        drawer: makeDrawer(),
       ),
     );
   }
+
+
 
   Widget makeTopTabBar() {
     return PreferredSize(
@@ -95,18 +114,61 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget makeTabBar() {
+    List<Tab> tabs = List<Tab>();
+
+    for (StatePageEnum statePageEnum in Vnum.allCasesFor(StatePageEnum)) {
+      tabs.add(Tab(icon: statePageEnum.image(), text: statePageEnum.shortName()));
+    }
+
     return TabBar(
-        tabs: [
-          Tab(icon: Image.asset(Drawables.binder_logo), text: "Bi"),
-          Tab(icon: Image.asset(Drawables.bloc_logo), text: "Bl"),
-          Tab(icon: Image.asset(Drawables.cubit_logo), text: "Cb"),
-          Tab(icon: Image.asset(Drawables.command_logo), text: "Co"),
-          Tab(icon: Image.asset(Drawables.getx_logo), text: "GX"),
-          Tab(icon: Image.asset(Drawables.mobx_logo), text: "MX"),
-          Tab(icon: Image.asset(Drawables.rebuilder_logo), text: "Rb"),
-          Tab(icon: Image.asset(Drawables.redux_logo), text: "Rd"),
-          Tab(icon: Image.asset(Drawables.riverpod_logo), text: "Rp")
-        ]
+        tabs: tabs
     );
+  }
+
+
+
+  Widget makeDrawer() {
+    List<Widget> items = List<Widget>();
+
+    items.add(DrawerHeader(
+      child: Container(
+        child: Text("State Tests", style: TextStyle(color: Colors.white, fontSize: 28)),
+        alignment: Alignment.bottomLeft,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.blue,
+      ),
+    ));
+
+    for (int i = 0; i < Vnum.allCasesFor(StatePageEnum).length; i++) {
+      items.add(makeDrawerListTile(Vnum.allCasesFor(StatePageEnum)[i], i));
+    }
+
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: items
+      )
+    );
+  }
+
+  Widget makeDrawerListTile(StatePageEnum statePageEnum, int index) {
+    return ListTile(
+      title: Row(
+        children: <Widget>[
+          statePageEnum.image(),
+          Padding(
+            padding: EdgeInsets.only(left: 8.0),
+            child: Text(statePageEnum.value),
+          )
+        ],
+      ),
+      onTap: () => onDrawerItemClicked(index)
+    );
+  }
+
+  void onDrawerItemClicked(int index) {
+    _scaffoldKey.currentState.openEndDrawer();
+    setState(() => { currentIndex = index });
   }
 }

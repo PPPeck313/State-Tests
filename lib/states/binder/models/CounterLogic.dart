@@ -7,8 +7,11 @@ class CounterLogic with Logic {
   // Static Fields
   //============================================================================
 
-  static final counterRef = StateRef(CounterState.initial());
-  static final counterLogicRef = LogicRef((scope) => CounterLogic(scope));
+  //BinderScope disposes values when out of scope, but can jumpstart value on recreation with override
+  static CounterState counterState = CounterState.initial();
+
+  static final StateRef<CounterState> counterRef = StateRef(counterState);
+  static final LogicRef<CounterLogic> counterLogicRef = LogicRef((scope) => CounterLogic(scope));
 
   //============================================================================
   // Constructors
@@ -28,12 +31,12 @@ class CounterLogic with Logic {
   //============================================================================
 
   void decrement() {
-    CounterState state = read(counterRef).decrementNew();
-    write(counterRef, state);
+    counterState = read(counterRef).decrementNew();
+    write(counterRef, counterState);
   }
 
   void increment() {
-    CounterState state = read(counterRef).incrementNew();
-    write(counterRef, state);
+    counterState = read(counterRef).incrementNew();
+    write(counterRef, counterState);
   }
 }

@@ -61,7 +61,7 @@ class _GenericPageState extends State<GenericPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(statePage.getTag())),
+      //appBar: AppBar(title: Text(statePage.getTag())),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(8.0, 32.0, 8.0, 8.0),
         child: Column(

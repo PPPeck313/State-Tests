@@ -19,6 +19,10 @@ class BinderPage extends StatelessWidget implements StatePage {
   @override
   Widget build(BuildContext context) {
     return BinderScope(
+      overrides: [
+        CounterLogic.counterRef.overrideWith(CounterLogic.counterState),
+        NotesLogic.notesRef.overrideWith(NotesLogic.notesState)
+      ],
       child: GenericPage(this)
     );
   }
