@@ -31,7 +31,17 @@ class CounterController extends GetxController {
   // Instance Methods
   //============================================================================
 
-  void decrement() => state.value = state.value.decrementNew();
+  // class is "reactive", but the properties inside ARE NOT!
+  // `Rx` don't have any clue when you change something inside
 
-  void increment() => state.value = state.value.incrementNew();
+  void decrementObject() => state.value = state.value.decrementNew();
+  void decrement() => state.update((value) {
+    value.count = --value.count;
+  });
+
+  void incrementObject() => state.value = state.value.incrementNew();
+  void increment() {
+    state.value.count = ++state.value.count;
+    state.refresh();
+  }
 }
