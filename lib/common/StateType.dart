@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/states/binder/BinderPage.dart';
 import 'package:state_tests/states/bloc/BlocPage.dart';
 import 'package:state_tests/states/bloc/CubitPage.dart';
@@ -17,33 +18,44 @@ enum StateType {
   // Enums
   //============================================================================
 
-  binder(BinderPage(), "Bi"),
-  bloc(BlocPage(), "Bl"),
-  cubit(CubitPage(), "Cu"),
-  command(CommandPage(), "Co"),
-  getX(GetXPage(), "GX"),
-  mobX(MobXPage(), "MX"),
-  rebuilder(RebuilderPage(), "Rb"),
-  redux(ReduxPage(), "Rb"),
-  riverPod(RiverPodPage(), "Rb");
+  binder('Bi'),
+  bloc('Bl'),
+  cubit('Cu'),
+  command('Co'),
+  getX('GX'),
+  mobX('MX'),
+  rebuilder('Rb'),
+  redux('Rd'),
+  riverPod('Rp');
 
   //============================================================================
   // Fields
   //============================================================================
-
-  final Widget page;
+  
   final String abbreviation;
 
   //============================================================================
   // Constructor
   //============================================================================
 
-  const StateType(this.page, this.abbreviation);
+  const StateType(this.abbreviation);
 
   //============================================================================
   // Functions
   //============================================================================
 
+  GenericPageState get page => switch(this) {
+    binder => BinderPage(),
+    bloc => BlocPage(),
+    cubit => CubitPage(),
+    command => CommandPage(),
+    getX => GetXPage(),
+    mobX => MobXPage(),
+    rebuilder => RebuilderPage(),
+    redux => ReduxPage(),
+    riverPod => RiverPodPage()
+  };
+  
   Image get logo => switch(this) {
     binder => Assets.images.binderLogo,
     bloc => Assets.images.binderLogo,

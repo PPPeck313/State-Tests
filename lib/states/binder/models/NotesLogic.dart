@@ -1,17 +1,10 @@
 import 'package:binder/binder.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
 
+final StateRef<NotesState> notesRef = StateRef(NotesState());
+final LogicRef<NotesLogic> notesLogicRef = LogicRef((scope) => NotesLogic(scope));
+
 class NotesLogic with Logic {
-
-  //============================================================================
-  // Static Fields
-  //============================================================================
-
-  //BinderScope disposes values when out of scope, but can jumpstart value on recreation with override
-  static NotesState notesState = NotesState();
-
-  static final StateRef<NotesState> notesRef = StateRef(NotesState());
-  static final LogicRef<NotesLogic> notesLogicRef = LogicRef((scope) => NotesLogic(scope));
 
   //============================================================================
   // Constructors
@@ -30,13 +23,6 @@ class NotesLogic with Logic {
   // Instance Methods
   //============================================================================
 
-  void addNote() {
-    NotesState state = read(notesRef).addNoteNew();
-    write(notesRef, state);
-  }
-
-  void updateInput(String input) {
-    NotesState state = read(notesRef).updateInputNew(input);
-    write(notesRef, state);
-  }
+  void addNote() => write(notesRef, read(notesRef).addNoteNew());
+  void updateInput(String input) => write(notesRef, read(notesRef).updateInputNew(input));
 }

@@ -5,6 +5,7 @@ import 'package:state_tests/states/bloc/models/NotesBloc.dart';
 import 'package:state_tests/states/river_pod/models/CounterNotifier.dart';
 import 'package:state_tests/states/river_pod/models/NotesNotifier.dart';
 import 'common/StateType.dart';
+import 'common/pages/GenericPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -74,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
       key: _scaffoldKey,
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(title: Text(stateTypes[currentIndex].name)),
-      body: stateTypes[currentIndex].page,
+      body: GenericPage(stateTypes[currentIndex].state),
       drawer: makeDrawer(stateTypes),
     ),
   );
@@ -100,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget makeDrawerListTile(int index, StateType stateType) => ListTile(
     title: Row(
       children: [
-        stateType.page,
+        stateType.logo,
         Padding(
           padding: EdgeInsets.only(left: 8.0),
           child: Text(stateType.name),

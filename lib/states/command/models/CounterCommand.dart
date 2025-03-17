@@ -1,5 +1,5 @@
 import 'package:flutter_command/flutter_command.dart';
-import 'package:state_tests/common/models/counter/CounterActions.dart';
+import 'package:state_tests/common/models/counter/CounterEvent.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
 
 class CounterCommand {

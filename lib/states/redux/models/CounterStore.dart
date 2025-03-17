@@ -1,6 +1,6 @@
 import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
-import 'package:state_tests/common/models/counter/CounterActions.dart';
+import 'package:state_tests/common/models/counter/CounterEvent.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
 
 class CounterStore extends Store<CounterState> {

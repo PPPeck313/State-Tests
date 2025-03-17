@@ -1,23 +1,15 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:state_tests/common/models/counter/CounterActions.dart';
+import 'package:state_tests/common/models/counter/CounterEvent.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
-import 'package:state_tests/common/models/note/NotesActions.dart';
+import 'package:state_tests/common/models/note/NotesEvent.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
-import 'package:state_tests/common/pages/StatePage.dart';
-import 'package:state_tests/common/models/note/NotesList.dart';
 import 'package:state_tests/states/bloc/models/CounterBloc.dart';
 
 import 'models/NotesBloc.dart';
 
-class BlocPage extends StatelessWidget implements StatePage {
-
-  //============================================================================
-  // Constructors
-  //============================================================================
-
-  const BlocPage();
+class BlocPage extends GenericPageState {
 
   //============================================================================
   // Lifecycle Methods
@@ -25,13 +17,12 @@ class BlocPage extends StatelessWidget implements StatePage {
 
   //value vs create in order to reuse
   @override
-  Widget build(BuildContext context) {
-    return  BlocProvider<CounterBloc>.value(value: CounterBloc(),
-      child: BlocProvider<NotesBloc>.value(value: NotesBloc(),
-          child: GenericPage(this)
-      ),
-    );
-  }
+  Widget build(BuildContext context) => BlocProvider<CounterBloc>.value(
+    value: CounterBloc(),
+    child: BlocProvider<NotesBloc>.value(value: NotesBloc(),
+      child: GenericPage(this)
+    ),
+  );
 
   //============================================================================
   // StatePage Methods
@@ -43,31 +34,23 @@ class BlocPage extends StatelessWidget implements StatePage {
 
 
   @override
-  Widget getCounterText(BuildContext context) {
-    return BlocBuilder<CounterBloc, CounterState>(
-        builder: (context, state) => Text('${state.count}', style: new TextStyle(fontSize: 60.0))
-    );
-  }
+  CounterState getCounterState(BuildContext context) => context.watch()<CounterBloc>().state;
 
   @override
-  void decrement(BuildContext context) => context.bloc<CounterBloc>().add(DecrementAction());
+  void decrement(BuildContext context) => context.read()<CounterBloc>().add(DecrementAction());
 
   @override
-  void increment(BuildContext context) => context.bloc<CounterBloc>().add(IncrementAction());
+  void increment(BuildContext context) => context.read()<CounterBloc>().add(IncrementAction());
 
 
 
   @override
-  Widget getNotesList(BuildContext context) {
-    return BlocBuilder<NotesBloc, NotesState>(
-        builder: (context, state) => NotesList(state)
-    );
-  }
+  NotesState getNotesState(BuildContext context) => context.read<NotesBloc>().state;
 
   @override
-  void addNote(BuildContext context) => context.bloc<NotesBloc>().add(AddNoteAction());
+  void addNote(BuildContext context) => context.watch<NotesBloc>().add(AddNoteAction());
 
   @override
-  void updateInput(BuildContext context, String input) => context.bloc<NotesBloc>().add(UpdateInputAction(input));
+  void updateInput(BuildContext context, String input) => context.watch<NotesBloc>().add(UpdateInputAction(input));
 }
 

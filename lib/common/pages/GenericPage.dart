@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:state_tests/common/pages/StatePage.dart';
+import 'package:state_tests/common/models/counter/CounterState.dart';
+import 'package:state_tests/common/models/note/NotesList.dart';
+import 'package:state_tests/common/models/note/NotesState.dart';
 
 class GenericPage extends StatefulWidget {
 
@@ -7,7 +9,7 @@ class GenericPage extends StatefulWidget {
   // Fields
   //============================================================================
 
-  final StatePage statePage;
+  final GenericPageState statePage;
 
   //============================================================================
   // Constructors
@@ -20,119 +22,103 @@ class GenericPage extends StatefulWidget {
   //============================================================================
 
   @override
-  _GenericPageState createState() => _GenericPageState(statePage);
+  GenericPageState createState() => statePage;
 }
 
-
-
-class _GenericPageState extends State<GenericPage> {
+abstract class GenericPageState extends State<StatefulWidget> {
 
   //============================================================================
   // Fields
   //============================================================================
 
-  final StatePage statePage;
-
-  TextEditingController? _controller;
+  final TextEditingController _controller = TextEditingController();
 
   //============================================================================
-  // Constructors
+  // Abstract Methods
   //============================================================================
 
-  _GenericPageState(this.statePage);
+  String getTag();
+
+  CounterState getCounterState(BuildContext context);
+  void increment(BuildContext context);
+  void decrement(BuildContext context);
+
+  NotesState getNotesState(BuildContext context);
+  void addNote(BuildContext context);
+  void updateInput(BuildContext context, String input);
 
   //============================================================================
   // Lifecycle Methods
   //============================================================================
 
   @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController();
-  }
-
-  @override
   void dispose() {
-    _controller?.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      //appBar: AppBar(title: Text(statePage.getTag())),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(8.0, 32.0, 8.0, 8.0),
-        child: Column(
-          children: [
-            makeCounter(),
-            makeCreateNoteButton(),
-            makeUpdateInputTextField(),
-            Divider(),
-            statePage.getNotesList(context)
-          ],
-        ),
+  Widget build(BuildContext context) => Scaffold(
+    body: Padding(
+      padding: const EdgeInsets.fromLTRB(8.0, 32.0, 8.0, 8.0),
+      child: Column(
+        children: [
+          makeCounter(),
+          makeCreateNoteButton(),
+          makeUpdateInputTextField(),
+          Divider(),
+          NotesList(getNotesState(context))
+        ],
       ),
-    );
-  }
+    ),
+  );
 
   //============================================================================
   // Widget Methods
   //============================================================================
 
-  Widget makeCounter() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        makeSubtractButton(),
-        statePage.getCounterText(context),
-        makeAddButton()
-      ],
-    );
-  }
+  Widget makeCounter() => Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      makeSubtractButton(),
+      makeCounterText(),
+      makeAddButton()
+    ],
+  );
 
-  Widget makeSubtractButton() {
-    return FloatingActionButton(
-        onPressed: () {
-          statePage.decrement(context);
-        },
-        child: Icon(Icons.remove, color: Colors.black),
-        backgroundColor: Colors.white
-    );
-  }
+  Widget makeSubtractButton() => FloatingActionButton(
+    onPressed: () { decrement(context); },
+    child: Icon(Icons.remove, color: Colors.black),
+    backgroundColor: Colors.white
+  );
 
-  Widget makeAddButton() {
-    return FloatingActionButton(
-        onPressed: () {
-          statePage.increment(context);
-        },
-        child: Icon(Icons.add, color: Colors.black),
-        backgroundColor: Colors.white
-    );
-  }
+  Widget makeCounterText() => Text(
+    '${getCounterState(context).count}',
+    style: new TextStyle(fontSize: 60.0)
+  );
+
+  Widget makeAddButton() => FloatingActionButton(
+    onPressed: () { increment(context); },
+    child: Icon(Icons.add, color: Colors.black),
+    backgroundColor: Colors.white
+  );
 
 
 
-  Widget makeCreateNoteButton() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 32.0),
-      child: TextButton(
-          onPressed: () {
-            statePage.addNote(context);
-            _controller?.clear();
-          },
-          child: Text('Create Note')
-      ),
-    );
-  }
+  Widget makeCreateNoteButton() => Padding(
+    padding: const EdgeInsets.only(top: 32.0),
+    child: TextButton(
+      onPressed: () {
+        addNote(context);
+        _controller.clear();
+      }, 
+      child: Text('Create Note')
+    ),
+  );
 
-  Widget makeUpdateInputTextField() {
-    return TextField(
-      controller: _controller,
-      onChanged: (value) => {
-        statePage.updateInput(context, value)
-      },
-      decoration: InputDecoration.collapsed(hintText: 'Add a note'),
-    );
-  }
+  Widget makeUpdateInputTextField() => TextField(
+    controller: _controller,
+    onChanged: (value) => { updateInput(context, value) },
+    decoration: InputDecoration.collapsed(hintText: 'Add a note'),
+  );
 }

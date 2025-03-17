@@ -1,8 +1,8 @@
-sealed class NotesActions {}
+sealed class NotesEvent {}
 
-class AddNoteAction extends NotesActions {}
+class AddNoteEvent extends NotesEvent {}
 
-class UpdateInputAction extends NotesActions {
+class UpdateInputEvent extends NotesEvent {
 
   //============================================================================
   // Fields
@@ -14,5 +14,5 @@ class UpdateInputAction extends NotesActions {
   // Constructors
   //============================================================================
 
-  UpdateInputAction(this.input);
+  UpdateInputEvent(this.input);
 }

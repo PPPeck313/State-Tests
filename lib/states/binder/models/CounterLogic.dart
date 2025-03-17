@@ -1,23 +1,16 @@
 import 'package:binder/binder.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
 
+final StateRef<CounterState> counterRef = StateRef(CounterState());
+final counterViewLogicRef = LogicRef((scope) => CounterLogic(scope));
+
 class CounterLogic with Logic {
-
-  //============================================================================
-  // Static Fields
-  //============================================================================
-
-  //BinderScope disposes values when out of scope, but can jumpstart value on recreation with override
-  static CounterState counterState = CounterState();
-
-  static final StateRef<CounterState> counterRef = StateRef(counterState);
-  static final LogicRef<CounterLogic> counterLogicRef = LogicRef((scope) => CounterLogic(scope));
 
   //============================================================================
   // Constructors
   //============================================================================
 
-  const CounterLogic(this.scope);
+  CounterLogic(this.scope);
 
   //============================================================================
   // Logic Methods
@@ -30,13 +23,6 @@ class CounterLogic with Logic {
   // Instance Methods
   //============================================================================
 
-  void decrement() {
-    counterState = read(counterRef).decrementNew();
-    write(counterRef, counterState);
-  }
-
-  void increment() {
-    counterState = read(counterRef).incrementNew();
-    write(counterRef, counterState);
-  }
+  void decrement() => write(counterRef, read(counterRef).decrementNew());
+  void increment() => write(counterRef, read(counterRef).incrementNew());
 }

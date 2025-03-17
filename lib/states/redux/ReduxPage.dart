@@ -1,12 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:state_tests/common/models/counter/CounterActions.dart';
+import 'package:state_tests/common/models/counter/CounterEvent.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
 import 'package:state_tests/common/models/note/NotesList.dart';
-import 'package:state_tests/common/models/note/NotesActions.dart';
+import 'package:state_tests/common/models/note/NotesEvent.dart';
 
 import 'models/CounterStore.dart';
 import 'models/NotesStore.dart';

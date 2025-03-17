@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:state_tests/common/models/counter/CounterActions.dart';
+import 'package:state_tests/common/models/counter/CounterEvent.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
 
 class CounterBloc extends Bloc<CounterActions, CounterState> {
@@ -16,24 +16,19 @@ class CounterBloc extends Bloc<CounterActions, CounterState> {
   // Constructors
   //============================================================================
 
-  CounterBloc._new() : super(CounterState.initial());
+  CounterBloc._new() : super(CounterState());
 
   //============================================================================
   // Bloc Methods
   //============================================================================
 
   @override
-  CounterState get initialState => CounterState.initial();
+  void onEvent(Bloc bloc, CounterEvent? event) {
+    super.onEvent(bloc, event);
 
-  @override
-  Stream<CounterState> mapEventToState(CounterActions event) async* {
-    if (event is DecrementAction) {
-      yield state.decrementNew();
-    }
-
-    else if (event is IncrementAction) {
-      yield state.incrementNew();
-    }
+    switch (event) {
+      DecrementEvent => state.decrementNew(),
+      IncrementEvent => state.incrementNew()
   }
 
   //============================================================================

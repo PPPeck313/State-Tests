@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:state_tests/common/models/note/NotesActions.dart';
+import 'package:state_tests/common/models/note/NotesEvent.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
 
 class NotesBloc extends Bloc<NotesActions, NotesState> {
