@@ -8,7 +8,7 @@ class CounterLogic with Logic {
   //============================================================================
 
   //BinderScope disposes values when out of scope, but can jumpstart value on recreation with override
-  static CounterState counterState = CounterState.initial();
+  static CounterState counterState = CounterState();
 
   static final StateRef<CounterState> counterRef = StateRef(counterState);
   static final LogicRef<CounterLogic> counterLogicRef = LogicRef((scope) => CounterLogic(scope));

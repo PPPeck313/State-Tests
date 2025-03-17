@@ -6,12 +6,18 @@ import 'package:state_tests/common/models/note/NotesActions.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
-import 'package:state_tests/common/widgets/NotesList.dart';
+import 'package:state_tests/common/models/note/NotesList.dart';
 import 'package:state_tests/states/bloc/models/CounterBloc.dart';
 
 import 'models/NotesBloc.dart';
 
 class BlocPage extends StatelessWidget implements StatePage {
+
+  //============================================================================
+  // Constructors
+  //============================================================================
+
+  const BlocPage();
 
   //============================================================================
   // Lifecycle Methods

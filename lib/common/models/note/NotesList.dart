@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
 import 'package:state_tests/states/mobx/models/NotesStoreX.dart';
 
-import '../models/note/Note.dart';
+import 'NoteWidget.dart';
 
 class NotesList extends StatelessWidget {
 
@@ -11,16 +11,16 @@ class NotesList extends StatelessWidget {
   // Fields
   //============================================================================
 
-  NotesState notesState;
-  NotesStoreX notesStoreX;
+  final NotesState? notesState;
+  final NotesStoreX? notesStoreX;
 
   //============================================================================
   // Constructors
   //============================================================================
 
-  NotesList(this.notesState);
+  NotesList(this.notesState) : notesStoreX = null;
 
-  NotesList.mobX(this.notesStoreX);
+  NotesList.mobX(this.notesStoreX) : notesState = null;
 
   //============================================================================
   // Lifecycle Methods
@@ -34,8 +34,8 @@ class NotesList extends StatelessWidget {
   Widget getList() {
     return Expanded(
       child: ListView.builder(
-        itemBuilder: (context, index) => Note(text: notesState != null ? notesState.notes[index] : notesStoreX.notes[index]),
-        itemCount: notesState != null ? notesState.notes.length : notesStoreX.notes.length,
+        itemBuilder: (context, index) => NoteWidget(text: (notesState != null ? notesState?.notes[index] : notesStoreX?.notes[index]) ?? ""),
+        itemCount: notesState != null ? notesState?.notes.length : notesStoreX?.notes.length,
       ),
     );
   }

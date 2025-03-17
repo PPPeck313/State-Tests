@@ -24,7 +24,7 @@ class CounterCommand {
   // Constructors
   //============================================================================
 
-  //TResult needs to change between commands
+  //Result needs to change between commands
   CounterCommand._new() {
     updateCountCommand = Command.createSync((command) {
       if (command is DecrementAction) {

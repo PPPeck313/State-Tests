@@ -8,9 +8,9 @@ class NotesLogic with Logic {
   //============================================================================
 
   //BinderScope disposes values when out of scope, but can jumpstart value on recreation with override
-  static NotesState notesState = NotesState.initial();
+  static NotesState notesState = NotesState();
 
-  static final StateRef<NotesState> notesRef = StateRef(NotesState.initial());
+  static final StateRef<NotesState> notesRef = StateRef(NotesState());
   static final LogicRef<NotesLogic> notesLogicRef = LogicRef((scope) => NotesLogic(scope));
 
   //============================================================================

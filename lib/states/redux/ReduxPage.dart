@@ -5,13 +5,19 @@ import 'package:state_tests/common/models/counter/CounterState.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
-import 'package:state_tests/common/widgets/NotesList.dart';
+import 'package:state_tests/common/models/note/NotesList.dart';
 import 'package:state_tests/common/models/note/NotesActions.dart';
 
 import 'models/CounterStore.dart';
 import 'models/NotesStore.dart';
 
 class ReduxPage extends StatelessWidget implements StatePage {
+
+  //============================================================================
+  // Constructors
+  //============================================================================
+
+  const ReduxPage();
 
   //============================================================================
   // Fields

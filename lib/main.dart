@@ -1,18 +1,12 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:state_tests/states/bloc/models/CounterBloc.dart';
 import 'package:state_tests/states/bloc/models/NotesBloc.dart';
 import 'package:state_tests/states/river_pod/models/CounterNotifier.dart';
 import 'package:state_tests/states/river_pod/models/NotesNotifier.dart';
-import 'package:vnum/vnum.dart';
-import 'common/StatePageEnum.dart';
-import 'main.reflectable.dart';
+import 'common/StateType.dart';
 
-
-void main() {
-  initializeReflectable();
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
 
@@ -21,14 +15,8 @@ class MyApp extends StatelessWidget {
   //============================================================================
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        home: HomeScreen()
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(home: HomeScreen());
 }
-
-
 
 class HomeScreen extends StatefulWidget {
 
@@ -65,110 +53,65 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    List<Widget> pages = List<Widget>();
-
-    for (StatePageEnum statePageEnum in Vnum.allCasesFor(StatePageEnum)) {
-      pages.add(statePageEnum.statePage());
-    }
-
-    return MaterialApp(
-        home: makeHomeScreen(context, pages),
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(
+    home: makeHomeScreen(context, StateType.values),
+    theme: ThemeData(
+      primarySwatch: Colors.blue,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+    ),
+  );
 
   //============================================================================
   // Widget Methods
   //============================================================================
 
-  Widget makeHomeScreen(BuildContext context, List<Widget> pages) {
-    return DefaultTabController(
-      length: pages.length,
-      child: Scaffold(
-        key: _scaffoldKey,
-        backgroundColor: Theme.of(context).primaryColor,
-        appBar: AppBar(title: Text(Vnum.allCasesFor(StatePageEnum)[currentIndex].value)),
-        // makeTopTabBar(),
-        body: (Vnum.allCasesFor(StatePageEnum)[currentIndex] as StatePageEnum).statePage(),
-        //TabBarView(children: pages),
-        drawer: makeDrawer(),
-      ),
-    );
-  }
+  Widget makeHomeScreen(
+    BuildContext context,
+    List<StateType> stateTypes
+  ) => DefaultTabController(
+    length: stateTypes.length,
+    child: Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: Theme.of(context).primaryColor,
+      appBar: AppBar(title: Text(stateTypes[currentIndex].name)),
+      body: stateTypes[currentIndex].page,
+      drawer: makeDrawer(stateTypes),
+    ),
+  );
 
-
-
-  Widget makeTopTabBar() {
-    return PreferredSize(
-      preferredSize: Size.fromHeight(74.0),
-      child: SafeArea(
-        child: AppBar(
-            flexibleSpace: makeTabBar()
+  Widget makeDrawer(List<StateType> stateTypes) => Drawer(
+    child: ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        DrawerHeader(
+          child: Container(
+            child: Text("State Tests", style: TextStyle(color: Colors.white, fontSize: 28)),
+            alignment: Alignment.bottomLeft,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.blue,
+          ),
         ),
-      ),
-    );
-  }
+        ...stateTypes.mapIndexed(makeDrawerListTile)
+      ]
+    ),
+  );
 
-  Widget makeTabBar() {
-    List<Tab> tabs = List<Tab>();
-
-    for (StatePageEnum statePageEnum in Vnum.allCasesFor(StatePageEnum)) {
-      tabs.add(Tab(icon: statePageEnum.image(), text: statePageEnum.shortName()));
-    }
-
-    return TabBar(
-        tabs: tabs
-    );
-  }
-
-
-
-  Widget makeDrawer() {
-    List<Widget> items = List<Widget>();
-
-    items.add(DrawerHeader(
-      child: Container(
-        child: Text("State Tests", style: TextStyle(color: Colors.white, fontSize: 28)),
-        alignment: Alignment.bottomLeft,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.blue,
-      ),
-    ));
-
-    for (int i = 0; i < Vnum.allCasesFor(StatePageEnum).length; i++) {
-      items.add(makeDrawerListTile(Vnum.allCasesFor(StatePageEnum)[i], i));
-    }
-
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: items
-      )
-    );
-  }
-
-  Widget makeDrawerListTile(StatePageEnum statePageEnum, int index) {
-    return ListTile(
-      title: Row(
-        children: <Widget>[
-          statePageEnum.image(),
-          Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Text(statePageEnum.value),
-          )
-        ],
-      ),
-      onTap: () => onDrawerItemClicked(index)
-    );
-  }
+  Widget makeDrawerListTile(int index, StateType stateType) => ListTile(
+    title: Row(
+      children: [
+        stateType.page,
+        Padding(
+          padding: EdgeInsets.only(left: 8.0),
+          child: Text(stateType.name),
+        )
+      ],
+    ),
+    onTap: () => onDrawerItemClicked(index)
+  );
 
   void onDrawerItemClicked(int index) {
-    _scaffoldKey.currentState.openEndDrawer();
-    setState(() => { currentIndex = index });
+    _scaffoldKey.currentState?.openEndDrawer();
+    setState(() => currentIndex = index);
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
-import 'package:state_tests/common/widgets/NotesList.dart';
+import 'package:state_tests/common/models/note/NotesList.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
 
@@ -11,6 +11,12 @@ import 'models/CounterCubit.dart';
 import 'models/NotesCubit.dart';
 
 class CubitPage extends StatelessWidget implements StatePage {
+
+  //============================================================================
+  // Constructors
+  //============================================================================
+
+  const CubitPage();
 
   //============================================================================
   // Lifecycle Methods

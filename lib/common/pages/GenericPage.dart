@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
 
 class GenericPage extends StatefulWidget {
@@ -14,7 +13,7 @@ class GenericPage extends StatefulWidget {
   // Constructors
   //============================================================================
 
-  const GenericPage(this.statePage, {Key key}) : super(key: key);
+  const GenericPage(this.statePage, {super.key});
 
   //============================================================================
   // Lifecycle Methods
@@ -34,7 +33,7 @@ class _GenericPageState extends State<GenericPage> {
 
   final StatePage statePage;
 
-  TextEditingController _controller;
+  TextEditingController? _controller;
 
   //============================================================================
   // Constructors
@@ -117,10 +116,10 @@ class _GenericPageState extends State<GenericPage> {
   Widget makeCreateNoteButton() {
     return Padding(
       padding: const EdgeInsets.only(top: 32.0),
-      child: FlatButton(
+      child: TextButton(
           onPressed: () {
             statePage.addNote(context);
-            _controller.clear();
+            _controller?.clear();
           },
           child: Text('Create Note')
       ),

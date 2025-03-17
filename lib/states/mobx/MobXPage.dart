@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:state_tests/common/widgets/NotesList.dart';
+import 'package:state_tests/common/models/note/NotesList.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
 
@@ -9,6 +9,12 @@ import 'models/CounterStoreX.dart';
 import 'models/NotesStoreX.dart';
 
 class MobXPage extends StatelessWidget implements StatePage {
+
+  //============================================================================
+  // Constructors
+  //============================================================================
+
+  const MobXPage();
 
   //============================================================================
   // Fields

@@ -1,10 +1,6 @@
-abstract class NotesActions {}
-
-
+sealed class NotesActions {}
 
 class AddNoteAction extends NotesActions {}
-
-
 
 class UpdateInputAction extends NotesActions {
 

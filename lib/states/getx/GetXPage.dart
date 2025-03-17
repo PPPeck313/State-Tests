@@ -2,12 +2,18 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
-import 'package:state_tests/common/widgets/NotesList.dart';
+import 'package:state_tests/common/models/note/NotesList.dart';
 import 'package:state_tests/states/getx/models/CounterController.dart';
 
 import 'models/NotesController.dart';
 
 class GetXPage extends StatelessWidget implements StatePage {
+
+  //============================================================================
+  // Constructors
+  //============================================================================
+
+  const GetXPage();
 
   //============================================================================
   // Fields

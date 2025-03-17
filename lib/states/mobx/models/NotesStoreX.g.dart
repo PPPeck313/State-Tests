@@ -6,10 +6,11 @@ part of 'NotesStoreX.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$NotesStoreX on NotesStoreXBase, Store {
-  final _$inputAtom = Atom(name: 'NotesStoreXBase.input');
+  late final _$inputAtom =
+      Atom(name: 'NotesStoreXBase.input', context: context);
 
   @override
   String get input {
@@ -24,7 +25,8 @@ mixin _$NotesStoreX on NotesStoreXBase, Store {
     });
   }
 
-  final _$notesAtom = Atom(name: 'NotesStoreXBase.notes');
+  late final _$notesAtom =
+      Atom(name: 'NotesStoreXBase.notes', context: context);
 
   @override
   ObservableList<String> get notes {
@@ -39,8 +41,8 @@ mixin _$NotesStoreX on NotesStoreXBase, Store {
     });
   }
 
-  final _$NotesStoreXBaseActionController =
-      ActionController(name: 'NotesStoreXBase');
+  late final _$NotesStoreXBaseActionController =
+      ActionController(name: 'NotesStoreXBase', context: context);
 
   @override
   void updateInput(String val) {

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-abstract class StatePage {
+abstract interface class StatePage {
   String getTag();
 
   Widget getCounterText(BuildContext context);

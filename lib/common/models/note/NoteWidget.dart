@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-class Note extends StatelessWidget {
+class NoteWidget extends StatelessWidget {
 
   //============================================================================
   // Fields
@@ -12,17 +12,15 @@ class Note extends StatelessWidget {
   // Constructors
   //============================================================================
 
-  const Note({Key key, this.text}) : super(key: key);
+  const NoteWidget({super.key, this.text = ""});
 
   //============================================================================
   // Lifecycle Methods
   //============================================================================
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Text('Note: $text'),
-    );
-  }
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0),
+    child: Text('Note: $text'),
+  );
 }

@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:state_tests/common/models/counter/CounterActions.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
-import 'package:state_tests/common/widgets/NotesList.dart';
+import 'package:state_tests/common/models/note/NotesList.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
 import 'package:state_tests/states/command/models/CounterCommand.dart';
@@ -11,6 +11,12 @@ import 'package:state_tests/states/command/models/CounterCommand.dart';
 import 'models/NotesCommand.dart';
 
 class CommandPage extends StatelessWidget implements StatePage {
+
+  //============================================================================
+  // Constructors
+  //============================================================================
+
+  const CommandPage();
 
   //============================================================================
   // Fields

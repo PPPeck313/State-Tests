@@ -14,8 +14,6 @@ dependencies:
 
   cupertino_icons: ^1.0.8
 
-  equatable: ^2.0.7
-
   binder: ^0.4.0
 
   bloc: ^9.0.0
@@ -39,8 +37,9 @@ dependencies:
   flutter_riverpod: ^2.6.1
   riverpod: ^2.6.1
 
-  reflectable: ^4.0.12
   json_annotation: any
+
+  dart_mappable: ^4.5.0
 
 dev_dependencies:
   flutter_test:
@@ -49,17 +48,11 @@ dev_dependencies:
   build_runner: ^2.4.13
   mobx_codegen: ^2.7.0
   json_serializable: any
+  dart_mappable_builder: ^4.3.1+1
+  flutter_gen_runner: 5.10.0
 
 flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/binder_logo.png
-    - assets/images/bloc_logo.png
-    - assets/images/cubit_logo.png
-    - assets/images/command_logo.png
-    - assets/images/getx_logo.png
-    - assets/images/mobx_logo.png
-    - assets/images/rebuilder_logo.png
-    - assets/images/redux_logo.png
-    - assets/images/riverpod_logo.png
+    - assets/images/

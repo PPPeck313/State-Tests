@@ -1,7 +1,10 @@
-import 'package:equatable/equatable.dart';
+import 'package:dart_mappable/dart_mappable.dart';
+
+part 'CounterState.mapper.dart';
 
 //needs to be a new object for Binder, Bloc, Cubit, Command, RiverPod
-class CounterState extends Equatable {
+@MappableClass()
+class CounterState with CounterStateMappable {
 
   //============================================================================
   // Fields
@@ -13,45 +16,15 @@ class CounterState extends Equatable {
   // Constructors
   //============================================================================
 
-  CounterState(this.count);
-
-  CounterState.initial() : count = 0;
-
-  CounterState copyWith(int count) {
-    return CounterState(count);
-  }
+  CounterState({this.count = 0});
 
   //============================================================================
   // Instance Methods
   //============================================================================
 
-  void increment() {
-    ++count;
-  }
+  void increment() => ++count;
+  CounterState incrementNew() => copyWith(count: ++count);
 
-  CounterState incrementNew() {
-    int copiedCount = count;
-    return copyWith(++copiedCount);
-  }
-
-
-
-  void decrement() {
-    --count;
-  }
-
-  CounterState decrementNew() {
-    int copiedCount = count;
-    return copyWith(--copiedCount);
-  }
-
-  //============================================================================
-  // Equatable Methods
-  //============================================================================
-
-  @override
-  List<Object> get props => [count];
-
-  @override
-  bool get stringify => true;
+  void decrement() => --count;
+  CounterState decrementNew() => copyWith(count: --count);
 }
