@@ -8,17 +8,17 @@ class CounterStore extends Store<CounterState> {
   factory CounterStore() => _instance;
 
   CounterStore._new()
-      : super(
-          (CounterState state, dynamic action) {
-            if (action is DecrementAction) {
-              state.decrement();
-            } else if (action is IncrementAction) {
-              state.increment();
-            }
+    : super(
+        (CounterState state, dynamic action) {
+          if (action is DecrementAction) {
+            state.decrement();
+          } else if (action is IncrementAction) {
+            state.increment();
+          }
 
-            return state;
-          },
-          initialState: CounterState.initial(),
-          middleware: [LoggingMiddleware.printer().call],
-        );
+          return state;
+        },
+        initialState: CounterState.initial(),
+        middleware: [LoggingMiddleware.printer().call],
+      );
 }

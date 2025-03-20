@@ -14,14 +14,11 @@ class NotesCommand {
   NotesCommand._new() {
     updateInputCommand = Command.createSync((input) => input, '');
 
-    addNoteCommand = Command.createSync(
-      (_) {
-        state = state.addNoteWithInputNew(updateInputCommand.value);
-        updateInputCommand.execute('');
+    addNoteCommand = Command.createSync((_) {
+      state = state.addNoteWithInputNew(updateInputCommand.value);
+      updateInputCommand.execute('');
 
-        return state;
-      },
-      NotesState.initial(),
-    );
+      return state;
+    }, NotesState.initial());
   }
 }

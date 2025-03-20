@@ -8,17 +8,17 @@ class NotesStore extends Store<NotesState> {
   factory NotesStore() => _instance;
 
   NotesStore._new()
-      : super(
-          (NotesState state, dynamic action) {
-            if (action is AddNoteAction) {
-              state.addNote();
-            } else if (action is UpdateInputAction) {
-              state.updateInput(action.input);
-            }
+    : super(
+        (NotesState state, dynamic action) {
+          if (action is AddNoteAction) {
+            state.addNote();
+          } else if (action is UpdateInputAction) {
+            state.updateInput(action.input);
+          }
 
-            return state;
-          },
-          initialState: NotesState.initial(),
-          middleware: [LoggingMiddleware.printer().call],
-        );
+          return state;
+        },
+        initialState: NotesState.initial(),
+        middleware: [LoggingMiddleware.printer().call],
+      );
 }

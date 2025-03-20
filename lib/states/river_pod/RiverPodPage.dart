@@ -14,20 +14,18 @@ class RiverPodPage extends StatelessWidget implements StatePage {
   const RiverPodPage({super.key});
 
   @override
-  Widget build(BuildContext context) => ProviderScope(
-        child: GenericPage(this),
-      );
+  Widget build(BuildContext context) => ProviderScope(child: GenericPage(this));
 
   @override
   String getTag() => 'Riverpod';
 
   @override
   Widget getCounterText(BuildContext context) => Consumer(
-        builder: (context, watch, child) {
-          CounterState state = watch(CounterNotifier.counterProvider.state);
-          return Text('${state.count}', style: TextStyle(fontSize: 60.0));
-        },
-      );
+    builder: (context, watch, child) {
+      CounterState state = watch(CounterNotifier.counterProvider.state);
+      return Text('${state.count}', style: TextStyle(fontSize: 60.0));
+    },
+  );
 
   @override
   void decrement(BuildContext context) {
@@ -43,11 +41,11 @@ class RiverPodPage extends StatelessWidget implements StatePage {
 
   @override
   Widget getNotesList(BuildContext context) => Consumer(
-        builder: (context, watch, child) {
-          NotesState state = watch(NotesNotifier.notesProvider.state);
-          return NotesList(state);
-        },
-      ); // Subscribe to the NotesController's state
+    builder: (context, watch, child) {
+      NotesState state = watch(NotesNotifier.notesProvider.state);
+      return NotesList(state);
+    },
+  ); // Subscribe to the NotesController's state
 
   @override
   void addNote(BuildContext context) {

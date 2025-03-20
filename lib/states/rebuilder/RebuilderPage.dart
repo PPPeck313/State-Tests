@@ -15,30 +15,20 @@ class RebuilderPage extends StatelessWidget implements StatePage {
 
   @override
   Widget build(BuildContext context) => Injector(
-        inject: [
-          Inject<CounterReactiveModel>(() => CounterReactiveModel()),
-          Inject<NotesReactiveModel>(() => NotesReactiveModel()),
-        ],
-        initState: () {}, //to be executed in the initState of statefulWidget
-        afterInitialBuild: (
-          BuildContext context,
-        ) {}, //to be executed after each rebuild of the widget
-        dispose: () {}, //to be executed in the dispose of statefulWidget
-        appLifeCycle: (
+    inject: [Inject<CounterReactiveModel>(() => CounterReactiveModel()), Inject<NotesReactiveModel>(() => NotesReactiveModel())],
+    initState: () {}, //to be executed in the initState of statefulWidget
+    afterInitialBuild: (BuildContext context) {}, //to be executed after each rebuild of the widget
+    dispose: () {}, //to be executed in the dispose of statefulWidget
+    appLifeCycle:
+        (
           AppLifecycleState state,
         ) {}, //to be executed each time the application state changed; Android: onResume, onPause; iOS: viewWillAppear, viewWillDisappear
-        builder: (context) {
-          RM.get<CounterReactiveModel>(
-            name: 'CounterReactiveModel',
-            context: context,
-          );
-          RM.get<NotesReactiveModel>(
-            name: 'NotesReactiveModel',
-            context: context,
-          );
-          return GenericPage(this);
-        },
-      );
+    builder: (context) {
+      RM.get<CounterReactiveModel>(name: 'CounterReactiveModel', context: context);
+      RM.get<NotesReactiveModel>(name: 'NotesReactiveModel', context: context);
+      return GenericPage(this);
+    },
+  );
 
   @override
   String getTag() => 'Rebuilder';

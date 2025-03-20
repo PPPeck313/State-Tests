@@ -14,12 +14,12 @@ class BlocPage extends GenericPageState {
   //value vs create in order to reuse
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (BuildContext context) => NotesCubit()),
-          BlocProvider(create: (BuildContext context) => NotesCubit()),
-        ],
-        child: GenericPage(this),
-      );
+    providers: [
+      BlocProvider(create: (BuildContext context) => NotesCubit()),
+      BlocProvider(create: (BuildContext context) => NotesCubit())
+    ],
+    child: GenericPage(this),
+  );
 
   @override
   String getTag() => 'Bloc';

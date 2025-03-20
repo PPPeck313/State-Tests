@@ -41,61 +41,41 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        home: makeHomeScreen(context, StateType.values),
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-      );
+    home: makeHomeScreen(context, StateType.values),
+    theme: ThemeData(primarySwatch: Colors.blue, visualDensity: VisualDensity.adaptivePlatformDensity),
+  );
 
-  Widget makeHomeScreen(
-    BuildContext context,
-    List<StateType> stateTypes,
-  ) =>
-      DefaultTabController(
-        length: stateTypes.length,
-        child: Scaffold(
-          key: _scaffoldKey,
-          backgroundColor: Theme.of(context).primaryColor,
-          appBar: AppBar(title: Text(stateTypes[currentIndex].name)),
-          body: GenericPage(stateTypes[currentIndex].state),
-          drawer: makeDrawer(stateTypes),
-        ),
-      );
+  Widget makeHomeScreen(BuildContext context, List<StateType> stateTypes) => DefaultTabController(
+    length: stateTypes.length,
+    child: Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: Theme.of(context).primaryColor,
+      appBar: AppBar(title: Text(stateTypes[currentIndex].name)),
+      body: GenericPage(stateTypes[currentIndex].state),
+      drawer: makeDrawer(stateTypes),
+    ),
+  );
 
   Widget makeDrawer(List<StateType> stateTypes) => Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Container(
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  'State Tests',
-                  style: TextStyle(color: Colors.white, fontSize: 28),
-                ),
-              ),
-            ),
-            ...stateTypes.mapIndexed(makeDrawerListTile),
-          ],
+    child: ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        DrawerHeader(
+          decoration: BoxDecoration(color: Colors.blue),
+          child: Container(
+            alignment: Alignment.bottomLeft,
+            child: Text('State Tests', style: TextStyle(color: Colors.white, fontSize: 28)),
+          ),
         ),
-      );
+        ...stateTypes.mapIndexed(makeDrawerListTile),
+      ],
+    ),
+  );
 
   Widget makeDrawerListTile(int index, StateType stateType) => ListTile(
-        title: Row(
-          children: [
-            stateType.logo,
-            Padding(
-              padding: EdgeInsets.only(left: 8.0),
-              child: Text(stateType.name),
-            ),
-          ],
-        ),
-        onTap: () => onDrawerItemClicked(index),
-      );
+    title: Row(children: [stateType.logo, Padding(padding: EdgeInsets.only(left: 8.0), child: Text(stateType.name))]),
+    onTap: () => onDrawerItemClicked(index),
+  );
 
   void onDrawerItemClicked(int index) {
     _scaffoldKey.currentState?.openEndDrawer();

@@ -12,17 +12,14 @@ class CounterCommand {
 
   //Result needs to change between commands
   CounterCommand._new() {
-    updateCountCommand = Command.createSync(
-      (command) {
-        if (command is DecrementAction) {
-          state = state.decrementNew();
-        } else if (command is IncrementAction) {
-          state = state.incrementNew();
-        }
+    updateCountCommand = Command.createSync((command) {
+      if (command is DecrementAction) {
+        state = state.decrementNew();
+      } else if (command is IncrementAction) {
+        state = state.incrementNew();
+      }
 
-        return state;
-      },
-      CounterState.initial(),
-    );
+      return state;
+    }, CounterState.initial());
   }
 }

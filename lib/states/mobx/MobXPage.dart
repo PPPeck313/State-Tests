@@ -21,9 +21,8 @@ class MobXPage extends StatelessWidget implements StatePage {
   String getTag() => 'MobX';
 
   @override
-  Widget getCounterText(BuildContext context) => Observer(
-        builder: (_) => Text('${_counterStoreX.count}', style: TextStyle(fontSize: 60.0)),
-      );
+  Widget getCounterText(BuildContext context) =>
+      Observer(builder: (_) => Text('${_counterStoreX.count}', style: TextStyle(fontSize: 60.0)));
 
   @override
   void decrement(BuildContext context) => _counterStoreX.decrement();
@@ -32,9 +31,7 @@ class MobXPage extends StatelessWidget implements StatePage {
   void increment(BuildContext context) => _counterStoreX.increment();
 
   @override
-  Widget getNotesList(BuildContext context) => NotesList.mobX(
-        _notesStoreX,
-      ); // Use Observer to subscribe to updates to the NotesStore.
+  Widget getNotesList(BuildContext context) => NotesList.mobX(_notesStoreX); // Use Observer to subscribe to updates to the NotesStore.
 
   @override
   void addNote(BuildContext context) => _notesStoreX.addNote();

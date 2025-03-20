@@ -20,12 +20,8 @@ class GetXPage extends StatelessWidget implements StatePage {
   String getTag() => 'GetX';
 
   @override
-  Widget getCounterText(BuildContext context) => Obx(
-        () => Text(
-          '${_counterController.state.value.count}',
-          style: TextStyle(fontSize: 60.0),
-        ),
-      );
+  Widget getCounterText(BuildContext context) =>
+      Obx(() => Text('${_counterController.state.value.count}', style: TextStyle(fontSize: 60.0)));
 
   @override
   void decrement(BuildContext context) => _counterController.decrement();

@@ -14,18 +14,12 @@ class NotesList extends StatelessWidget {
   const NotesList.mobX(this.notesStoreX, {super.key}) : notesState = null;
 
   @override
-  Widget build(BuildContext context) => notesState != null
-      ? getList()
-      : Observer(
-          builder: (_) => getList(),
-        ); //MobX needs observable in Observer within sight
+  Widget build(BuildContext context) => notesState != null ? getList() : Observer(builder: (_) => getList()); //MobX needs observable in Observer within sight
 
   Widget getList() => Expanded(
-        child: ListView.builder(
-          itemBuilder: (context, index) => NoteWidget(
-            text: (notesState != null ? notesState?.notes[index] : notesStoreX?.notes[index]) ?? '',
-          ),
-          itemCount: notesState != null ? notesState?.notes.length : notesStoreX?.notes.length,
-        ),
-      );
+    child: ListView.builder(
+      itemBuilder: (context, index) => NoteWidget(text: (notesState != null ? notesState?.notes[index] : notesStoreX?.notes[index]) ?? ''),
+      itemCount: notesState != null ? notesState?.notes.length : notesStoreX?.notes.length,
+    ),
+  );
 }

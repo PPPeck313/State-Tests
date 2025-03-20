@@ -10,9 +10,7 @@ import 'models/NotesLogic.dart';
 
 class BinderPage extends GenericPageState {
   @override
-  Widget build(BuildContext context) => BinderScope(
-        child: super.build(context),
-      );
+  Widget build(BuildContext context) => BinderScope(child: super.build(context));
 
   @override
   String getTag() => 'Binder';

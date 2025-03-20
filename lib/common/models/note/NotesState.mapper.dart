@@ -21,17 +21,12 @@ class NotesStateMapper extends ClassMapperBase<NotesState> {
   final String id = 'NotesState';
 
   static String _$input(NotesState v) => v.input;
-  static const Field<NotesState, String> _f$input =
-      Field('input', _$input, opt: true, def: '');
+  static const Field<NotesState, String> _f$input = Field('input', _$input, opt: true, def: '');
   static List<String> _$notes(NotesState v) => v.notes;
-  static const Field<NotesState, List<String>> _f$notes =
-      Field('notes', _$notes, mode: FieldMode.member);
+  static const Field<NotesState, List<String>> _f$notes = Field('notes', _$notes, mode: FieldMode.member);
 
   @override
-  final MappableFields<NotesState> fields = const {
-    #input: _f$input,
-    #notes: _f$notes,
-  };
+  final MappableFields<NotesState> fields = const {#input: _f$input, #notes: _f$notes};
 
   static NotesState _instantiate(DecodingData data) {
     return NotesState(input: data.dec(_f$input));
@@ -51,27 +46,22 @@ class NotesStateMapper extends ClassMapperBase<NotesState> {
 
 mixin NotesStateMappable {
   String toJson() {
-    return NotesStateMapper.ensureInitialized()
-        .encodeJson<NotesState>(this as NotesState);
+    return NotesStateMapper.ensureInitialized().encodeJson<NotesState>(this as NotesState);
   }
 
   Map<String, dynamic> toMap() {
-    return NotesStateMapper.ensureInitialized()
-        .encodeMap<NotesState>(this as NotesState);
+    return NotesStateMapper.ensureInitialized().encodeMap<NotesState>(this as NotesState);
   }
 
-  NotesStateCopyWith<NotesState, NotesState, NotesState> get copyWith =>
-      _NotesStateCopyWithImpl(this as NotesState, $identity, $identity);
+  NotesStateCopyWith<NotesState, NotesState, NotesState> get copyWith => _NotesStateCopyWithImpl(this as NotesState, $identity, $identity);
   @override
   String toString() {
-    return NotesStateMapper.ensureInitialized()
-        .stringifyValue(this as NotesState);
+    return NotesStateMapper.ensureInitialized().stringifyValue(this as NotesState);
   }
 
   @override
   bool operator ==(Object other) {
-    return NotesStateMapper.ensureInitialized()
-        .equalsValue(this as NotesState, other);
+    return NotesStateMapper.ensureInitialized().equalsValue(this as NotesState, other);
   }
 
   @override
@@ -80,35 +70,26 @@ mixin NotesStateMappable {
   }
 }
 
-extension NotesStateValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, NotesState, $Out> {
-  NotesStateCopyWith<$R, NotesState, $Out> get $asNotesState =>
-      $base.as((v, t, t2) => _NotesStateCopyWithImpl(v, t, t2));
+extension NotesStateValueCopy<$R, $Out> on ObjectCopyWith<$R, NotesState, $Out> {
+  NotesStateCopyWith<$R, NotesState, $Out> get $asNotesState => $base.as((v, t, t2) => _NotesStateCopyWithImpl(v, t, t2));
 }
 
-abstract class NotesStateCopyWith<$R, $In extends NotesState, $Out>
-    implements ClassCopyWith<$R, $In, $Out> {
+abstract class NotesStateCopyWith<$R, $In extends NotesState, $Out> implements ClassCopyWith<$R, $In, $Out> {
   $R call({String? input});
   NotesStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
-class _NotesStateCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, NotesState, $Out>
+class _NotesStateCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, NotesState, $Out>
     implements NotesStateCopyWith<$R, NotesState, $Out> {
   _NotesStateCopyWithImpl(super.value, super.then, super.then2);
 
   @override
-  late final ClassMapperBase<NotesState> $mapper =
-      NotesStateMapper.ensureInitialized();
+  late final ClassMapperBase<NotesState> $mapper = NotesStateMapper.ensureInitialized();
   @override
-  $R call({String? input}) =>
-      $apply(FieldCopyWithData({if (input != null) #input: input}));
+  $R call({String? input}) => $apply(FieldCopyWithData({if (input != null) #input: input}));
   @override
-  NotesState $make(CopyWithData data) =>
-      NotesState(input: data.get(#input, or: $value.input));
+  NotesState $make(CopyWithData data) => NotesState(input: data.get(#input, or: $value.input));
 
   @override
-  NotesStateCopyWith<$R2, NotesState, $Out2> $chain<$R2, $Out2>(
-          Then<$Out2, $R2> t) =>
-      _NotesStateCopyWithImpl($value, $cast, t);
+  NotesStateCopyWith<$R2, NotesState, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) => _NotesStateCopyWithImpl($value, $cast, t);
 }

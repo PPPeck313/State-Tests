@@ -23,9 +23,9 @@ class CommandPage extends StatelessWidget implements StatePage {
 
   @override
   Widget getCounterText(BuildContext context) => ValueListenableBuilder<CounterState>(
-        valueListenable: _counterCommand.updateCountCommand,
-        builder: (context, state, _) => Text('${state.count}', style: TextStyle(fontSize: 60.0)),
-      );
+    valueListenable: _counterCommand.updateCountCommand,
+    builder: (context, state, _) => Text('${state.count}', style: TextStyle(fontSize: 60.0)),
+  );
 
   @override
   void decrement(BuildContext context) => _counterCommand.updateCountCommand(DecrementAction());
@@ -34,10 +34,8 @@ class CommandPage extends StatelessWidget implements StatePage {
   void increment(BuildContext context) => _counterCommand.updateCountCommand(IncrementAction());
 
   @override
-  Widget getNotesList(BuildContext context) => ValueListenableBuilder<NotesState>(
-        valueListenable: _notesCommand.addNoteCommand,
-        builder: (context, state, _) => NotesList(state),
-      );
+  Widget getNotesList(BuildContext context) =>
+      ValueListenableBuilder<NotesState>(valueListenable: _notesCommand.addNoteCommand, builder: (context, state, _) => NotesList(state));
 
   @override
   void addNote(BuildContext context) => _notesCommand.addNoteCommand.execute();

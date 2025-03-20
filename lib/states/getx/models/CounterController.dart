@@ -19,8 +19,8 @@ class CounterController extends GetxController {
 
   void decrementObject() => state.value = state.value.decrementNew();
   void decrement() => state.update((value) {
-        value.count = --value.count;
-      });
+    value.count = --value.count;
+  });
 
   void incrementObject() => state.value = state.value.incrementNew();
   void increment() {

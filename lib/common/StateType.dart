@@ -28,18 +28,19 @@ enum StateType {
   const StateType(this.abbreviation);
 
   GenericPageState get page => switch (this) {
-        binder => BinderPage(),
-        bloc => BlocPage(),
-        cubit => CubitPage(),
-        command => CommandPage(),
-        getX => GetXPage(),
-        mobX => MobXPage(),
-        rebuilder => RebuilderPage(),
-        redux => ReduxPage(),
-        riverPod => RiverPodPage()
-      };
+    binder => BinderPage(),
+    bloc => BlocPage(),
+    cubit => CubitPage(),
+    command => CommandPage(),
+    getX => GetXPage(),
+    mobX => MobXPage(),
+    rebuilder => RebuilderPage(),
+    redux => ReduxPage(),
+    riverPod => RiverPodPage(),
+  };
 
-  Image get logo => switch (this) {
+  Image get logo =>
+      switch (this) {
         binder => Assets.images.binderLogo,
         bloc => Assets.images.binderLogo,
         cubit => Assets.images.binderLogo,
@@ -48,7 +49,6 @@ enum StateType {
         mobX => Assets.images.binderLogo,
         rebuilder => Assets.images.binderLogo,
         redux => Assets.images.binderLogo,
-        riverPod => Assets.images.binderLogo
-      }
-          .image();
+        riverPod => Assets.images.binderLogo,
+      }.image();
 }
