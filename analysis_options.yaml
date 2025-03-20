@@ -4,6 +4,7 @@ analyzer:
   exclude:
     - "build/**"
     - "**/*.g.dart"
+    - "**/*.mapper.dart"
 
 formatter:
   page_width: 140
