@@ -14,4 +14,3 @@ linter:
   rules:
     prefer_expression_function_bodies: true
     prefer_single_quotes: true
-    require_trailing_commas: true
