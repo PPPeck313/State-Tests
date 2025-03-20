@@ -1,8 +1,15 @@
-include: package:lints/recommended.yaml
+include: package:flutter_lints/flutter.yaml
 
 analyzer:
-  exclude: [build/**]
+  exclude:
+    - "build/**"
+    - "**/*.g.dart"
+
+formatter:
+  page_width: 140
 
 linter:
   rules:
-    - require_trailing_commas
+    prefer_expression_function_bodies: true
+    prefer_single_quotes: true
+    require_trailing_commas: true

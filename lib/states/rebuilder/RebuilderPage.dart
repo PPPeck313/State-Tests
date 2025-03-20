@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
 import 'package:state_tests/common/models/note/NotesList.dart';
+import 'package:state_tests/common/models/note/NotesState.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
 import 'package:state_tests/states/rebuilder/models/CounterReactiveModel.dart';
@@ -11,45 +11,37 @@ import 'package:states_rebuilder/states_rebuilder.dart';
 import 'models/NotesReactiveModel.dart';
 
 class RebuilderPage extends StatelessWidget implements StatePage {
-  //============================================================================
-  // Constructors
-  //============================================================================
-
-  const RebuilderPage();
-
-  //============================================================================
-  // Lifecycle Methods
-  //============================================================================
+  const RebuilderPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Injector(
-      inject: [
-        Inject<CounterReactiveModel>(() => CounterReactiveModel()),
-        Inject<NotesReactiveModel>(() => NotesReactiveModel()),
-      ],
-      initState: () {}, //to be executed in the initState of statefulWidget
-      afterInitialBuild: (BuildContext
-          context) {}, //to be executed after each rebuild of the widget
-      dispose: () {}, //to be executed in the dispose of statefulWidget
-      appLifeCycle: (AppLifecycleState
-          state) {}, //to be executed each time the application state changed; Android: onResume, onPause; iOS: viewWillAppear, viewWillDisappear
-      builder: (context) {
-        RM.get<CounterReactiveModel>(
-            name: "CounterReactiveModel", context: context);
-        RM.get<NotesReactiveModel>(
-            name: "NotesReactiveModel", context: context);
-        return GenericPage(this);
-      },
-    );
-  }
-
-  //============================================================================
-  // StatePage Methods
-  //============================================================================
+  Widget build(BuildContext context) => Injector(
+        inject: [
+          Inject<CounterReactiveModel>(() => CounterReactiveModel()),
+          Inject<NotesReactiveModel>(() => NotesReactiveModel()),
+        ],
+        initState: () {}, //to be executed in the initState of statefulWidget
+        afterInitialBuild: (
+          BuildContext context,
+        ) {}, //to be executed after each rebuild of the widget
+        dispose: () {}, //to be executed in the dispose of statefulWidget
+        appLifeCycle: (
+          AppLifecycleState state,
+        ) {}, //to be executed each time the application state changed; Android: onResume, onPause; iOS: viewWillAppear, viewWillDisappear
+        builder: (context) {
+          RM.get<CounterReactiveModel>(
+            name: 'CounterReactiveModel',
+            context: context,
+          );
+          RM.get<NotesReactiveModel>(
+            name: 'NotesReactiveModel',
+            context: context,
+          );
+          return GenericPage(this);
+        },
+      );
 
   @override
-  String getTag() => "Rebuilder";
+  String getTag() => 'Rebuilder';
 
   @override
   Widget getCounterText(BuildContext context) {
@@ -59,15 +51,13 @@ class RebuilderPage extends StatelessWidget implements StatePage {
 
   @override
   void decrement(BuildContext context) {
-    ReactiveModel<CounterReactiveModel> reactiveModel =
-        RM.get<CounterReactiveModel>();
+    ReactiveModel<CounterReactiveModel> reactiveModel = RM.get<CounterReactiveModel>();
     reactiveModel.setState((s) => s.decrement());
   }
 
   @override
   void increment(BuildContext context) {
-    ReactiveModel<CounterReactiveModel> reactiveModel =
-        RM.get<CounterReactiveModel>();
+    ReactiveModel<CounterReactiveModel> reactiveModel = RM.get<CounterReactiveModel>();
     reactiveModel.setState((s) => s.increment());
   }
 
@@ -79,16 +69,14 @@ class RebuilderPage extends StatelessWidget implements StatePage {
 
   @override
   void addNote(BuildContext context) {
-    ReactiveModel<NotesReactiveModel> reactiveModel =
-        RM.get<NotesReactiveModel>();
+    ReactiveModel<NotesReactiveModel> reactiveModel = RM.get<NotesReactiveModel>();
     reactiveModel.setState((state) => state.addNote());
   }
 
   @override
   void updateInput(BuildContext context, String input) {
     //IN.get<NotesReactiveModel>().updateInput(input);
-    ReactiveModel<NotesReactiveModel> reactiveModel =
-        RM.get<NotesReactiveModel>();
+    ReactiveModel<NotesReactiveModel> reactiveModel = RM.get<NotesReactiveModel>();
     reactiveModel.setState((s) => s.updateInput(input));
   }
 }

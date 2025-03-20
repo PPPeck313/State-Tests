@@ -6,42 +6,26 @@ import 'package:state_tests/states/mobx/models/NotesStoreX.dart';
 import 'NoteWidget.dart';
 
 class NotesList extends StatelessWidget {
-  //============================================================================
-  // Fields
-  //============================================================================
-
   final NotesState? notesState;
   final NotesStoreX? notesStoreX;
 
-  //============================================================================
-  // Constructors
-  //============================================================================
+  const NotesList(this.notesState, {super.key}) : notesStoreX = null;
 
-  NotesList(this.notesState) : notesStoreX = null;
-
-  NotesList.mobX(this.notesStoreX) : notesState = null;
-
-  //============================================================================
-  // Lifecycle Methods
-  //============================================================================
+  const NotesList.mobX(this.notesStoreX, {super.key}) : notesState = null;
 
   @override
-  Widget build(BuildContext context) {
-    return notesState != null ? getList() : Observer(builder: (_) => getList());
-  } //MobX needs observable in Observer within sight
+  Widget build(BuildContext context) => notesState != null
+      ? getList()
+      : Observer(
+          builder: (_) => getList(),
+        ); //MobX needs observable in Observer within sight
 
-  Widget getList() {
-    return Expanded(
-      child: ListView.builder(
-        itemBuilder: (context, index) => NoteWidget(
-            text: (notesState != null
-                    ? notesState?.notes[index]
-                    : notesStoreX?.notes[index]) ??
-                ""),
-        itemCount: notesState != null
-            ? notesState?.notes.length
-            : notesStoreX?.notes.length,
-      ),
-    );
-  }
+  Widget getList() => Expanded(
+        child: ListView.builder(
+          itemBuilder: (context, index) => NoteWidget(
+            text: (notesState != null ? notesState?.notes[index] : notesStoreX?.notes[index]) ?? '',
+          ),
+          itemCount: notesState != null ? notesState?.notes.length : notesStoreX?.notes.length,
+        ),
+      );
 }

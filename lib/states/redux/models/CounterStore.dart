@@ -3,17 +3,9 @@ import 'package:redux_logging/redux_logging.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
 
 class CounterStore extends Store<CounterState> {
-  //============================================================================
-  // Static Fields
-  //============================================================================
-
   static final CounterStore _instance = CounterStore._new();
 
   factory CounterStore() => _instance;
-
-  //============================================================================
-  // Constructors
-  //============================================================================
 
   CounterStore._new()
       : super(

@@ -9,33 +9,22 @@ import 'models/CounterLogic.dart';
 import 'models/NotesLogic.dart';
 
 class BinderPage extends GenericPageState {
-  //============================================================================
-  // Lifecycle Methods
-  //============================================================================
-
   @override
   Widget build(BuildContext context) => BinderScope(
         child: super.build(context),
       );
 
-  //============================================================================
-  // StatePage Methods
-  //============================================================================
+  @override
+  String getTag() => 'Binder';
 
   @override
-  String getTag() => "Binder";
+  CounterState getCounterState(BuildContext context) => context.watch(counterRef);
 
   @override
-  CounterState getCounterState(BuildContext context) =>
-      context.watch(counterRef);
+  void decrement(BuildContext context) => context.use(counterViewLogicRef).decrement();
 
   @override
-  void decrement(BuildContext context) =>
-      context.use(counterViewLogicRef).decrement();
-
-  @override
-  void increment(BuildContext context) =>
-      context.use(counterViewLogicRef).increment();
+  void increment(BuildContext context) => context.use(counterViewLogicRef).increment();
 
   @override
   NotesState getNotesState(BuildContext context) => context.watch(notesRef);
@@ -44,6 +33,5 @@ class BinderPage extends GenericPageState {
   void addNote(BuildContext context) => context.use(notesLogicRef).addNote();
 
   @override
-  void updateInput(BuildContext context, String input) =>
-      context.use(notesLogicRef).updateInput(input);
+  void updateInput(BuildContext context, String input) => context.use(notesLogicRef).updateInput(input);
 }

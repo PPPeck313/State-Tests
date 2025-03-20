@@ -8,47 +8,37 @@ import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/states/bloc/models/CounterBloc.dart';
 
 import 'models/NotesBloc.dart';
+import 'models/NotesCubit.dart';
 
 class BlocPage extends GenericPageState {
-  //============================================================================
-  // Lifecycle Methods
-  //============================================================================
-
   //value vs create in order to reuse
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
-        providers: providers,
-        child: child,
+        providers: [
+          BlocProvider(create: (BuildContext context) => NotesCubit()),
+          BlocProvider(create: (BuildContext context) => NotesCubit()),
+        ],
+        child: GenericPage(this),
       );
 
-  //============================================================================
-  // StatePage Methods
-  //============================================================================
+  @override
+  String getTag() => 'Bloc';
 
   @override
-  String getTag() => "Bloc";
+  CounterState getCounterState(BuildContext context) => context.watch()<CounterBloc>().state;
 
   @override
-  CounterState getCounterState(BuildContext context) =>
-      context.watch()<CounterBloc>().state;
+  void decrement(BuildContext context) => context.read()<CounterBloc>().add(DecrementEvent());
 
   @override
-  void decrement(BuildContext context) =>
-      context.read()<CounterBloc>().add(DecrementEvent());
+  void increment(BuildContext context) => context.read()<CounterBloc>().add(IncrementEvent());
 
   @override
-  void increment(BuildContext context) =>
-      context.read()<CounterBloc>().add(IncrementEvent());
+  NotesState getNotesState(BuildContext context) => context.read<NotesBloc>().state;
 
   @override
-  NotesState getNotesState(BuildContext context) =>
-      context.read<NotesBloc>().state;
+  void addNote(BuildContext context) => context.watch<NotesBloc>().add(AddNoteEvent());
 
   @override
-  void addNote(BuildContext context) =>
-      context.watch<NotesBloc>().add(AddNoteEvent());
-
-  @override
-  void updateInput(BuildContext context, String input) =>
-      context.watch<NotesBloc>().add(UpdateInputEvent(input));
+  void updateInput(BuildContext context, String input) => context.watch<NotesBloc>().add(UpdateInputEvent(input));
 }

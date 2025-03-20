@@ -3,17 +3,9 @@ import 'package:redux_logging/redux_logging.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
 
 class NotesStore extends Store<NotesState> {
-  //============================================================================
-  // Static Fields
-  //============================================================================
-
   static final NotesStore _instance = NotesStore._new();
 
   factory NotesStore() => _instance;
-
-  //============================================================================
-  // Constructors
-  //===========================================================================
 
   NotesStore._new()
       : super(

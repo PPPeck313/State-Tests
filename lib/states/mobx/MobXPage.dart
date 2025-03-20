@@ -9,39 +9,21 @@ import 'models/CounterStoreX.dart';
 import 'models/NotesStoreX.dart';
 
 class MobXPage extends StatelessWidget implements StatePage {
-  //============================================================================
-  // Constructors
-  //============================================================================
-
-  const MobXPage();
-
-  //============================================================================
-  // Fields
-  //============================================================================
+  const MobXPage({super.key});
 
   final CounterStoreX _counterStoreX = CounterStoreXWrapper().counterStoreX;
   final NotesStoreX _notesStoreX = NotesStoreXWrapper().notesStoreX;
 
-  //============================================================================
-  // Lifecycle Methods
-  //============================================================================
+  @override
+  Widget build(BuildContext context) => GenericPage(this);
 
   @override
-  Widget build(BuildContext context) {
-    return GenericPage(this);
-  }
-
-  //============================================================================
-  // StatePage Methods
-  //============================================================================
-
-  @override
-  String getTag() => "MobX";
+  String getTag() => 'MobX';
 
   @override
   Widget getCounterText(BuildContext context) => Observer(
-      builder: (_) =>
-          Text('${_counterStoreX.count}', style: TextStyle(fontSize: 60.0)));
+        builder: (_) => Text('${_counterStoreX.count}', style: TextStyle(fontSize: 60.0)),
+      );
 
   @override
   void decrement(BuildContext context) => _counterStoreX.decrement();
@@ -51,12 +33,12 @@ class MobXPage extends StatelessWidget implements StatePage {
 
   @override
   Widget getNotesList(BuildContext context) => NotesList.mobX(
-      _notesStoreX); // Use Observer to subscribe to updates to the NotesStore.
+        _notesStoreX,
+      ); // Use Observer to subscribe to updates to the NotesStore.
 
   @override
   void addNote(BuildContext context) => _notesStoreX.addNote();
 
   @override
-  void updateInput(BuildContext context, String input) =>
-      _notesStoreX.updateInput(input);
+  void updateInput(BuildContext context, String input) => _notesStoreX.updateInput(input);
 }

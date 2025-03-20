@@ -4,36 +4,16 @@ import 'package:state_tests/common/models/note/NotesList.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
 
 class GenericPage extends StatefulWidget {
-  //============================================================================
-  // Fields
-  //============================================================================
-
   final GenericPageState statePage;
 
-  //============================================================================
-  // Constructors
-  //============================================================================
-
   const GenericPage(this.statePage, {super.key});
-
-  //============================================================================
-  // Lifecycle Methods
-  //============================================================================
 
   @override
   GenericPageState createState() => statePage;
 }
 
 abstract class GenericPageState extends State<StatefulWidget> {
-  //============================================================================
-  // Fields
-  //============================================================================
-
   final TextEditingController _controller = TextEditingController();
-
-  //============================================================================
-  // Abstract Methods
-  //============================================================================
 
   String getTag();
 
@@ -44,10 +24,6 @@ abstract class GenericPageState extends State<StatefulWidget> {
   NotesState getNotesState(BuildContext context);
   void addNote(BuildContext context);
   void updateInput(BuildContext context, String input);
-
-  //============================================================================
-  // Lifecycle Methods
-  //============================================================================
 
   @override
   void dispose() {
@@ -71,10 +47,6 @@ abstract class GenericPageState extends State<StatefulWidget> {
         ),
       );
 
-  //============================================================================
-  // Widget Methods
-  //============================================================================
-
   Widget makeCounter() => Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -88,8 +60,8 @@ abstract class GenericPageState extends State<StatefulWidget> {
         onPressed: () {
           decrement(context);
         },
-        child: Icon(Icons.remove, color: Colors.black),
         backgroundColor: Colors.white,
+        child: Icon(Icons.remove, color: Colors.black),
       );
 
   Widget makeCounterText() => Text(
@@ -101,8 +73,8 @@ abstract class GenericPageState extends State<StatefulWidget> {
         onPressed: () {
           increment(context);
         },
-        child: Icon(Icons.add, color: Colors.black),
         backgroundColor: Colors.white,
+        child: Icon(Icons.add, color: Colors.black),
       );
 
   Widget makeCreateNoteButton() => Padding(

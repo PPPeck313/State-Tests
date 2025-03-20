@@ -3,15 +3,7 @@ import 'package:state_tests/common/models/counter/CounterEvent.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
 
 class CounterBloc extends Bloc<CounterEvent, CounterState> {
-  //============================================================================
-  // Constructors
-  //============================================================================
-
   CounterBloc() : super(CounterState());
-
-  //============================================================================
-  // Bloc Methods
-  //============================================================================
 
   @override
   void onEvent(CounterEvent event) {

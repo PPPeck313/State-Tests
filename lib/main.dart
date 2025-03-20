@@ -4,41 +4,30 @@ import 'package:state_tests/states/bloc/models/CounterBloc.dart';
 import 'package:state_tests/states/bloc/models/NotesBloc.dart';
 import 'package:state_tests/states/river_pod/models/CounterNotifier.dart';
 import 'package:state_tests/states/river_pod/models/NotesNotifier.dart';
+
 import 'common/StateType.dart';
 import 'common/pages/GenericPage.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  //============================================================================
-  // Lifecycle Methods
-  //============================================================================
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) => MaterialApp(home: HomeScreen());
 }
 
 class HomeScreen extends StatefulWidget {
-  //============================================================================
-  // Lifecycle Methods
-  //============================================================================
+  const HomeScreen({super.key});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //============================================================================
-  // Fields
-  //============================================================================
-
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int currentIndex = 0;
-
-  //============================================================================
-  // Lifecycle Methods
-  //============================================================================
 
   @override
   void dispose() {
@@ -58,10 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
       );
-
-  //============================================================================
-  // Widget Methods
-  //============================================================================
 
   Widget makeHomeScreen(
     BuildContext context,
@@ -83,13 +68,15 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              child: Container(
-                child: Text("State Tests",
-                    style: TextStyle(color: Colors.white, fontSize: 28)),
-                alignment: Alignment.bottomLeft,
-              ),
               decoration: BoxDecoration(
                 color: Colors.blue,
+              ),
+              child: Container(
+                alignment: Alignment.bottomLeft,
+                child: Text(
+                  'State Tests',
+                  style: TextStyle(color: Colors.white, fontSize: 28),
+                ),
               ),
             ),
             ...stateTypes.mapIndexed(makeDrawerListTile),
