@@ -17,12 +17,10 @@ class BlocPage extends GenericPageState {
 
   //value vs create in order to reuse
   @override
-  Widget build(BuildContext context) => BlocProvider<CounterBloc>.value(
-    value: CounterBloc(),
-    child: BlocProvider<NotesBloc>.value(value: NotesBloc(),
-      child: GenericPage(this)
-    ),
-  );
+  Widget build(BuildContext context) => MultiBlocProvider(
+    providers: providers,
+    child: child,
+  ) ;
 
   //============================================================================
   // StatePage Methods
@@ -37,10 +35,10 @@ class BlocPage extends GenericPageState {
   CounterState getCounterState(BuildContext context) => context.watch()<CounterBloc>().state;
 
   @override
-  void decrement(BuildContext context) => context.read()<CounterBloc>().add(DecrementAction());
+  void decrement(BuildContext context) => context.read()<CounterBloc>().add(DecrementEvent());
 
   @override
-  void increment(BuildContext context) => context.read()<CounterBloc>().add(IncrementAction());
+  void increment(BuildContext context) => context.read()<CounterBloc>().add(IncrementEvent());
 
 
 
@@ -48,9 +46,9 @@ class BlocPage extends GenericPageState {
   NotesState getNotesState(BuildContext context) => context.read<NotesBloc>().state;
 
   @override
-  void addNote(BuildContext context) => context.watch<NotesBloc>().add(AddNoteAction());
+  void addNote(BuildContext context) => context.watch<NotesBloc>().add(AddNoteEvent());
 
   @override
-  void updateInput(BuildContext context, String input) => context.watch<NotesBloc>().add(UpdateInputAction(input));
+  void updateInput(BuildContext context, String input) => context.watch<NotesBloc>().add(UpdateInputEvent(input));
 }
 

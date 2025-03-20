@@ -2,45 +2,25 @@ import 'package:bloc/bloc.dart';
 import 'package:state_tests/common/models/note/NotesEvent.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
 
-class NotesBloc extends Bloc<NotesActions, NotesState> {
-
-  //============================================================================
-  // Static Fields
-  //============================================================================
-
-  static NotesBloc _instance = NotesBloc._new();
-
-  factory NotesBloc() => _instance;
+class NotesBloc extends Bloc<NotesEvent, NotesState> {
 
   //============================================================================
   // Constructors
   //============================================================================
 
-  NotesBloc._new() : super(NotesState.initial());
+  NotesBloc() : super(NotesState());
 
   //============================================================================
   // Bloc Methods
   //============================================================================
 
   @override
-  NotesState get initialState => NotesState.initial();
+  void onEvent(NotesEvent event) {
+    super.onEvent(event);
 
-  @override
-  Stream<NotesState> mapEventToState(NotesActions event) async* {
-    if (event is AddNoteAction) {
-      yield state.addNoteNew();
+    switch (event) {
+      case AddNoteEvent(): state.addNoteNew();
+      case UpdateInputEvent(): state.updateInputNew(event.input);
     }
-
-    else if (event is UpdateInputAction) {
-      yield state.updateInputNew(event.input);
-    }
-  }
-
-  //============================================================================
-  // Instance Methods
-  //============================================================================
-
-  void dispose() {
-    close();
   }
 }
