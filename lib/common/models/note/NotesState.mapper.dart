@@ -53,7 +53,8 @@ mixin NotesStateMappable {
     return NotesStateMapper.ensureInitialized().encodeMap<NotesState>(this as NotesState);
   }
 
-  NotesStateCopyWith<NotesState, NotesState, NotesState> get copyWith => _NotesStateCopyWithImpl(this as NotesState, $identity, $identity);
+  NotesStateCopyWith<NotesState, NotesState, NotesState> get copyWith =>
+      _NotesStateCopyWithImpl(this as NotesState, $identity, $identity);
   @override
   String toString() {
     return NotesStateMapper.ensureInitialized().stringifyValue(this as NotesState);
@@ -71,7 +72,8 @@ mixin NotesStateMappable {
 }
 
 extension NotesStateValueCopy<$R, $Out> on ObjectCopyWith<$R, NotesState, $Out> {
-  NotesStateCopyWith<$R, NotesState, $Out> get $asNotesState => $base.as((v, t, t2) => _NotesStateCopyWithImpl(v, t, t2));
+  NotesStateCopyWith<$R, NotesState, $Out> get $asNotesState =>
+      $base.as((v, t, t2) => _NotesStateCopyWithImpl(v, t, t2));
 }
 
 abstract class NotesStateCopyWith<$R, $In extends NotesState, $Out> implements ClassCopyWith<$R, $In, $Out> {
@@ -91,5 +93,6 @@ class _NotesStateCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, NotesState
   NotesState $make(CopyWithData data) => NotesState(input: data.get(#input, or: $value.input));
 
   @override
-  NotesStateCopyWith<$R2, NotesState, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) => _NotesStateCopyWithImpl($value, $cast, t);
+  NotesStateCopyWith<$R2, NotesState, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+      _NotesStateCopyWithImpl($value, $cast, t);
 }

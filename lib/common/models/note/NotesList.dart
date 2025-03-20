@@ -18,7 +18,9 @@ class NotesList extends StatelessWidget {
 
   Widget getList() => Expanded(
     child: ListView.builder(
-      itemBuilder: (context, index) => NoteWidget(text: (notesState != null ? notesState?.notes[index] : notesStoreX?.notes[index]) ?? ''),
+      itemBuilder:
+          (context, index) =>
+              NoteWidget(text: (notesState != null ? notesState?.notes[index] : notesStoreX?.notes[index]) ?? ''),
       itemCount: notesState != null ? notesState?.notes.length : notesStoreX?.notes.length,
     ),
   );

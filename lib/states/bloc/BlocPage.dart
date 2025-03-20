@@ -16,7 +16,7 @@ class BlocPage extends GenericPageState {
   Widget build(BuildContext context) => MultiBlocProvider(
     providers: [
       BlocProvider(create: (BuildContext context) => NotesCubit()),
-      BlocProvider(create: (BuildContext context) => NotesCubit())
+      BlocProvider(create: (BuildContext context) => NotesCubit()),
     ],
     child: GenericPage(this),
   );

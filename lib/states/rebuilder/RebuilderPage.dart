@@ -15,7 +15,10 @@ class RebuilderPage extends StatelessWidget implements StatePage {
 
   @override
   Widget build(BuildContext context) => Injector(
-    inject: [Inject<CounterReactiveModel>(() => CounterReactiveModel()), Inject<NotesReactiveModel>(() => NotesReactiveModel())],
+    inject: [
+      Inject<CounterReactiveModel>(() => CounterReactiveModel()),
+      Inject<NotesReactiveModel>(() => NotesReactiveModel()),
+    ],
     initState: () {}, //to be executed in the initState of statefulWidget
     afterInitialBuild: (BuildContext context) {}, //to be executed after each rebuild of the widget
     dispose: () {}, //to be executed in the dispose of statefulWidget

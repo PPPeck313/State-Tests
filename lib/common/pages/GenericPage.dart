@@ -36,13 +36,21 @@ abstract class GenericPageState extends State<StatefulWidget> {
     body: Padding(
       padding: const EdgeInsets.fromLTRB(8.0, 32.0, 8.0, 8.0),
       child: Column(
-        children: [makeCounter(), makeCreateNoteButton(), makeUpdateInputTextField(), Divider(), NotesList(getNotesState(context))],
+        children: [
+          makeCounter(),
+          makeCreateNoteButton(),
+          makeUpdateInputTextField(),
+          Divider(),
+          NotesList(getNotesState(context)),
+        ],
       ),
     ),
   );
 
-  Widget makeCounter() =>
-      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [makeSubtractButton(), makeCounterText(), makeAddButton()]);
+  Widget makeCounter() => Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [makeSubtractButton(), makeCounterText(), makeAddButton()],
+  );
 
   Widget makeSubtractButton() => FloatingActionButton(
     onPressed: () {

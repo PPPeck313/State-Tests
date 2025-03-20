@@ -13,53 +13,44 @@ class $AssetsImagesGen {
   const $AssetsImagesGen();
 
   /// File path: assets/images/binder_logo.png
-  AssetGenImage get binderLogo =>
-      const AssetGenImage('assets/images/binder_logo.png');
+  AssetGenImage get binderLogo => const AssetGenImage('assets/images/binder_logo.png');
 
   /// File path: assets/images/bloc_logo.png
-  AssetGenImage get blocLogo =>
-      const AssetGenImage('assets/images/bloc_logo.png');
+  AssetGenImage get blocLogo => const AssetGenImage('assets/images/bloc_logo.png');
 
   /// File path: assets/images/command_logo.png
-  AssetGenImage get commandLogo =>
-      const AssetGenImage('assets/images/command_logo.png');
+  AssetGenImage get commandLogo => const AssetGenImage('assets/images/command_logo.png');
 
   /// File path: assets/images/cubit_logo.png
-  AssetGenImage get cubitLogo =>
-      const AssetGenImage('assets/images/cubit_logo.png');
+  AssetGenImage get cubitLogo => const AssetGenImage('assets/images/cubit_logo.png');
 
   /// File path: assets/images/getx_logo.png
-  AssetGenImage get getxLogo =>
-      const AssetGenImage('assets/images/getx_logo.png');
+  AssetGenImage get getxLogo => const AssetGenImage('assets/images/getx_logo.png');
 
   /// File path: assets/images/mobx_logo.png
-  AssetGenImage get mobxLogo =>
-      const AssetGenImage('assets/images/mobx_logo.png');
+  AssetGenImage get mobxLogo => const AssetGenImage('assets/images/mobx_logo.png');
 
   /// File path: assets/images/rebuilder_logo.png
-  AssetGenImage get rebuilderLogo =>
-      const AssetGenImage('assets/images/rebuilder_logo.png');
+  AssetGenImage get rebuilderLogo => const AssetGenImage('assets/images/rebuilder_logo.png');
 
   /// File path: assets/images/redux_logo.png
-  AssetGenImage get reduxLogo =>
-      const AssetGenImage('assets/images/redux_logo.png');
+  AssetGenImage get reduxLogo => const AssetGenImage('assets/images/redux_logo.png');
 
   /// File path: assets/images/riverpod_logo.png
-  AssetGenImage get riverpodLogo =>
-      const AssetGenImage('assets/images/riverpod_logo.png');
+  AssetGenImage get riverpodLogo => const AssetGenImage('assets/images/riverpod_logo.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [
-        binderLogo,
-        blocLogo,
-        commandLogo,
-        cubitLogo,
-        getxLogo,
-        mobxLogo,
-        rebuilderLogo,
-        reduxLogo,
-        riverpodLogo
-      ];
+    binderLogo,
+    blocLogo,
+    commandLogo,
+    cubitLogo,
+    getxLogo,
+    mobxLogo,
+    rebuilderLogo,
+    reduxLogo,
+    riverpodLogo,
+  ];
 }
 
 class Assets {
@@ -69,11 +60,7 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  });
+  const AssetGenImage(this._assetName, {this.size, this.flavors = const {}});
 
   final String _assetName;
 
@@ -133,15 +120,8 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider({
-    AssetBundle? bundle,
-    String? package,
-  }) {
-    return AssetImage(
-      _assetName,
-      bundle: bundle,
-      package: package,
-    );
+  ImageProvider provider({AssetBundle? bundle, String? package}) {
+    return AssetImage(_assetName, bundle: bundle, package: package);
   }
 
   String get path => _assetName;

@@ -16,8 +16,10 @@ class ReduxPage extends StatelessWidget implements StatePage {
   final NotesStore _notesStore = NotesStore();
 
   @override
-  Widget build(BuildContext context) =>
-      StoreProvider<CounterState>(store: _counterStore, child: StoreProvider<NotesState>(store: _notesStore, child: GenericPage(this)));
+  Widget build(BuildContext context) => StoreProvider<CounterState>(
+    store: _counterStore,
+    child: StoreProvider<NotesState>(store: _notesStore, child: GenericPage(this)),
+  );
 
   @override
   String getTag() => 'Redux';
@@ -35,8 +37,10 @@ class ReduxPage extends StatelessWidget implements StatePage {
   void increment(BuildContext context) => _counterStore.dispatch(IncrementAction());
 
   @override
-  Widget getNotesList(BuildContext context) =>
-      StoreConnector<NotesState, NotesState>(converter: (store) => store.state, builder: (context, state) => NotesList(state));
+  Widget getNotesList(BuildContext context) => StoreConnector<NotesState, NotesState>(
+    converter: (store) => store.state,
+    builder: (context, state) => NotesList(state),
+  );
 
   @override
   void addNote(BuildContext context) => _notesStore.dispatch(AddNoteAction());

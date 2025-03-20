@@ -1,15 +1,14 @@
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
-  exclude: [
-    "build/**",
-    "**/*.g.dart",
-    "**/*.gen.dart",
-    "**/*.mapper.dart"
-  ]
+  exclude:
+    - 'build/**'
+    - '**/*.g.dart'
+    - '**/*.gen.dart'
+    - '**/*.mapper.dart'
 
 formatter:
-  page_width: 140
+  page_width: 120
 
 linter:
   rules:

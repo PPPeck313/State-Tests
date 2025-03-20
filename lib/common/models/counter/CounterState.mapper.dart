@@ -21,13 +21,10 @@ class CounterStateMapper extends ClassMapperBase<CounterState> {
   final String id = 'CounterState';
 
   static int _$count(CounterState v) => v.count;
-  static const Field<CounterState, int> _f$count =
-      Field('count', _$count, opt: true, def: 0);
+  static const Field<CounterState, int> _f$count = Field('count', _$count, opt: true, def: 0);
 
   @override
-  final MappableFields<CounterState> fields = const {
-    #count: _f$count,
-  };
+  final MappableFields<CounterState> fields = const {#count: _f$count};
 
   static CounterState _instantiate(DecodingData data) {
     return CounterState(count: data.dec(_f$count));
@@ -47,65 +44,53 @@ class CounterStateMapper extends ClassMapperBase<CounterState> {
 
 mixin CounterStateMappable {
   String toJson() {
-    return CounterStateMapper.ensureInitialized()
-        .encodeJson<CounterState>(this as CounterState);
+    return CounterStateMapper.ensureInitialized().encodeJson<CounterState>(this as CounterState);
   }
 
   Map<String, dynamic> toMap() {
-    return CounterStateMapper.ensureInitialized()
-        .encodeMap<CounterState>(this as CounterState);
+    return CounterStateMapper.ensureInitialized().encodeMap<CounterState>(this as CounterState);
   }
 
   CounterStateCopyWith<CounterState, CounterState, CounterState> get copyWith =>
       _CounterStateCopyWithImpl(this as CounterState, $identity, $identity);
   @override
   String toString() {
-    return CounterStateMapper.ensureInitialized()
-        .stringifyValue(this as CounterState);
+    return CounterStateMapper.ensureInitialized().stringifyValue(this as CounterState);
   }
 
   @override
   bool operator ==(Object other) {
-    return CounterStateMapper.ensureInitialized()
-        .equalsValue(this as CounterState, other);
+    return CounterStateMapper.ensureInitialized().equalsValue(this as CounterState, other);
   }
 
   @override
   int get hashCode {
-    return CounterStateMapper.ensureInitialized()
-        .hashValue(this as CounterState);
+    return CounterStateMapper.ensureInitialized().hashValue(this as CounterState);
   }
 }
 
-extension CounterStateValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, CounterState, $Out> {
+extension CounterStateValueCopy<$R, $Out> on ObjectCopyWith<$R, CounterState, $Out> {
   CounterStateCopyWith<$R, CounterState, $Out> get $asCounterState =>
       $base.as((v, t, t2) => _CounterStateCopyWithImpl(v, t, t2));
 }
 
-abstract class CounterStateCopyWith<$R, $In extends CounterState, $Out>
-    implements ClassCopyWith<$R, $In, $Out> {
+abstract class CounterStateCopyWith<$R, $In extends CounterState, $Out> implements ClassCopyWith<$R, $In, $Out> {
   $R call({int? count});
   CounterStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
-class _CounterStateCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, CounterState, $Out>
+class _CounterStateCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, CounterState, $Out>
     implements CounterStateCopyWith<$R, CounterState, $Out> {
   _CounterStateCopyWithImpl(super.value, super.then, super.then2);
 
   @override
-  late final ClassMapperBase<CounterState> $mapper =
-      CounterStateMapper.ensureInitialized();
+  late final ClassMapperBase<CounterState> $mapper = CounterStateMapper.ensureInitialized();
   @override
-  $R call({int? count}) =>
-      $apply(FieldCopyWithData({if (count != null) #count: count}));
+  $R call({int? count}) => $apply(FieldCopyWithData({if (count != null) #count: count}));
   @override
-  CounterState $make(CopyWithData data) =>
-      CounterState(count: data.get(#count, or: $value.count));
+  CounterState $make(CopyWithData data) => CounterState(count: data.get(#count, or: $value.count));
 
   @override
-  CounterStateCopyWith<$R2, CounterState, $Out2> $chain<$R2, $Out2>(
-          Then<$Out2, $R2> t) =>
+  CounterStateCopyWith<$R2, CounterState, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
       _CounterStateCopyWithImpl($value, $cast, t);
 }

@@ -6,5 +6,6 @@ class NoteWidget extends StatelessWidget {
   const NoteWidget({super.key, this.text = ''});
 
   @override
-  Widget build(BuildContext context) => Padding(padding: const EdgeInsets.symmetric(vertical: 8.0), child: Text('Note: $text'));
+  Widget build(BuildContext context) =>
+      Padding(padding: const EdgeInsets.symmetric(vertical: 8.0), child: Text('Note: $text'));
 }

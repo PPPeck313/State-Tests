@@ -24,8 +24,9 @@ class CubitPage extends StatelessWidget implements StatePage {
   String getTag() => 'Cubit';
 
   @override
-  Widget getCounterText(BuildContext context) =>
-      BlocBuilder<CounterCubit, CounterState>(builder: (context, state) => Text('${state.count}', style: TextStyle(fontSize: 60.0)));
+  Widget getCounterText(BuildContext context) => BlocBuilder<CounterCubit, CounterState>(
+    builder: (context, state) => Text('${state.count}', style: TextStyle(fontSize: 60.0)),
+  );
 
   @override
   void decrement(BuildContext context) => context.bloc<CounterCubit>().decrement();
@@ -34,7 +35,8 @@ class CubitPage extends StatelessWidget implements StatePage {
   void increment(BuildContext context) => context.bloc<CounterCubit>().increment();
 
   @override
-  Widget getNotesList(BuildContext context) => BlocBuilder<NotesCubit, NotesState>(builder: (context, state) => NotesList(state));
+  Widget getNotesList(BuildContext context) =>
+      BlocBuilder<NotesCubit, NotesState>(builder: (context, state) => NotesList(state));
 
   @override
   void addNote(BuildContext context) => context.bloc<NotesCubit>().addNote();
