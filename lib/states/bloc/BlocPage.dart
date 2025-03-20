@@ -10,7 +10,6 @@ import 'package:state_tests/states/bloc/models/CounterBloc.dart';
 import 'models/NotesBloc.dart';
 
 class BlocPage extends GenericPageState {
-
   //============================================================================
   // Lifecycle Methods
   //============================================================================
@@ -18,9 +17,9 @@ class BlocPage extends GenericPageState {
   //value vs create in order to reuse
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
-    providers: providers,
-    child: child,
-  ) ;
+        providers: providers,
+        child: child,
+      );
 
   //============================================================================
   // StatePage Methods
@@ -29,26 +28,27 @@ class BlocPage extends GenericPageState {
   @override
   String getTag() => "Bloc";
 
-
+  @override
+  CounterState getCounterState(BuildContext context) =>
+      context.watch()<CounterBloc>().state;
 
   @override
-  CounterState getCounterState(BuildContext context) => context.watch()<CounterBloc>().state;
+  void decrement(BuildContext context) =>
+      context.read()<CounterBloc>().add(DecrementEvent());
 
   @override
-  void decrement(BuildContext context) => context.read()<CounterBloc>().add(DecrementEvent());
+  void increment(BuildContext context) =>
+      context.read()<CounterBloc>().add(IncrementEvent());
 
   @override
-  void increment(BuildContext context) => context.read()<CounterBloc>().add(IncrementEvent());
-
-
-
-  @override
-  NotesState getNotesState(BuildContext context) => context.read<NotesBloc>().state;
+  NotesState getNotesState(BuildContext context) =>
+      context.read<NotesBloc>().state;
 
   @override
-  void addNote(BuildContext context) => context.watch<NotesBloc>().add(AddNoteEvent());
+  void addNote(BuildContext context) =>
+      context.watch<NotesBloc>().add(AddNoteEvent());
 
   @override
-  void updateInput(BuildContext context, String input) => context.watch<NotesBloc>().add(UpdateInputEvent(input));
+  void updateInput(BuildContext context, String input) =>
+      context.watch<NotesBloc>().add(UpdateInputEvent(input));
 }
-

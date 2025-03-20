@@ -2,14 +2,14 @@ import 'package:flutter_riverpod/all.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
 
 class NotesNotifier extends StateNotifier<NotesState> {
-
   //============================================================================
   // Static Fields
   //============================================================================
 
-  static StateNotifierProvider<NotesNotifier> notesProvider = StateNotifierProvider((ref) => NotesNotifier());
+  static StateNotifierProvider<NotesNotifier> notesProvider =
+      StateNotifierProvider((ref) => NotesNotifier());
 
-  static NotesNotifier _instance = NotesNotifier._new();
+  static final NotesNotifier _instance = NotesNotifier._new();
 
   factory NotesNotifier() => _instance;
 

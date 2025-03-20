@@ -1,14 +1,12 @@
 import 'package:flutter_command/flutter_command.dart';
-import 'package:state_tests/common/models/counter/CounterEvent.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
 
 class CounterCommand {
-
   //============================================================================
   // Static Fields
   //============================================================================
 
-  static CounterCommand _instance = CounterCommand._new();
+  static final CounterCommand _instance = CounterCommand._new();
 
   factory CounterCommand() => _instance;
 
@@ -26,16 +24,17 @@ class CounterCommand {
 
   //Result needs to change between commands
   CounterCommand._new() {
-    updateCountCommand = Command.createSync((command) {
-      if (command is DecrementAction) {
-        state = state.decrementNew();
-      }
+    updateCountCommand = Command.createSync(
+      (command) {
+        if (command is DecrementAction) {
+          state = state.decrementNew();
+        } else if (command is IncrementAction) {
+          state = state.incrementNew();
+        }
 
-      else if (command is IncrementAction) {
-        state = state.incrementNew();
-      }
-
-      return state;
-    }, CounterState.initial());
+        return state;
+      },
+      CounterState.initial(),
+    );
   }
 }

@@ -5,7 +5,6 @@ final StateRef<CounterState> counterRef = StateRef(CounterState());
 final counterViewLogicRef = LogicRef((scope) => CounterLogic(scope));
 
 class CounterLogic with Logic {
-
   //============================================================================
   // Constructors
   //============================================================================

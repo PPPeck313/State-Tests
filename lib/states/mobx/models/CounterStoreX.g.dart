@@ -31,7 +31,8 @@ mixin _$CounterStoreX on CounterStoreXBase, Store {
   @override
   void decrement() {
     final _$actionInfo = _$CounterStoreXBaseActionController.startAction(
-        name: 'CounterStoreXBase.decrement');
+      name: 'CounterStoreXBase.decrement',
+    );
     try {
       return super.decrement();
     } finally {
@@ -42,7 +43,8 @@ mixin _$CounterStoreX on CounterStoreXBase, Store {
   @override
   void increment() {
     final _$actionInfo = _$CounterStoreXBaseActionController.startAction(
-        name: 'CounterStoreXBase.increment');
+      name: 'CounterStoreXBase.increment',
+    );
     try {
       return super.increment();
     } finally {

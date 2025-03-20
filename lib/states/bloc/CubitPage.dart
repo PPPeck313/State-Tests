@@ -11,7 +11,6 @@ import 'models/CounterCubit.dart';
 import 'models/NotesCubit.dart';
 
 class CubitPage extends StatelessWidget implements StatePage {
-
   //============================================================================
   // Constructors
   //============================================================================
@@ -25,9 +24,11 @@ class CubitPage extends StatelessWidget implements StatePage {
   //value vs create in order to reuse
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CounterCubit>.value(value: CounterCubit(),
-      child: BlocProvider<NotesCubit>.value(value: NotesCubit(),
-        child: GenericPage(this)
+    return BlocProvider<CounterCubit>.value(
+      value: CounterCubit(),
+      child: BlocProvider<NotesCubit>.value(
+        value: NotesCubit(),
+        child: GenericPage(this),
       ),
     );
   }
@@ -39,27 +40,26 @@ class CubitPage extends StatelessWidget implements StatePage {
   @override
   String getTag() => "Cubit";
 
-
-
   @override
   Widget getCounterText(BuildContext context) {
     return BlocBuilder<CounterCubit, CounterState>(
-        builder: (context, state) => Text('${state.count}', style: new TextStyle(fontSize: 60.0))
+      builder: (context, state) =>
+          Text('${state.count}', style: TextStyle(fontSize: 60.0)),
     );
   }
 
   @override
-  void decrement(BuildContext context) => context.bloc<CounterCubit>().decrement();
+  void decrement(BuildContext context) =>
+      context.bloc<CounterCubit>().decrement();
 
   @override
-  void increment(BuildContext context) => context.bloc<CounterCubit>().increment();
-
-
+  void increment(BuildContext context) =>
+      context.bloc<CounterCubit>().increment();
 
   @override
   Widget getNotesList(BuildContext context) {
     return BlocBuilder<NotesCubit, NotesState>(
-        builder: (context, state) => NotesList(state)
+      builder: (context, state) => NotesList(state),
     );
   }
 
@@ -67,5 +67,6 @@ class CubitPage extends StatelessWidget implements StatePage {
   void addNote(BuildContext context) => context.bloc<NotesCubit>().addNote();
 
   @override
-  void updateInput(BuildContext context, String input) => context.bloc<NotesCubit>().updateInput(input);
+  void updateInput(BuildContext context, String input) =>
+      context.bloc<NotesCubit>().updateInput(input);
 }

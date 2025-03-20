@@ -1,18 +1,15 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:state_tests/common/models/counter/CounterEvent.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
 import 'package:state_tests/common/pages/GenericPage.dart';
 import 'package:state_tests/common/pages/StatePage.dart';
 import 'package:state_tests/common/models/note/NotesList.dart';
-import 'package:state_tests/common/models/note/NotesEvent.dart';
 
 import 'models/CounterStore.dart';
 import 'models/NotesStore.dart';
 
 class ReduxPage extends StatelessWidget implements StatePage {
-
   //============================================================================
   // Constructors
   //============================================================================
@@ -23,8 +20,8 @@ class ReduxPage extends StatelessWidget implements StatePage {
   // Fields
   //============================================================================
 
-  CounterStore _counterStore = CounterStore();
-  NotesStore _notesStore = NotesStore();
+  final CounterStore _counterStore = CounterStore();
+  final NotesStore _notesStore = NotesStore();
 
   //============================================================================
   // Lifecycle Methods
@@ -35,8 +32,8 @@ class ReduxPage extends StatelessWidget implements StatePage {
     return StoreProvider<CounterState>(
       store: _counterStore,
       child: StoreProvider<NotesState>(
-          store: _notesStore,
-          child: GenericPage(this)
+        store: _notesStore,
+        child: GenericPage(this),
       ),
     );
   }
@@ -48,30 +45,28 @@ class ReduxPage extends StatelessWidget implements StatePage {
   @override
   String getTag() => "Redux";
 
-
-
-
   @override
   Widget getCounterText(BuildContext context) {
     return StoreConnector<CounterState, CounterState>(
-        converter: (store) => store.state,
-        builder: (context, state) => Text('${state.count}', style: new TextStyle(fontSize: 60.0))
+      converter: (store) => store.state,
+      builder: (context, state) =>
+          Text('${state.count}', style: TextStyle(fontSize: 60.0)),
     );
   }
 
   @override
-  void decrement(BuildContext context) => _counterStore.dispatch(DecrementAction());
+  void decrement(BuildContext context) =>
+      _counterStore.dispatch(DecrementAction());
 
   @override
-  void increment(BuildContext context) => _counterStore.dispatch(IncrementAction());
-
-
+  void increment(BuildContext context) =>
+      _counterStore.dispatch(IncrementAction());
 
   @override
   Widget getNotesList(BuildContext context) {
     return StoreConnector<NotesState, NotesState>(
-        converter: (store) => store.state,
-        builder: (context, state) => NotesList(state)
+      converter: (store) => store.state,
+      builder: (context, state) => NotesList(state),
     );
   }
 
@@ -79,5 +74,6 @@ class ReduxPage extends StatelessWidget implements StatePage {
   void addNote(BuildContext context) => _notesStore.dispatch(AddNoteAction());
 
   @override
-  void updateInput(BuildContext context, String input) => _notesStore.dispatch(UpdateInputAction(input));
+  void updateInput(BuildContext context, String input) =>
+      _notesStore.dispatch(UpdateInputAction(input));
 }

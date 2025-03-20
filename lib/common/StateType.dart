@@ -13,7 +13,6 @@ import 'package:state_tests/states/river_pod/RiverPodPage.dart';
 import '../gen/assets.gen.dart';
 
 enum StateType {
-
   //============================================================================
   // Enums
   //============================================================================
@@ -31,7 +30,7 @@ enum StateType {
   //============================================================================
   // Fields
   //============================================================================
-  
+
   final String abbreviation;
 
   //============================================================================
@@ -44,27 +43,28 @@ enum StateType {
   // Functions
   //============================================================================
 
-  GenericPageState get page => switch(this) {
-    binder => BinderPage(),
-    bloc => BlocPage(),
-    cubit => CubitPage(),
-    command => CommandPage(),
-    getX => GetXPage(),
-    mobX => MobXPage(),
-    rebuilder => RebuilderPage(),
-    redux => ReduxPage(),
-    riverPod => RiverPodPage()
-  };
-  
-  Image get logo => switch(this) {
-    binder => Assets.images.binderLogo,
-    bloc => Assets.images.binderLogo,
-    cubit => Assets.images.binderLogo,
-    command => Assets.images.binderLogo,
-    getX => Assets.images.binderLogo,
-    mobX => Assets.images.binderLogo,
-    rebuilder => Assets.images.binderLogo,
-    redux => Assets.images.binderLogo,
-    riverPod => Assets.images.binderLogo
-  }.image();
+  GenericPageState get page => switch (this) {
+        binder => BinderPage(),
+        bloc => BlocPage(),
+        cubit => CubitPage(),
+        command => CommandPage(),
+        getX => GetXPage(),
+        mobX => MobXPage(),
+        rebuilder => RebuilderPage(),
+        redux => ReduxPage(),
+        riverPod => RiverPodPage()
+      };
+
+  Image get logo => switch (this) {
+        binder => Assets.images.binderLogo,
+        bloc => Assets.images.binderLogo,
+        cubit => Assets.images.binderLogo,
+        command => Assets.images.binderLogo,
+        getX => Assets.images.binderLogo,
+        mobX => Assets.images.binderLogo,
+        rebuilder => Assets.images.binderLogo,
+        redux => Assets.images.binderLogo,
+        riverPod => Assets.images.binderLogo
+      }
+          .image();
 }

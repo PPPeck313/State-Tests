@@ -2,14 +2,14 @@ import 'package:flutter_riverpod/all.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
 
 class CounterNotifier extends StateNotifier<CounterState> {
-
   //============================================================================
   // Static Fields
   //============================================================================
 
-  static StateNotifierProvider<CounterNotifier> counterProvider = StateNotifierProvider((ref) => CounterNotifier());
+  static StateNotifierProvider<CounterNotifier> counterProvider =
+      StateNotifierProvider((ref) => CounterNotifier());
 
-  static CounterNotifier _instance = CounterNotifier._new();
+  static final CounterNotifier _instance = CounterNotifier._new();
 
   factory CounterNotifier() => _instance;
 

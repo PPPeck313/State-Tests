@@ -1,15 +1,13 @@
 import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
-import 'package:state_tests/common/models/counter/CounterEvent.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
 
 class CounterStore extends Store<CounterState> {
-
   //============================================================================
   // Static Fields
   //============================================================================
 
-  static CounterStore _instance = CounterStore._new();
+  static final CounterStore _instance = CounterStore._new();
 
   factory CounterStore() => _instance;
 
@@ -17,16 +15,18 @@ class CounterStore extends Store<CounterState> {
   // Constructors
   //============================================================================
 
-  CounterStore._new() : super((CounterState state, dynamic action) {
-    if (action is DecrementAction) {
-      state.decrement();
-    }
+  CounterStore._new()
+      : super(
+          (CounterState state, dynamic action) {
+            if (action is DecrementAction) {
+              state.decrement();
+            } else if (action is IncrementAction) {
+              state.increment();
+            }
 
-    else if (action is IncrementAction) {
-      state.increment();
-    }
-
-    return state;
-  }, initialState: CounterState.initial(),
-      middleware: [LoggingMiddleware.printer()]);
+            return state;
+          },
+          initialState: CounterState.initial(),
+          middleware: [LoggingMiddleware.printer().call],
+        );
 }

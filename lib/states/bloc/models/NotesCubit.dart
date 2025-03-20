@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
 
 class NotesCubit extends Cubit<NotesState> {
-
   //============================================================================
   // Constructors
   //============================================================================

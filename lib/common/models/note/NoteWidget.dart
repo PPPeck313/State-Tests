@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 
 class NoteWidget extends StatelessWidget {
-
   //============================================================================
   // Fields
   //============================================================================
@@ -20,7 +19,7 @@ class NoteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(vertical: 8.0),
-    child: Text('Note: $text'),
-  );
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Text('Note: $text'),
+      );
 }

@@ -1,12 +1,12 @@
 import 'package:state_tests/common/models/counter/CounterState.dart';
 
 class CounterReactiveModel {
-
   //============================================================================
   // Static Fields
   //============================================================================
 
-  static CounterReactiveModel _instance = CounterReactiveModel._new(CounterState.initial());
+  static final CounterReactiveModel _instance =
+      CounterReactiveModel._new(CounterState.initial());
 
   factory CounterReactiveModel() => _instance;
 

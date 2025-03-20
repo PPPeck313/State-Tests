@@ -5,7 +5,6 @@ part 'NotesState.mapper.dart';
 //needs to be a new object for Binder, Bloc, Cubit, Command, RiverPod
 @MappableClass()
 class NotesState with NotesStateMappable {
-
   //============================================================================
   // Fields
   //============================================================================
@@ -25,7 +24,7 @@ class NotesState with NotesStateMappable {
 
   void addNote() {
     notes.add(input);
-    this.input = '';
+    input = '';
   }
 
   NotesState addNoteNew() {

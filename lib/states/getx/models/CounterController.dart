@@ -2,12 +2,11 @@ import 'package:get/get.dart';
 import 'package:state_tests/common/models/counter/CounterState.dart';
 
 class CounterController extends GetxController {
-
   //============================================================================
   // Static Fields
   //============================================================================
 
-  static CounterController _instance = CounterController._new();
+  static final CounterController _instance = CounterController._new();
 
   factory CounterController() => _instance;
 
@@ -36,8 +35,8 @@ class CounterController extends GetxController {
 
   void decrementObject() => state.value = state.value.decrementNew();
   void decrement() => state.update((value) {
-    value.count = --value.count;
-  });
+        value.count = --value.count;
+      });
 
   void incrementObject() => state.value = state.value.incrementNew();
   void increment() {

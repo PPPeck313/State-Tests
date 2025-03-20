@@ -8,7 +8,6 @@ import 'package:state_tests/states/getx/models/CounterController.dart';
 import 'models/NotesController.dart';
 
 class GetXPage extends StatelessWidget implements StatePage {
-
   //============================================================================
   // Constructors
   //============================================================================
@@ -38,10 +37,10 @@ class GetXPage extends StatelessWidget implements StatePage {
   @override
   String getTag() => "GetX";
 
-
-
   @override
-  Widget getCounterText(BuildContext context) => Obx(() => Text('${_counterController.state.value.count}', style: new TextStyle(fontSize: 60.0)));
+  Widget getCounterText(BuildContext context) =>
+      Obx(() => Text('${_counterController.state.value.count}',
+          style: TextStyle(fontSize: 60.0)));
 
   @override
   void decrement(BuildContext context) => _counterController.decrement();
@@ -49,14 +48,14 @@ class GetXPage extends StatelessWidget implements StatePage {
   @override
   void increment(BuildContext context) => _counterController.increment();
 
-
-
   @override
-  Widget getNotesList(BuildContext context) => Obx(() => NotesList(_notesController.state.value));
+  Widget getNotesList(BuildContext context) =>
+      Obx(() => NotesList(_notesController.state.value));
 
   @override
   void addNote(BuildContext context) => _notesController.addNote();
 
   @override
-  void updateInput(BuildContext context, String input) => _notesController.updateInput(input);
+  void updateInput(BuildContext context, String input) =>
+      _notesController.updateInput(input);
 }

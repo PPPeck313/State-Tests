@@ -6,7 +6,6 @@ import 'package:state_tests/states/mobx/models/NotesStoreX.dart';
 import 'NoteWidget.dart';
 
 class NotesList extends StatelessWidget {
-
   //============================================================================
   // Fields
   //============================================================================
@@ -34,8 +33,14 @@ class NotesList extends StatelessWidget {
   Widget getList() {
     return Expanded(
       child: ListView.builder(
-        itemBuilder: (context, index) => NoteWidget(text: (notesState != null ? notesState?.notes[index] : notesStoreX?.notes[index]) ?? ""),
-        itemCount: notesState != null ? notesState?.notes.length : notesStoreX?.notes.length,
+        itemBuilder: (context, index) => NoteWidget(
+            text: (notesState != null
+                    ? notesState?.notes[index]
+                    : notesStoreX?.notes[index]) ??
+                ""),
+        itemCount: notesState != null
+            ? notesState?.notes.length
+            : notesStoreX?.notes.length,
       ),
     );
   }

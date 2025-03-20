@@ -11,7 +11,6 @@ import 'models/CounterNotifier.dart';
 import 'models/NotesNotifier.dart';
 
 class RiverPodPage extends StatelessWidget implements StatePage {
-
   //============================================================================
   // Constructors
   //============================================================================
@@ -25,7 +24,7 @@ class RiverPodPage extends StatelessWidget implements StatePage {
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
-        child: GenericPage(this)
+      child: GenericPage(this),
     );
   }
 
@@ -36,39 +35,37 @@ class RiverPodPage extends StatelessWidget implements StatePage {
   @override
   String getTag() => "Riverpod";
 
-
-
   @override
   Widget getCounterText(BuildContext context) {
     return Consumer(
-        builder: (context, watch, child) {
-          CounterState state = watch(CounterNotifier.counterProvider.state);
-          return Text('${state.count}', style: new TextStyle(fontSize: 60.0));
-        }
+      builder: (context, watch, child) {
+        CounterState state = watch(CounterNotifier.counterProvider.state);
+        return Text('${state.count}', style: TextStyle(fontSize: 60.0));
+      },
     );
   }
 
   @override
   void decrement(BuildContext context) {
-    CounterNotifier counterNotifier = context.read(CounterNotifier.counterProvider);
+    CounterNotifier counterNotifier =
+        context.read(CounterNotifier.counterProvider);
     counterNotifier.decrement();
   }
 
   @override
   void increment(BuildContext context) {
-    CounterNotifier counterNotifier = context.read(CounterNotifier.counterProvider);
+    CounterNotifier counterNotifier =
+        context.read(CounterNotifier.counterProvider);
     counterNotifier.increment();
   }
-
-
 
   @override
   Widget getNotesList(BuildContext context) {
     return Consumer(
-        builder: (context, watch, child) {
-          NotesState state = watch(NotesNotifier.notesProvider.state);
-          return NotesList(state);
-        }
+      builder: (context, watch, child) {
+        NotesState state = watch(NotesNotifier.notesProvider.state);
+        return NotesList(state);
+      },
     );
   } // Subscribe to the NotesController's state
 

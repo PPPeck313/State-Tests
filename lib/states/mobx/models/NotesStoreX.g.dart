@@ -47,7 +47,8 @@ mixin _$NotesStoreX on NotesStoreXBase, Store {
   @override
   void updateInput(String val) {
     final _$actionInfo = _$NotesStoreXBaseActionController.startAction(
-        name: 'NotesStoreXBase.updateInput');
+      name: 'NotesStoreXBase.updateInput',
+    );
     try {
       return super.updateInput(val);
     } finally {
@@ -58,7 +59,8 @@ mixin _$NotesStoreX on NotesStoreXBase, Store {
   @override
   void addNote() {
     final _$actionInfo = _$NotesStoreXBaseActionController.startAction(
-        name: 'NotesStoreXBase.addNote');
+      name: 'NotesStoreXBase.addNote',
+    );
     try {
       return super.addNote();
     } finally {

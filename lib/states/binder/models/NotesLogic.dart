@@ -2,10 +2,10 @@ import 'package:binder/binder.dart';
 import 'package:state_tests/common/models/note/NotesState.dart';
 
 final StateRef<NotesState> notesRef = StateRef(NotesState());
-final LogicRef<NotesLogic> notesLogicRef = LogicRef((scope) => NotesLogic(scope));
+final LogicRef<NotesLogic> notesLogicRef =
+    LogicRef((scope) => NotesLogic(scope));
 
 class NotesLogic with Logic {
-
   //============================================================================
   // Constructors
   //============================================================================
@@ -24,5 +24,6 @@ class NotesLogic with Logic {
   //============================================================================
 
   void addNote() => write(notesRef, read(notesRef).addNoteNew());
-  void updateInput(String input) => write(notesRef, read(notesRef).updateInputNew(input));
+  void updateInput(String input) =>
+      write(notesRef, read(notesRef).updateInputNew(input));
 }
