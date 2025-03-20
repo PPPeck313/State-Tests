@@ -1,6 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
-part 'CounterState.mapper.dart';
+part 'counter_state.mapper.dart';
 
 //needs to be a new object for Binder, Bloc, Cubit, Command, RiverPod
 @MappableClass()
