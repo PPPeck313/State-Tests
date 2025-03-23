@@ -1,41 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:state_tests/common/models/note/NotesList.dart';
-import 'package:state_tests/common/pages/GenericPage.dart';
-import 'package:state_tests/common/pages/StatePage.dart';
 
-import 'models/CounterStoreX.dart';
-import 'models/NotesStoreX.dart';
+import '../../common/models/counter/counter_state.dart';
+import '../../common/models/note/notes_state.dart';
+import '../../common/pages/generic_page.dart';
+import 'models/counter_store_x.dart';
+import 'models/notes_store_x.dart';
 
-class MobXPage extends StatelessWidget implements StatePage {
-  const MobXPage({super.key});
+class MobXPage extends GenericPageState {
+  final CounterStoreX _counterStoreX;
+  final NotesStoreX _notesStoreX;
 
-  final CounterStoreX _counterStoreX = CounterStoreXWrapper().counterStoreX;
-  final NotesStoreX _notesStoreX = NotesStoreXWrapper().notesStoreX;
-
-  @override
-  Widget build(BuildContext context) => GenericPage(this);
+  MobXPage() : _counterStoreX = CounterStoreX(), _notesStoreX = NotesStoreX();
 
   @override
-  String getTag() => 'MobX';
+  Widget? getCounterWidget(Widget child) => Observer(builder: (_) => child);
 
   @override
-  Widget getCounterText(BuildContext context) =>
-      Observer(builder: (_) => Text('${_counterStoreX.count}', style: TextStyle(fontSize: 60.0)));
+  CounterState getCounterState(BuildContext _) => _counterStoreX.state;
 
   @override
-  void decrement(BuildContext context) => _counterStoreX.decrement();
+  void decrement(BuildContext _) => _counterStoreX.decrement();
 
   @override
-  void increment(BuildContext context) => _counterStoreX.increment();
+  void increment(BuildContext _) => _counterStoreX.increment();
 
   @override
-  Widget getNotesList(BuildContext context) => NotesList.mobX(_notesStoreX); // Use Observer to subscribe to updates to the NotesStore.
+  Widget? getNotesWidget(Widget child) => Observer(builder: (_) => child);
 
   @override
-  void addNote(BuildContext context) => _notesStoreX.addNote();
+  NotesState getNotesState(BuildContext _) => _notesStoreX.state;
 
   @override
-  void updateInput(BuildContext context, String input) => _notesStoreX.updateInput(input);
+  void addNote(BuildContext _) => _notesStoreX.addNote();
+
+  @override
+  void updateInput(BuildContext _, String input) => _notesStoreX.updateInput(input);
 }

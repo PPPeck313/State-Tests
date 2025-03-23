@@ -1,9 +1,14 @@
 import 'package:bloc/bloc.dart';
-import 'package:state_tests/common/models/counter/CounterState.dart';
+import 'package:state_tests/common/models/counter/counter_state_view_model.dart';
 
-class CounterCubit extends Cubit<CounterState> {
-  CounterCubit() : super(CounterState());
+import '../../../common/models/counter/counter_state.dart';
 
-  void decrement() => emit(state.decrementNew());
-  void increment() => emit(state.incrementNew());
+class CounterCubit extends Cubit<CounterState> implements CounterStateFunctions {
+  CounterCubit([super.initialState = const CounterState()]);
+
+  @override
+  void decrement() => emit(state.decrement());
+
+  @override
+  void increment() => emit(state.increment());
 }

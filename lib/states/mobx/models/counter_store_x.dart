@@ -1,30 +1,22 @@
 import 'package:mobx/mobx.dart';
+import 'package:state_tests/common/models/counter/counter_state.dart';
+import 'package:state_tests/common/models/counter/counter_state_view_model.dart';
 
-part 'CounterStoreX.g.dart';
-
-class CounterStoreXWrapper {
-  static final CounterStoreXWrapper _instance = CounterStoreXWrapper._new(CounterStoreX());
-
-  factory CounterStoreXWrapper() => _instance;
-
-  CounterStoreX counterStoreX;
-
-  CounterStoreXWrapper._new(this.counterStoreX);
-}
+part 'counter_store_x.g.dart';
 
 class CounterStoreX = CounterStoreXBase with _$CounterStoreX;
 
-abstract class CounterStoreXBase with Store {
+abstract class CounterStoreXBase with Store implements CounterStateFunctions {
   @observable
-  int count = 0;
+  CounterState state;
+
+  CounterStoreXBase([this.state = const CounterState()]);
 
   @action
-  void decrement() {
-    --count;
-  }
+  @override
+  void decrement() => state = state.decrement();
 
   @action
-  void increment() {
-    ++count;
-  }
+  @override
+  void increment() => state = state.increment();
 }

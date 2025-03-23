@@ -1,19 +1,22 @@
 import 'package:bloc/bloc.dart';
-import 'package:state_tests/common/models/counter/CounterEvent.dart';
-import 'package:state_tests/common/models/counter/CounterState.dart';
+import 'package:state_tests/common/models/counter/counter_state_view_model.dart';
 
-class CounterBloc extends Bloc<CounterEvent, CounterState> {
-  CounterBloc() : super(CounterState());
+import '../../../common/models/counter/counter_event.dart';
+import '../../../common/models/counter/counter_state.dart';
+
+class CounterBloc extends Bloc<CounterEvent, CounterState> implements CounterStateFunctions {
+  CounterBloc([super.initialState = const CounterState()]) {
+    on<DecrementEvent>((event, emit) {
+      emit(decrement());
+    });
+    on<IncrementEvent>((event, emit) {
+      emit(increment());
+    });
+  }
 
   @override
-  void onEvent(CounterEvent event) {
-    super.onEvent(event);
+  CounterState decrement() => state.decrement();
 
-    switch (event) {
-      case DecrementEvent():
-        state.decrementNew();
-      case IncrementEvent():
-        state.incrementNew();
-    }
-  }
+  @override
+  CounterState increment() => state.increment();
 }

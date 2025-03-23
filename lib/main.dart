@@ -1,12 +1,7 @@
+import 'package:bloc/bloc.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:state_tests/states/bloc/models/CounterBloc.dart';
-import 'package:state_tests/states/bloc/models/NotesBloc.dart';
-import 'package:state_tests/states/river_pod/models/CounterNotifier.dart';
-import 'package:state_tests/states/river_pod/models/NotesNotifier.dart';
-
-import 'common/StateType.dart';
-import 'common/pages/GenericPage.dart';
+import 'package:state_tests/states/bloc/bloc_observer.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,13 +16,19 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    Bloc.observer = SimpleBlocObserver();
+  }
 
   @override
   void dispose() {

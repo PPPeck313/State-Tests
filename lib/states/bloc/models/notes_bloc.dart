@@ -1,19 +1,22 @@
 import 'package:bloc/bloc.dart';
-import 'package:state_tests/common/models/note/NotesEvent.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
+import 'package:state_tests/common/models/note/notes_state_view_model.dart';
 
-class NotesBloc extends Bloc<NotesEvent, NotesState> {
-  NotesBloc() : super(NotesState());
+import '../../../common/models/note/notes_event.dart';
+import '../../../common/models/note/notes_state.dart';
+
+class NotesBloc extends Bloc<NotesEvent, NotesState> implements NotesStateFunctions {
+  NotesBloc([super.initialState = const NotesState()]) {
+    on<UpdateInputEvent>((event, emit) {
+      emit(updateInput(event.input));
+    });
+    on<AddNoteEvent>((event, emit) {
+      emit(addNote());
+    });
+  }
 
   @override
-  void onEvent(NotesEvent event) {
-    super.onEvent(event);
+  NotesState updateInput(String input) => state.updateInput(input);
 
-    switch (event) {
-      case AddNoteEvent():
-        state.addNoteNew();
-      case UpdateInputEvent():
-        state.updateInputNew(event.input);
-    }
-  }
+  @override
+  NotesState addNote() => state.addNote();
 }

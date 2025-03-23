@@ -1,15 +1,18 @@
-import 'package:state_tests/common/models/counter/CounterState.dart';
+import '../../../common/models/counter/counter_state.dart';
 
 class CounterReactiveModel {
-  static final CounterReactiveModel _instance = CounterReactiveModel._new(CounterState.initial());
-
-  factory CounterReactiveModel() => _instance;
-
   CounterState state;
 
-  CounterReactiveModel._new(this.state);
+  CounterReactiveModel(this.state);
 
   void decrement() => state.decrement();
 
   void increment() => state.increment();
+  RM.inject<Counter>(
+  () => Counter(0),
+  // State will be redone and undone
+  undoStackLength: 8,
+  // Build-in logger
+  debugPrintWhenNotifiedPreMessage: 'counter2',
+  );
 }

@@ -1,15 +1,23 @@
 import 'package:binder/binder.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
+import 'package:state_tests/common/models/note/notes_state_view_model.dart';
 
-final notesRef = StateRef(NotesState());
-final notesLogicRef = LogicRef((scope) => NotesLogic(scope));
+import '../../../common/models/note/notes_state.dart';
 
-class NotesLogic with Logic {
-  const NotesLogic(this.scope);
-
+class NotesLogic extends NotesStateViewModel with Logic {
   @override
   final Scope scope;
+  late StateRef<NotesState> notesStateRef;
 
-  void addNote() => write(notesRef, read(notesRef).addNoteNew());
-  void updateInput(String input) => write(notesRef, read(notesRef).updateInputNew(input));
+  factory NotesLogic(Scope scope, [NotesState state = const NotesState()]) {
+    StateRef<NotesState> notesStateRef = StateRef<NotesState>(state);
+    return NotesLogic._internal(scope, notesStateRef);
+  }
+
+  NotesLogic._internal(this.scope, this.notesStateRef) : super(scope.read(notesStateRef, null));
+
+  @override
+  void updateInput(String input) => write(notesStateRef, state.updateInput(input));
+
+  @override
+  void addNote() => write(notesStateRef, state.addNote());
 }

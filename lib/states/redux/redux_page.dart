@@ -22,9 +22,6 @@ class ReduxPage extends StatelessWidget implements StatePage {
   );
 
   @override
-  String getTag() => 'Redux';
-
-  @override
   Widget getCounterText(BuildContext context) => StoreConnector<CounterState, CounterState>(
     converter: (store) => store.state,
     builder: (context, state) => Text('${state.count}', style: TextStyle(fontSize: 60.0)),

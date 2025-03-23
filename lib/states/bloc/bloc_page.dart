@@ -1,31 +1,29 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:state_tests/common/models/counter/CounterEvent.dart';
-import 'package:state_tests/common/models/counter/CounterState.dart';
-import 'package:state_tests/common/models/note/NotesEvent.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
-import 'package:state_tests/common/pages/GenericPage.dart';
-import 'package:state_tests/states/bloc/models/CounterBloc.dart';
 
-import 'models/NotesBloc.dart';
-import 'models/NotesCubit.dart';
+import '../../common/models/counter/counter_event.dart';
+import '../../common/models/counter/counter_state.dart';
+import '../../common/models/note/notes_event.dart';
+import '../../common/models/note/notes_state.dart';
+import '../../common/pages/generic_page.dart';
+import 'models/counter_bloc.dart';
+import 'models/notes_bloc.dart';
 
 class BlocPage extends GenericPageState {
-  //value vs create in order to reuse
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
     providers: [
-      BlocProvider(create: (BuildContext context) => NotesCubit()),
-      BlocProvider(create: (BuildContext context) => NotesCubit()),
+      BlocProvider(create: (BuildContext _) => CounterBloc()),
+      BlocProvider(create: (BuildContext _) => NotesBloc()),
     ],
-    child: GenericPage(this),
+    child: super.build(context),
   );
 
-  @override
-  String getTag() => 'Bloc';
+  // @override
+  // Widget? getCounterWidget(Widget child) => BlocBuilder<CounterBloc, CounterState>(builder: (_, _) => child);
 
   @override
-  CounterState getCounterState(BuildContext context) => context.watch()<CounterBloc>().state;
+  CounterState getCounterState(BuildContext context) => context.watch<CounterBloc>().state;
 
   @override
   void decrement(BuildContext context) => context.read()<CounterBloc>().add(DecrementEvent());
@@ -33,12 +31,15 @@ class BlocPage extends GenericPageState {
   @override
   void increment(BuildContext context) => context.read()<CounterBloc>().add(IncrementEvent());
 
-  @override
-  NotesState getNotesState(BuildContext context) => context.read<NotesBloc>().state;
+  // @override
+  // Widget? getNotesWidget(Widget child) => BlocBuilder<NotesBloc, NotesState>(builder: (_, _) => child);
 
   @override
-  void addNote(BuildContext context) => context.watch<NotesBloc>().add(AddNoteEvent());
+  NotesState getNotesState(BuildContext context) => context.watch<NotesBloc>().state;
 
   @override
-  void updateInput(BuildContext context, String input) => context.watch<NotesBloc>().add(UpdateInputEvent(input));
+  void updateInput(BuildContext context, String input) => context.read<NotesBloc>().add(UpdateInputEvent(input));
+
+  @override
+  void addNote(BuildContext context) => context.read<NotesBloc>().add(AddNoteEvent());
 }

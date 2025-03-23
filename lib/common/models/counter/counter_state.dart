@@ -5,13 +5,12 @@ part 'counter_state.mapper.dart';
 //needs to be a new object for Binder, Bloc, Cubit, Command, RiverPod
 @MappableClass()
 class CounterState with CounterStateMappable {
-  int count;
+  final int count;
 
-  CounterState({this.count = 0});
+  const CounterState({this.count = 0});
+}
 
-  void increment() => ++count;
-  CounterState incrementNew() => copyWith(count: ++count);
-
-  void decrement() => --count;
-  CounterState decrementNew() => copyWith(count: --count);
+extension CounterStateExtensions on CounterState {
+  CounterState increment() => copyWith(count: count + 1);
+  CounterState decrement() => copyWith(count: count - 1);
 }

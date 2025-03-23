@@ -1,47 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:state_tests/common/models/counter/CounterState.dart';
-import 'package:state_tests/common/models/note/NotesList.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
-import 'package:state_tests/common/pages/GenericPage.dart';
-import 'package:state_tests/common/pages/StatePage.dart';
-import 'package:state_tests/states/command/models/CounterCommand.dart';
+import 'package:flutter_command/flutter_command.dart';
+import 'package:state_tests/common/models/note/notes_state.dart';
 
-import 'models/NotesCommand.dart';
+import '../../common/models/counter/counter_state.dart';
+import '../../common/pages/generic_page.dart';
+import 'models/counter_commands.dart';
+import 'models/notes_commands.dart';
 
-class CommandPage extends StatelessWidget implements StatePage {
-  const CommandPage({super.key});
+class CommandPage extends GenericPageState {
+  final CounterCommands _counterCommand;
+  final NotesCommands _notesCommand;
 
-  final _counterCommand = CounterCommand();
-  final _notesCommand = NotesCommand();
-
-  @override
-  Widget build(BuildContext context) => GenericPage(this);
+  CommandPage() : _counterCommand = CounterCommands(), _notesCommand = NotesCommands();
 
   @override
-  String getTag() => 'Command';
+  Widget? getCounterWidget(Widget child) =>
+      [_counterCommand.decrementCommand, _counterCommand.incrementCommand].toCommandsWidget(child);
 
   @override
-  Widget getCounterText(BuildContext context) => ValueListenableBuilder<CounterState>(
-    valueListenable: _counterCommand.updateCountCommand,
-    builder: (context, state, _) => Text('${state.count}', style: TextStyle(fontSize: 60.0)),
-  );
+  CounterState getCounterState(BuildContext _) => _counterCommand.state;
 
   @override
-  void decrement(BuildContext context) => _counterCommand.updateCountCommand(DecrementAction());
+  void decrement(BuildContext _) => _counterCommand.decrementCommand();
 
   @override
-  void increment(BuildContext context) => _counterCommand.updateCountCommand(IncrementAction());
+  void increment(BuildContext _) => _counterCommand.incrementCommand();
 
   @override
-  Widget getNotesList(BuildContext context) => ValueListenableBuilder<NotesState>(
-    valueListenable: _notesCommand.addNoteCommand,
-    builder: (context, state, _) => NotesList(state),
-  );
+  Widget? getNotesWidget(Widget child) =>
+      [_notesCommand.updateInputCommand, _notesCommand.addNoteCommand].toCommandsWidget(child);
 
   @override
-  void addNote(BuildContext context) => _notesCommand.addNoteCommand.execute();
+  NotesState getNotesState(BuildContext _) => _notesCommand.state;
 
   @override
-  void updateInput(BuildContext context, String input) => _notesCommand.updateInputCommand(input);
+  void updateInput(BuildContext _, String input) => _notesCommand.updateInputCommand(input);
+
+  @override
+  void addNote(BuildContext _) => _notesCommand.addNoteCommand();
+}
+
+extension CommandListExtensions on List<Command<dynamic, dynamic>> {
+  Widget toCommandsWidget(Widget child) =>
+      first.toCommandWidget(length > 1 ? sublist(1, length).toCommandsWidget(child) : child);
+}
+
+extension CommandExtensions on Command<dynamic, dynamic> {
+  Widget toCommandWidget(Widget child) =>
+      ValueListenableBuilder<dynamic>(valueListenable: this, builder: (context, state, _) => child);
 }

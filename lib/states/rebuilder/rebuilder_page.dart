@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:state_tests/common/models/counter/CounterState.dart';
-import 'package:state_tests/common/models/note/NotesList.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
-import 'package:state_tests/common/pages/GenericPage.dart';
-import 'package:state_tests/common/pages/StatePage.dart';
-import 'package:state_tests/states/rebuilder/models/CounterReactiveModel.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 import 'models/NotesReactiveModel.dart';
@@ -32,9 +26,6 @@ class RebuilderPage extends StatelessWidget implements StatePage {
       return GenericPage(this);
     },
   );
-
-  @override
-  String getTag() => 'Rebuilder';
 
   @override
   Widget getCounterText(BuildContext context) {

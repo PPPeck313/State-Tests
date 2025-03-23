@@ -1,22 +1,16 @@
 import 'package:get/get.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
+import 'package:state_tests/common/models/note/notes_state_view_model.dart';
 
-class NotesController extends GetxController {
-  static final NotesController _instance = NotesController._new();
+import '../../../common/models/note/notes_state.dart';
 
-  factory NotesController() => _instance;
-
+class NotesController extends GetxController implements NotesStateFunctions {
   Rx<NotesState> state;
-  RxList notes;
-  RxString input;
 
-  NotesController._new() {
-    state = NotesState.initial().obs;
-    notes = state.value.notes.obs;
-    input = state.value.input.obs;
-  }
+  NotesController([NotesState state = const NotesState()]) : state = state.obs;
 
-  void addNote() => state.value = state.value.addNoteNew();
+  @override
+  void updateInput(String input) => state.value = state.value.updateInput(input);
 
-  void updateInput(String input) => state.value = state.value.updateInputNew(input);
+  @override
+  void addNote() => state.value = state.value.addNote();
 }

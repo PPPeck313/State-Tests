@@ -1,9 +1,14 @@
 import 'package:bloc/bloc.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
+import 'package:state_tests/common/models/note/notes_state_view_model.dart';
 
-class NotesCubit extends Cubit<NotesState> {
-  NotesCubit() : super(NotesState());
+import '../../../common/models/note/notes_state.dart';
 
-  void addNote() => emit(state.addNoteNew());
-  void updateInput(String input) => emit(state.updateInputNew(input));
+class NotesCubit extends Cubit<NotesState> implements NotesStateFunctions {
+  NotesCubit([super.initialState = const NotesState()]);
+
+  @override
+  void updateInput(String input) => emit(state.updateInput(input));
+
+  @override
+  void addNote() => emit(state.addNote());
 }

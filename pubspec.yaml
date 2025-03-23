@@ -41,6 +41,8 @@ dependencies:
 
   dart_mappable: ^4.5.0
 
+  meta: ^1.16.0
+
   collection: any
 dev_dependencies:
   flutter_test:

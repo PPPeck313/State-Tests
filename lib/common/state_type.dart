@@ -1,16 +1,16 @@
 import 'package:flutter/widgets.dart';
-import 'package:state_tests/common/pages/GenericPage.dart';
-import 'package:state_tests/states/binder/BinderPage.dart';
-import 'package:state_tests/states/bloc/BlocPage.dart';
-import 'package:state_tests/states/bloc/CubitPage.dart';
-import 'package:state_tests/states/command/CommandPage.dart';
-import 'package:state_tests/states/getx/GetXPage.dart';
-import 'package:state_tests/states/mobx/MobXPage.dart';
-import 'package:state_tests/states/rebuilder/RebuilderPage.dart';
-import 'package:state_tests/states/redux/ReduxPage.dart';
-import 'package:state_tests/states/river_pod/RiverPodPage.dart';
+import 'package:state_tests/common/pages/generic_page.dart';
 
 import '../gen/assets.gen.dart';
+import '../states/binder/binder_page.dart';
+import '../states/bloc/bloc_page.dart';
+import '../states/bloc/cubit_page.dart';
+import '../states/command/command_page.dart';
+import '../states/getx/get_x_page.dart';
+import '../states/mobx/mob_x_page.dart';
+import '../states/rebuilder/rebuilder_page.dart';
+import '../states/redux/redux_page.dart';
+import '../states/river_pod/river_pod_page.dart';
 
 enum StateType {
   binder('Bi'),

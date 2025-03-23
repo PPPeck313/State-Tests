@@ -1,34 +1,23 @@
 import 'package:mobx/mobx.dart';
+import 'package:state_tests/common/models/note/notes_state.dart';
 
-part 'NotesStoreX.g.dart';
+import '../../../common/models/note/notes_state_view_model.dart';
 
-class NotesStoreXWrapper {
-  static final NotesStoreXWrapper _instance = NotesStoreXWrapper._new(NotesStoreX());
-
-  factory NotesStoreXWrapper() => _instance;
-
-  NotesStoreX notesStoreX;
-
-  NotesStoreXWrapper._new(this.notesStoreX);
-}
+part 'notes_store_x.g.dart';
 
 class NotesStoreX = NotesStoreXBase with _$NotesStoreX;
 
-abstract class NotesStoreXBase with Store {
+abstract class NotesStoreXBase with Store implements NotesStateFunctions {
   @observable
-  String input = '';
+  NotesState state;
 
-  @observable
-  ObservableList<String> notes = ObservableList();
+  NotesStoreXBase([this.state = const NotesState()]);
 
   @action
-  void updateInput(String val) {
-    input = val;
-  }
+  @override
+  void updateInput(String input) => state.updateInput(input);
 
   @action
-  void addNote() {
-    notes.add(input);
-    input = '';
-  }
+  @override
+  void addNote() => state.addNote();
 }

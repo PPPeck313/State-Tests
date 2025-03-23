@@ -1,46 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:state_tests/common/models/counter/CounterState.dart';
-import 'package:state_tests/common/models/note/NotesList.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
-import 'package:state_tests/common/pages/GenericPage.dart';
-import 'package:state_tests/common/pages/StatePage.dart';
+import 'package:state_tests/states/bloc/models/counter_cubit.dart';
+import 'package:state_tests/states/bloc/models/notes_cubit.dart';
 
-import 'models/CounterCubit.dart';
-import 'models/NotesCubit.dart';
+import '../../common/models/counter/counter_state.dart';
+import '../../common/models/note/notes_state.dart';
+import '../../common/pages/generic_page.dart';
+import 'models/notes_bloc.dart';
 
-class CubitPage extends StatelessWidget implements StatePage {
-  const CubitPage({super.key});
-
-  //value vs create in order to reuse
+class CubitPage extends GenericPageState {
   @override
-  Widget build(BuildContext context) => BlocProvider<CounterCubit>.value(
-    value: CounterCubit(),
-    child: BlocProvider<NotesCubit>.value(value: NotesCubit(), child: GenericPage(this)),
+  Widget build(BuildContext context) => MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (BuildContext _) => CounterCubit()),
+      BlocProvider(create: (BuildContext _) => NotesCubit()),
+    ],
+    child: super.build(context),
   );
 
-  @override
-  String getTag() => 'Cubit';
+  // @override
+  // Widget? getCounterWidget(Widget child) => BlocBuilder<CounterBloc, CounterState>(builder: (_, _) => child);
 
   @override
-  Widget getCounterText(BuildContext context) => BlocBuilder<CounterCubit, CounterState>(
-    builder: (context, state) => Text('${state.count}', style: TextStyle(fontSize: 60.0)),
-  );
+  CounterState getCounterState(BuildContext context) => context.watch<CounterCubit>().state;
 
   @override
-  void decrement(BuildContext context) => context.bloc<CounterCubit>().decrement();
+  void decrement(BuildContext context) => context.read<CounterCubit>().decrement();
 
   @override
-  void increment(BuildContext context) => context.bloc<CounterCubit>().increment();
+  void increment(BuildContext context) => context.read<CounterCubit>().increment();
+
+  // @override
+  // Widget? getNotesWidget(Widget child) => BlocBuilder<NotesBloc, NotesState>(builder: (_, _) => child);
 
   @override
-  Widget getNotesList(BuildContext context) =>
-      BlocBuilder<NotesCubit, NotesState>(builder: (context, state) => NotesList(state));
+  NotesState getNotesState(BuildContext context) => context.watch<NotesBloc>().state;
 
   @override
-  void addNote(BuildContext context) => context.bloc<NotesCubit>().addNote();
+  void updateInput(BuildContext context, String input) => context.read<NotesCubit>().updateInput(input);
 
   @override
-  void updateInput(BuildContext context, String input) => context.bloc<NotesCubit>().updateInput(input);
+  void addNote(BuildContext context) => context.read<NotesCubit>().addNote();
 }

@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:state_tests/common/models/counter/CounterState.dart';
-import 'package:state_tests/common/models/note/NotesList.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
+
+import '../models/counter/counter_state.dart';
+import '../models/note/notes_state.dart';
+import '../models/note/widgets/notes_list.dart';
 
 class GenericPage extends StatefulWidget {
-  final GenericPageState statePage;
+  final GenericPageState _statePage;
 
-  const GenericPage(this.statePage, {super.key});
+  const GenericPage(this._statePage, {super.key});
 
   @override
-  GenericPageState createState() => statePage;
+  GenericPageState createState() => _statePage;
 }
 
 abstract class GenericPageState extends State<StatefulWidget> {
   final TextEditingController _controller = TextEditingController();
 
-  String getTag();
-
+  Widget? getCounterWidget(Widget child) => null;
   CounterState getCounterState(BuildContext context);
   void increment(BuildContext context);
   void decrement(BuildContext context);
 
+  Widget? getNotesWidget(Widget child) => null;
   NotesState getNotesState(BuildContext context);
   void addNote(BuildContext context);
   void updateInput(BuildContext context, String input);
@@ -41,7 +42,7 @@ abstract class GenericPageState extends State<StatefulWidget> {
           makeCreateNoteButton(),
           makeUpdateInputTextField(),
           Divider(),
-          NotesList(getNotesState(context)),
+          getNotesWidget(makeNotesList(context)) ?? makeNotesList(context),
         ],
       ),
     ),
@@ -49,7 +50,7 @@ abstract class GenericPageState extends State<StatefulWidget> {
 
   Widget makeCounter() => Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [makeSubtractButton(), makeCounterText(), makeAddButton()],
+    children: [makeSubtractButton(), getCounterWidget(makeCounterText()) ?? makeCounterText(), makeAddButton()],
   );
 
   Widget makeSubtractButton() => FloatingActionButton(
@@ -86,4 +87,6 @@ abstract class GenericPageState extends State<StatefulWidget> {
     onChanged: (value) => {updateInput(context, value)},
     decoration: InputDecoration.collapsed(hintText: 'Add a note'),
   );
+
+  Widget makeNotesList(BuildContext context) => NotesList(getNotesState(context));
 }

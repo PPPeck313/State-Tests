@@ -17,9 +17,6 @@ class RiverPodPage extends StatelessWidget implements StatePage {
   Widget build(BuildContext context) => ProviderScope(child: GenericPage(this));
 
   @override
-  String getTag() => 'Riverpod';
-
-  @override
   Widget getCounterText(BuildContext context) => Consumer(
     builder: (context, watch, child) {
       CounterState state = watch(CounterNotifier.counterProvider.state);

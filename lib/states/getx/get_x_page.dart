@@ -1,40 +1,39 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:state_tests/common/models/note/NotesList.dart';
-import 'package:state_tests/common/pages/GenericPage.dart';
-import 'package:state_tests/common/pages/StatePage.dart';
-import 'package:state_tests/states/getx/models/CounterController.dart';
+import 'package:state_tests/common/pages/generic_page.dart';
 
-import 'models/NotesController.dart';
+import '../../common/models/counter/counter_state.dart';
+import '../../common/models/note/notes_state.dart';
+import 'models/counter_controller.dart';
+import 'models/notes_controller.dart';
 
-class GetXPage extends StatelessWidget implements StatePage {
-  const GetXPage({super.key});
+class GetXPage extends GenericPageState {
+  final CounterController _counterController;
+  final NotesController _notesController;
 
-  final _counterController = Get.put(CounterController());
-  final _notesController = Get.put(NotesController());
-
-  @override
-  Widget build(BuildContext context) => GenericPage(this);
+  GetXPage() : _counterController = Get.put(CounterController()), _notesController = Get.put(NotesController());
 
   @override
-  String getTag() => 'GetX';
+  Widget? getCounterWidget(Widget child) => Obx(() => child);
 
   @override
-  Widget getCounterText(BuildContext context) =>
-      Obx(() => Text('${_counterController.state.value.count}', style: TextStyle(fontSize: 60.0)));
+  CounterState getCounterState(BuildContext _) => _counterController.state.value;
 
   @override
-  void decrement(BuildContext context) => _counterController.decrement();
+  void decrement(BuildContext _) => _counterController.decrement();
 
   @override
-  void increment(BuildContext context) => _counterController.increment();
+  void increment(BuildContext _) => _counterController.increment();
 
   @override
-  Widget getNotesList(BuildContext context) => Obx(() => NotesList(_notesController.state.value));
+  Widget? getNotesWidget(Widget child) => Obx(() => child);
 
   @override
-  void addNote(BuildContext context) => _notesController.addNote();
+  NotesState getNotesState(BuildContext _) => _notesController.state.value;
 
   @override
-  void updateInput(BuildContext context, String input) => _notesController.updateInput(input);
+  void addNote(BuildContext _) => _notesController.addNote();
+
+  @override
+  void updateInput(BuildContext _, String input) => _notesController.updateInput(input);
 }
