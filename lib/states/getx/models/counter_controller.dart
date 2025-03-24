@@ -1,16 +1,19 @@
 import 'package:get/get.dart';
-import 'package:state_tests/common/models/counter/counter_state_view_model.dart';
 
 import '../../../common/models/counter/counter_state.dart';
+import '../../../common/models/counter/counter_view_model.dart';
 
-class CounterController extends GetxController implements CounterStateFunctions {
-  Rx<CounterState> state;
-
-  CounterController([CounterState state = const CounterState()]) : state = state.obs;
-
-  @override
-  void decrement() => state.value = state.value.decrement();
+class CounterController extends GetxController implements BaseCounterViewModel {
+  final Rx<CounterState> xState;
 
   @override
-  void increment() => state.value = state.value.increment();
+  CounterState get state => xState.value;
+
+  CounterController([CounterState state = const CounterState()]) : xState = state.obs;
+
+  @override
+  void decrement() => xState.value = state.decrement();
+
+  @override
+  void increment() => xState.value = state.increment();
 }

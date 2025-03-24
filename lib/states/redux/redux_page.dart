@@ -1,47 +1,39 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:state_tests/common/models/counter/CounterState.dart';
-import 'package:state_tests/common/models/note/NotesList.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
-import 'package:state_tests/common/pages/GenericPage.dart';
-import 'package:state_tests/common/pages/StatePage.dart';
 
-import 'models/CounterStore.dart';
-import 'models/NotesStore.dart';
+import '../../common/models/counter/counter_event.dart';
+import '../../common/models/counter/counter_state.dart';
+import '../../common/models/note/notes_event.dart';
+import '../../common/models/note/notes_state.dart';
+import '../../common/pages/generic_page.dart';
+import 'models/counter_store.dart';
+import 'models/notes_store.dart';
 
-class ReduxPage extends StatelessWidget implements StatePage {
-  const ReduxPage({super.key});
-
+class ReduxPage extends GenericPageState {
   final CounterStore _counterStore = CounterStore();
   final NotesStore _notesStore = NotesStore();
 
   @override
-  Widget build(BuildContext context) => StoreProvider<CounterState>(
-    store: _counterStore,
-    child: StoreProvider<NotesState>(store: _notesStore, child: GenericPage(this)),
-  );
+  Widget? getCounterWidget(Widget child) => StoreProvider<CounterState>(store: _counterStore.store, child: child);
 
   @override
-  Widget getCounterText(BuildContext context) => StoreConnector<CounterState, CounterState>(
-    converter: (store) => store.state,
-    builder: (context, state) => Text('${state.count}', style: TextStyle(fontSize: 60.0)),
-  );
+  CounterState getCounterState(BuildContext _) => _counterStore.state;
 
   @override
-  void decrement(BuildContext context) => _counterStore.dispatch(DecrementAction());
+  void decrement(BuildContext context) => _counterStore.store.dispatch(DecrementEvent());
 
   @override
-  void increment(BuildContext context) => _counterStore.dispatch(IncrementAction());
+  void increment(BuildContext context) => _counterStore.store.dispatch(IncrementEvent());
 
   @override
-  Widget getNotesList(BuildContext context) => StoreConnector<NotesState, NotesState>(
-    converter: (store) => store.state,
-    builder: (context, state) => NotesList(state),
-  );
+  Widget? getNotesWidget(Widget child) => StoreProvider<NotesState>(store: _notesStore.store, child: child);
 
   @override
-  void addNote(BuildContext context) => _notesStore.dispatch(AddNoteAction());
+  NotesState getNotesState(BuildContext _) => _notesStore.state;
 
   @override
-  void updateInput(BuildContext context, String input) => _notesStore.dispatch(UpdateInputAction(input));
+  void updateInput(BuildContext context, String input) => _notesStore.store.dispatch(UpdateInputEvent(input));
+
+  @override
+  void addNote(BuildContext context) => _notesStore.store.dispatch(AddNoteEvent());
 }

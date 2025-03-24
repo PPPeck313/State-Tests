@@ -1,24 +1,32 @@
 import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
-import 'package:state_tests/common/models/counter/CounterState.dart';
 
-class CounterStore extends Store<CounterState> {
-  static final CounterStore _instance = CounterStore._new();
+import '../../../common/models/counter/counter_event.dart';
+import '../../../common/models/counter/counter_state.dart';
+import '../../../common/models/counter/counter_view_model.dart';
 
-  factory CounterStore() => _instance;
+class CounterStore implements BaseCounterViewModel {
+  late Store<CounterState> store; // can initialize in Store super constructor, but can't use instance methods
 
-  CounterStore._new()
-    : super(
-        (CounterState state, dynamic action) {
-          if (action is DecrementAction) {
-            state.decrement();
-          } else if (action is IncrementAction) {
-            state.increment();
-          }
+  @override
+  CounterState get state => store.state;
 
-          return state;
-        },
-        initialState: CounterState.initial(),
-        middleware: [LoggingMiddleware.printer().call],
-      );
+  CounterStore([CounterState state = const CounterState()]) {
+    store = Store<CounterState>(
+      (CounterState state, dynamic action) => switch (action) {
+        DecrementEvent _ => decrement(),
+        IncrementEvent _ => increment(),
+        Object _ => throw UnimplementedError(),
+        null => throw UnimplementedError(),
+      },
+      initialState: state,
+      middleware: [LoggingMiddleware().call],
+    );
+  }
+
+  @override
+  CounterState decrement() => state.decrement();
+
+  @override
+  CounterState increment() => state.increment();
 }

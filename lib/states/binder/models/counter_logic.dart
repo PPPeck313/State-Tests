@@ -1,19 +1,19 @@
 import 'package:binder/binder.dart';
-import 'package:state_tests/common/models/counter/counter_state.dart';
 
-import '../../../common/models/counter/counter_state_view_model.dart';
+import '../../../common/models/counter/counter_state.dart';
+import '../../../common/models/counter/counter_view_model.dart';
 
-class CounterLogic extends CounterStateViewModel with Logic {
+class CounterLogic with Logic implements BaseCounterViewModel {
+  @override
+  CounterState get state => read(counterStateRef);
+
   @override
   final Scope scope;
+
   final StateRef<CounterState> counterStateRef;
 
-  factory CounterLogic(Scope scope, [CounterState state = const CounterState()]) {
-    StateRef<CounterState> counterStateRef = StateRef<CounterState>(state);
-    return CounterLogic._internal(scope, counterStateRef);
-  }
-
-  CounterLogic._internal(this.scope, this.counterStateRef) : super(scope.read(counterStateRef, null));
+  CounterLogic(this.scope, [CounterState state = const CounterState()])
+    : counterStateRef = StateRef<CounterState>(state);
 
   @override
   void decrement() => write(counterStateRef, state.decrement());

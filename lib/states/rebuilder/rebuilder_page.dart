@@ -1,66 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:states_rebuilder/states_rebuilder.dart';
 
-import 'models/NotesReactiveModel.dart';
+import '../../common/models/counter/counter_state.dart';
+import '../../common/models/note/notes_state.dart';
+import '../../common/pages/generic_page.dart';
+import 'models/counter_rebuilder.dart';
+import 'models/notes_rebuilder.dart';
 
-class RebuilderPage extends StatelessWidget implements StatePage {
-  const RebuilderPage({super.key});
+class RebuilderPage extends GenericPageState {
+  CounterRebuilder counterRebuilder = CounterRebuilder();
+  NotesRebuilder notesRebuilder = NotesRebuilder();
 
-  @override
-  Widget build(BuildContext context) => Injector(
-    inject: [
-      Inject<CounterReactiveModel>(() => CounterReactiveModel()),
-      Inject<NotesReactiveModel>(() => NotesReactiveModel()),
-    ],
-    initState: () {}, //to be executed in the initState of statefulWidget
-    afterInitialBuild: (BuildContext context) {}, //to be executed after each rebuild of the widget
-    dispose: () {}, //to be executed in the dispose of statefulWidget
-    appLifeCycle:
-        (
-          AppLifecycleState state,
-        ) {}, //to be executed each time the application state changed; Android: onResume, onPause; iOS: viewWillAppear, viewWillDisappear
-    builder: (context) {
-      RM.get<CounterReactiveModel>(name: 'CounterReactiveModel', context: context);
-      RM.get<NotesReactiveModel>(name: 'NotesReactiveModel', context: context);
-      return GenericPage(this);
-    },
-  );
+  RebuilderPage() : counterRebuilder = CounterRebuilder(), notesRebuilder = NotesRebuilder();
+
+  // local scope = inherited widget
+  // @override
+  // Widget? getCounterWidget(Widget child) =>
+  //     counterRebuilder.injectedState.inherited(builder: (_) => child, stateOverride: () => counterRebuilder.state);
 
   @override
-  Widget getCounterText(BuildContext context) {
-    CounterState state = RM.get<CounterReactiveModel>().state.state;
-    return Text('${state.count}', style: TextStyle(fontSize: 60.0));
-  }
+  CounterState getCounterState(BuildContext _) => counterRebuilder.state; // counterRebuilder.injectedState.of(context);
 
   @override
-  void decrement(BuildContext context) {
-    ReactiveModel<CounterReactiveModel> reactiveModel = RM.get<CounterReactiveModel>();
-    reactiveModel.setState((s) => s.decrement());
-  }
+  void decrement(BuildContext _) => counterRebuilder.decrement();
 
   @override
-  void increment(BuildContext context) {
-    ReactiveModel<CounterReactiveModel> reactiveModel = RM.get<CounterReactiveModel>();
-    reactiveModel.setState((s) => s.increment());
-  }
+  void increment(BuildContext _) => counterRebuilder.increment();
+
+  // local scope = inherited widget
+  // @override
+  // Widget? getNotesWidget(Widget child) =>
+  //     notesRebuilder.injectedState.inherited(builder: (_) => child, stateOverride: () => notesRebuilder.state);
 
   @override
-  Widget getNotesList(BuildContext context) {
-    NotesState state = RM.get<NotesReactiveModel>().state.state;
-    return NotesList(state);
-  }
+  NotesState getNotesState(BuildContext _) => notesRebuilder.state; // notesRebuilder.injectedState.of(context);
 
   @override
-  void addNote(BuildContext context) {
-    ReactiveModel<NotesReactiveModel> reactiveModel = RM.get<NotesReactiveModel>();
-    reactiveModel.setState((state) => state.addNote());
-  }
+  void updateInput(BuildContext _, String input) => notesRebuilder.updateInput(input);
 
   @override
-  void updateInput(BuildContext context, String input) {
-    //IN.get<NotesReactiveModel>().updateInput(input);
-    ReactiveModel<NotesReactiveModel> reactiveModel = RM.get<NotesReactiveModel>();
-    reactiveModel.setState((s) => s.updateInput(input));
-  }
+  void addNote(BuildContext _) => notesRebuilder.addNote();
 }

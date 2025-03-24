@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:state_tests/common/models/counter/counter_view_model.dart';
+import 'package:state_tests/common/models/note/notes_view_model.dart';
 
 import '../models/counter/counter_state.dart';
 import '../models/note/notes_state.dart';
@@ -14,17 +16,29 @@ class GenericPage extends StatefulWidget {
 }
 
 abstract class GenericPageState extends State<StatefulWidget> {
-  final TextEditingController _controller = TextEditingController();
+  late TextEditingController _controller;
+
+  @protected
+  abstract final BaseCounterViewModel counterViewModel;
+
+  @protected
+  abstract final BaseNotesViewModel notesViewModel;
 
   Widget? getCounterWidget(Widget child) => null;
-  CounterState getCounterState(BuildContext context);
-  void increment(BuildContext context);
-  void decrement(BuildContext context);
+  CounterState getCounterState(BuildContext context) => counterViewModel.state;
+  void increment(BuildContext context) => counterViewModel.increment();
+  void decrement(BuildContext context) => counterViewModel.decrement();
 
   Widget? getNotesWidget(Widget child) => null;
-  NotesState getNotesState(BuildContext context);
-  void addNote(BuildContext context);
-  void updateInput(BuildContext context, String input);
+  NotesState getNotesState(BuildContext context) => notesViewModel.state;
+  void updateInput(BuildContext context, String input) => notesViewModel.updateInput(input);
+  void addNote(BuildContext context) => notesViewModel.addNote();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
 
   @override
   void dispose() {

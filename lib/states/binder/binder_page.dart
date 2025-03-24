@@ -9,22 +9,24 @@ import 'models/counter_logic.dart';
 import 'models/notes_logic.dart';
 
 class BinderPage extends GenericPageState {
-  late CounterLogic _counterLogic;
+  @override
+  late CounterLogic counterViewModel;
   late LogicRef<CounterLogic> _counterLogicRef;
 
-  late NotesLogic _notesLogic;
+  @override
+  late NotesLogic notesViewModel;
   late LogicRef<NotesLogic> _notesLogicRef;
 
   BinderPage() {
-    _counterLogicRef = LogicRef((scope) => _counterLogic = CounterLogic(scope));
-    _notesLogicRef = LogicRef((scope) => _notesLogic = NotesLogic(scope));
+    _counterLogicRef = LogicRef((scope) => counterViewModel = CounterLogic(scope));
+    _notesLogicRef = LogicRef((scope) => notesViewModel = NotesLogic(scope));
   }
 
   @override
   Widget build(BuildContext context) => BinderScope(child: super.build(context));
 
   @override
-  CounterState getCounterState(BuildContext context) => context.watch(_counterLogic.counterStateRef);
+  CounterState getCounterState(BuildContext context) => context.watch(counterViewModel.counterStateRef);
 
   @override
   void decrement(BuildContext context) => context.use(_counterLogicRef).decrement();
@@ -33,7 +35,7 @@ class BinderPage extends GenericPageState {
   void increment(BuildContext context) => context.use(_counterLogicRef).increment();
 
   @override
-  NotesState getNotesState(BuildContext context) => context.watch(_notesLogic.notesStateRef);
+  NotesState getNotesState(BuildContext context) => context.watch(notesViewModel.notesStateRef);
 
   @override
   void updateInput(BuildContext context, String input) => context.use(_notesLogicRef).updateInput(input);

@@ -9,3 +9,12 @@ class NotesState with NotesStateMappable {
 
   const NotesState({this.input = ''});
 }
+
+extension NotesStateExtensions on NotesState {
+  NotesState updateInput(String input) => copyWith(input: input);
+
+  NotesState addNote() {
+    notes.add(input);
+    return copyWith(input: '');
+  }
+}

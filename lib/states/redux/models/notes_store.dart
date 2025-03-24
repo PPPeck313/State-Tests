@@ -1,24 +1,32 @@
 import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
 
-class NotesStore extends Store<NotesState> {
-  static final NotesStore _instance = NotesStore._new();
+import '../../../common/models/note/notes_event.dart';
+import '../../../common/models/note/notes_state.dart';
+import '../../../common/models/note/notes_view_model.dart';
 
-  factory NotesStore() => _instance;
+class NotesStore implements BaseNotesViewModel {
+  late Store<NotesState> store; // can initialize in Store super constructor, but can't use instance methods
 
-  NotesStore._new()
-    : super(
-        (NotesState state, dynamic action) {
-          if (action is AddNoteAction) {
-            state.addNote();
-          } else if (action is UpdateInputAction) {
-            state.updateInput(action.input);
-          }
+  @override
+  NotesState get state => store.state;
 
-          return state;
-        },
-        initialState: NotesState.initial(),
-        middleware: [LoggingMiddleware.printer().call],
-      );
+  NotesStore([NotesState state = const NotesState()]) {
+    store = Store<NotesState>(
+      (NotesState state, dynamic action) => switch (action) {
+        UpdateInputEvent _ => updateInput(action.input),
+        AddNoteEvent _ => addNote(),
+        Object _ => throw UnimplementedError(),
+        null => throw UnimplementedError(),
+      },
+      initialState: state,
+      middleware: [LoggingMiddleware().call],
+    );
+  }
+
+  @override
+  NotesState updateInput(String input) => state.updateInput(input);
+
+  @override
+  NotesState addNote() => state.addNote();
 }
