@@ -20,7 +20,7 @@ class CubitPage extends GenericPageState {
   // );
 
   @override
-  Widget getCounterWidget(Widget child) => BlocBuilder<CounterCubit, CounterState>(builder: (_, _) => child);
+  Widget getCounterStateWidget(Widget counter) => BlocBuilder<CounterCubit, CounterState>(builder: (_, _) => counter);
 
   @override
   CounterState getCounterState(BuildContext context) => context.watch<CounterCubit>().state;
@@ -32,7 +32,7 @@ class CubitPage extends GenericPageState {
   void increment(BuildContext context) => context.read<CounterCubit>().increment();
 
   @override
-  Widget getNotesWidget(Widget child) => BlocBuilder<NotesBloc, NotesState>(builder: (_, _) => child);
+  Widget getNotesStateWidget(Widget notes) => BlocBuilder<NotesBloc, NotesState>(builder: (_, _) => notes);
 
   @override
   NotesState getNotesState(BuildContext context) => context.watch<NotesBloc>().state;

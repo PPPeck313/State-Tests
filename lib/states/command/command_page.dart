@@ -18,12 +18,12 @@ class CommandPage extends GenericPageState {
   CommandPage.def() : this(CounterCommands(), NotesCommands());
 
   @override
-  Widget getCounterWidget(Widget child) =>
-      [counterViewModel.decrementCommand, counterViewModel.incrementCommand].toCommandsWidget(child);
+  Widget getCounterStateWidget(Widget counter) =>
+      [counterViewModel.decrementCommand, counterViewModel.incrementCommand].toCommandsWidget(counter);
 
   @override
-  Widget getNotesWidget(Widget child) =>
-      [notesViewModel.updateInputCommand, notesViewModel.addNoteCommand].toCommandsWidget(child);
+  Widget getNotesStateWidget(Widget notes) =>
+      [notesViewModel.updateInputCommand, notesViewModel.addNoteCommand].toCommandsWidget(notes);
 }
 
 extension CommandListExtensions on List<Command<dynamic, dynamic>> {

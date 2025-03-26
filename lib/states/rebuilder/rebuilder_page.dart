@@ -22,13 +22,13 @@ class RebuilderPage extends GenericPageState {
   CounterState getCounterState(BuildContext context) => counterViewModel.injectedState.of(context);
 
   @override
-  Widget getCounterWidget(Widget child) =>
-      counterViewModel.injectedState.inherited(builder: (_) => child, stateOverride: () => counterViewModel.state);
+  Widget getCounterStateWidget(Widget counter) =>
+      counterViewModel.injectedState.inherited(builder: (_) => counter, stateOverride: () => counterViewModel.state);
 
   @override
   NotesState getNotesState(BuildContext context) => notesViewModel.injectedState.of(context);
 
   @override
-  Widget getNotesWidget(Widget child) =>
-      notesViewModel.injectedState.inherited(builder: (_) => child, stateOverride: () => notesViewModel.state);
+  Widget getNotesStateWidget(Widget notes) =>
+      notesViewModel.injectedState.inherited(builder: (_) => notes, stateOverride: () => notesViewModel.state);
 }

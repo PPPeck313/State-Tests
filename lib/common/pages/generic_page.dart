@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../models/base_counter_view_model.dart';
 import '../models/base_notes_view_model.dart';
 import '../models/counter/counter_state.dart';
+import '../models/counter/widgets/counter.dart';
 import '../models/note/notes_state.dart';
-import '../models/note/widgets/notes_list.dart';
+import '../models/note/widgets/notes.dart';
 
 class GenericPage extends StatefulWidget {
   final GenericPageState _statePage;
@@ -24,12 +25,12 @@ abstract class GenericPageState extends State<StatefulWidget> {
   @protected
   BaseNotesViewModel? get notesViewModel => null;
 
-  Widget getCounterWidget(Widget child) => child;
+  Widget getCounterStateWidget(Widget counter) => counter;
   CounterState getCounterState(BuildContext context) => counterViewModel?.state ?? CounterState();
   void increment(BuildContext context) => counterViewModel?.increment();
   void decrement(BuildContext context) => counterViewModel?.decrement();
 
-  Widget getNotesWidget(Widget child) => child;
+  Widget getNotesStateWidget(Widget notes) => notes;
   NotesState getNotesState(BuildContext context) => notesViewModel?.state ?? NotesState();
   void updateInput(BuildContext context, String input) => notesViewModel?.updateInput(input);
   void addNote(BuildContext context) => notesViewModel?.addNote();
@@ -52,55 +53,10 @@ abstract class GenericPageState extends State<StatefulWidget> {
       padding: const EdgeInsets.fromLTRB(8.0, 32.0, 8.0, 8.0),
       child: Column(
         children: [
-          makeCounter(),
-          makeCreateNoteButton(),
-          makeUpdateInputTextField(),
-          Divider(),
-          getNotesWidget(makeNotesList(context)),
+          Counter(getCounterStateWidget, getCounterState, decrement, increment),
+          Notes(_controller, getNotesStateWidget, getNotesState, updateInput, addNote),
         ],
       ),
     ),
   );
-
-  Widget makeCounter() => Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [makeSubtractButton(), getCounterWidget(makeCounterText()), makeAddButton()],
-  );
-
-  Widget makeSubtractButton() => FloatingActionButton(
-    onPressed: () {
-      decrement(context);
-    },
-    backgroundColor: Colors.white,
-    child: Icon(Icons.remove, color: Colors.black),
-  );
-
-  Widget makeCounterText() => Text('${getCounterState(context).count}', style: TextStyle(fontSize: 60.0));
-
-  Widget makeAddButton() => FloatingActionButton(
-    onPressed: () {
-      increment(context);
-    },
-    backgroundColor: Colors.white,
-    child: Icon(Icons.add, color: Colors.black),
-  );
-
-  Widget makeCreateNoteButton() => Padding(
-    padding: const EdgeInsets.only(top: 32.0),
-    child: TextButton(
-      onPressed: () {
-        addNote(context);
-        _controller.clear();
-      },
-      child: Text('Create Note'),
-    ),
-  );
-
-  Widget makeUpdateInputTextField() => TextField(
-    controller: _controller,
-    onChanged: (value) => {updateInput(context, value)},
-    decoration: InputDecoration.collapsed(hintText: 'Add a note'),
-  );
-
-  Widget makeNotesList(BuildContext context) => NotesList(getNotesState(context));
 }

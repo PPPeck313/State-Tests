@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 
-import '../notes_state.dart';
-import 'note_widget.dart';
+import '../../notes_state.dart';
+import 'note_cell.dart';
 
 class NotesList extends StatelessWidget {
   final NotesState notesState;
@@ -13,7 +13,7 @@ class NotesList extends StatelessWidget {
 
   Widget getList() => Expanded(
     child: ListView.builder(
-      itemBuilder: (context, index) => NoteWidget(text: (notesState.notes[index])),
+      itemBuilder: (context, index) => NoteCell(text: (notesState.notes[index])),
       itemCount: notesState.notes.length,
     ),
   );

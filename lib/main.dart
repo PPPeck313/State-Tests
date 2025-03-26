@@ -34,16 +34,6 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  void dispose() {
-    CounterNotifier().manualDispose();
-    NotesNotifier().manualDispose();
-
-    CounterBloc().dispose();
-    NotesBloc().dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) => MaterialApp(
     home: makeHomeScreen(context, StateType.values),
     theme: ThemeData(primarySwatch: Colors.blue, visualDensity: VisualDensity.adaptivePlatformDensity),

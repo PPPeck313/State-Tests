@@ -19,8 +19,9 @@ class ReduxPage extends GenericPageState {
   ReduxPage.def() : this(CounterStore(), NotesStore());
 
   @override
-  Widget getCounterWidget(Widget child) => StoreProvider<CounterState>(store: counterViewModel.store, child: child);
+  Widget getCounterStateWidget(Widget counter) =>
+      StoreProvider<CounterState>(store: counterViewModel.store, child: counter);
 
   @override
-  Widget getNotesWidget(Widget child) => StoreProvider<NotesState>(store: notesViewModel.store, child: child);
+  Widget getNotesStateWidget(Widget notes) => StoreProvider<NotesState>(store: notesViewModel.store, child: notes);
 }

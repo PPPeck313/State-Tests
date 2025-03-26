@@ -17,8 +17,8 @@ class GetXPage extends GenericPageState {
   GetXPage.def() : this(Get.put(CounterController()), Get.put(NotesController()));
 
   @override
-  Widget getCounterWidget(Widget child) => Obx(() => child);
+  Widget getCounterStateWidget(Widget counter) => Obx(() => counter);
 
   @override
-  Widget getNotesWidget(Widget child) => Obx(() => child);
+  Widget getNotesStateWidget(Widget notes) => Obx(() => notes);
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 
-class NoteWidget extends StatelessWidget {
+class NoteCell extends StatelessWidget {
   final String text;
 
-  const NoteWidget({super.key, this.text = ''});
+  const NoteCell({this.text = '', super.key});
 
   @override
   Widget build(BuildContext context) =>

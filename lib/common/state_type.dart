@@ -30,7 +30,7 @@ enum StateType {
   const StateType(this.abbreviation);
 
   GenericPageState get page => switch (this) {
-    binder => BinderPage(),
+    binder => BinderPage.def(),
     bloc => BlocPage(),
     cubit => CubitPage(),
     command => CommandPage.def(),

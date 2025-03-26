@@ -20,7 +20,7 @@ class BlocPage extends GenericPageState {
   // );
 
   @override
-  Widget getCounterWidget(Widget child) => BlocBuilder<CounterBloc, CounterState>(builder: (_, _) => child);
+  Widget getCounterStateWidget(Widget counter) => BlocBuilder<CounterBloc, CounterState>(builder: (_, _) => counter);
 
   @override
   CounterState getCounterState(BuildContext context) => context.watch<CounterBloc>().state;
@@ -32,7 +32,7 @@ class BlocPage extends GenericPageState {
   void increment(BuildContext context) => context.read()<CounterBloc>().add(IncrementEvent());
 
   @override
-  Widget getNotesWidget(Widget child) => BlocBuilder<NotesBloc, NotesState>(builder: (_, _) => child);
+  Widget getNotesStateWidget(Widget notes) => BlocBuilder<NotesBloc, NotesState>(builder: (_, _) => notes);
 
   @override
   NotesState getNotesState(BuildContext context) => context.watch<NotesBloc>().state;

@@ -11,7 +11,8 @@ class RiverPodPage extends GenericPageState {
   final NotesStore notesViewModel = NotesStore();
 
   @override
-  Widget? getCounterWidget(Widget child) => StoreProvider<CounterState>(store: counterViewModel.store, child: child);
+  Widget? getCounterStateWidget(Widget counter) =>
+      StoreProvider<CounterState>(store: counterViewModel.store, child: counter);
 
   @override
   void decrement(BuildContext context) => counterViewModel.store.dispatch(DecrementEvent());
@@ -20,7 +21,7 @@ class RiverPodPage extends GenericPageState {
   void increment(BuildContext context) => counterViewModel.store.dispatch(IncrementEvent());
 
   @override
-  Widget? getNotesWidget(Widget child) => StoreProvider<NotesState>(store: notesViewModel.store, child: child);
+  Widget? getNotesStateWidget(Widget notes) => StoreProvider<NotesState>(store: notesViewModel.store, child: notes);
 
   @override
   void updateInput(BuildContext context, String input) => notesViewModel.store.dispatch(UpdateInputEvent(input));
