@@ -1,14 +1,29 @@
 import 'package:flutter_command/flutter_command.dart';
+import 'package:state_tests/common/models/base_notes_view_model.dart';
 
 import '../../../common/models/note/notes_state.dart';
-import '../../../common/models/note/notes_view_model.dart';
 
-class NotesCommands extends NotesViewModel {
+class NotesCommands extends BaseNotesViewModel {
+  NotesState _state;
+
+  @override
+  NotesState get state => _state;
+
   late Command<String, NotesState> updateInputCommand;
   late Command<void, NotesState> addNoteCommand;
 
-  NotesCommands([super._state = const NotesState()]) {
-    updateInputCommand = Command.createSync<String, NotesState>((String val) => updateInput(val), initialValue: state);
-    addNoteCommand = Command.createSyncNoParam<NotesState>(() => addNote(), initialValue: state);
+  NotesCommands([this._state = const NotesState()]) {
+    updateInputCommand = Command.createSync<String, NotesState>(
+      (String input) => _state = state.updateInput(input),
+      initialValue: state,
+    );
+
+    addNoteCommand = Command.createSyncNoParam<NotesState>(() => _state = state.addNote(), initialValue: state);
   }
+
+  @override
+  void updateInput(String input) => updateInputCommand(input);
+
+  @override
+  void addNote() => addNoteCommand();
 }

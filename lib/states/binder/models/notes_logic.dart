@@ -1,7 +1,7 @@
 import 'package:binder/binder.dart';
 
+import '../../../common/models/base_notes_view_model.dart';
 import '../../../common/models/note/notes_state.dart';
-import '../../../common/models/note/notes_view_model.dart';
 
 class NotesLogic extends BaseNotesViewModel with Logic {
   @override

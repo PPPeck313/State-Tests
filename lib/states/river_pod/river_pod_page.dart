@@ -1,58 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_riverpod/all.dart';
-import 'package:state_tests/common/models/counter/CounterState.dart';
-import 'package:state_tests/common/models/note/NotesList.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
-import 'package:state_tests/common/pages/GenericPage.dart';
-import 'package:state_tests/common/pages/StatePage.dart';
 
-import 'models/CounterNotifier.dart';
-import 'models/NotesNotifier.dart';
+import '../../common/pages/generic_page.dart';
 
-class RiverPodPage extends StatelessWidget implements StatePage {
-  const RiverPodPage({super.key});
+class RiverPodPage extends GenericPageState {
+  @override
+  final CounterStore counterViewModel = CounterStore();
 
   @override
-  Widget build(BuildContext context) => ProviderScope(child: GenericPage(this));
+  final NotesStore notesViewModel = NotesStore();
 
   @override
-  Widget getCounterText(BuildContext context) => Consumer(
-    builder: (context, watch, child) {
-      CounterState state = watch(CounterNotifier.counterProvider.state);
-      return Text('${state.count}', style: TextStyle(fontSize: 60.0));
-    },
-  );
+  Widget? getCounterWidget(Widget child) => StoreProvider<CounterState>(store: counterViewModel.store, child: child);
 
   @override
-  void decrement(BuildContext context) {
-    CounterNotifier counterNotifier = context.read(CounterNotifier.counterProvider);
-    counterNotifier.decrement();
-  }
+  void decrement(BuildContext context) => counterViewModel.store.dispatch(DecrementEvent());
 
   @override
-  void increment(BuildContext context) {
-    CounterNotifier counterNotifier = context.read(CounterNotifier.counterProvider);
-    counterNotifier.increment();
-  }
+  void increment(BuildContext context) => counterViewModel.store.dispatch(IncrementEvent());
 
   @override
-  Widget getNotesList(BuildContext context) => Consumer(
-    builder: (context, watch, child) {
-      NotesState state = watch(NotesNotifier.notesProvider.state);
-      return NotesList(state);
-    },
-  ); // Subscribe to the NotesController's state
+  Widget? getNotesWidget(Widget child) => StoreProvider<NotesState>(store: notesViewModel.store, child: child);
 
   @override
-  void addNote(BuildContext context) {
-    NotesNotifier notesNotifier = context.read(NotesNotifier.notesProvider);
-    notesNotifier.addNote();
-  }
+  void updateInput(BuildContext context, String input) => notesViewModel.store.dispatch(UpdateInputEvent(input));
 
   @override
-  void updateInput(BuildContext context, String input) {
-    NotesNotifier notesNotifier = context.read(NotesNotifier.notesProvider);
-    notesNotifier.updateInput(input);
-  }
+  void addNote(BuildContext context) => notesViewModel.store.dispatch(AddNoteEvent());
 }

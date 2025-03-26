@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
 
+import '../../../common/models/base_counter_view_model.dart';
 import '../../../common/models/counter/counter_state.dart';
-import '../../../common/models/counter/counter_view_model.dart';
 
 part 'counter_store_x.g.dart';
 

@@ -10,14 +10,6 @@ import 'models/counter_bloc.dart';
 import 'models/notes_bloc.dart';
 
 class BlocPage extends GenericPageState {
-  @override
-  CounterBloc counterViewModel;
-
-  @override
-  NotesBloc notesViewModel;
-
-  BlocPage() : counterViewModel = CounterBloc(), notesViewModel = NotesBloc();
-
   // @override
   // Widget build(BuildContext context) => MultiBlocProvider(
   //   providers: [
@@ -28,26 +20,26 @@ class BlocPage extends GenericPageState {
   // );
 
   @override
-  Widget? getCounterWidget(Widget child) => BlocBuilder<CounterBloc, CounterState>(builder: (_, _) => child);
+  Widget getCounterWidget(Widget child) => BlocBuilder<CounterBloc, CounterState>(builder: (_, _) => child);
 
   @override
-  CounterState getCounterState(BuildContext context) => context.watch<CounterBloc>().state; // counterViewModel.state
+  CounterState getCounterState(BuildContext context) => context.watch<CounterBloc>().state;
 
   @override
-  void decrement(BuildContext context) => context.read()<CounterBloc>().add(DecrementEvent()); // counterViewModel.add
+  void decrement(BuildContext context) => context.read()<CounterBloc>().add(DecrementEvent());
 
   @override
-  void increment(BuildContext context) => context.read()<CounterBloc>().add(IncrementEvent()); // counterViewModel.add
+  void increment(BuildContext context) => context.read()<CounterBloc>().add(IncrementEvent());
 
   @override
-  Widget? getNotesWidget(Widget child) => BlocBuilder<NotesBloc, NotesState>(builder: (_, _) => child);
+  Widget getNotesWidget(Widget child) => BlocBuilder<NotesBloc, NotesState>(builder: (_, _) => child);
 
   @override
-  NotesState getNotesState(BuildContext context) => context.watch<NotesBloc>().state; // notesViewModel.state
+  NotesState getNotesState(BuildContext context) => context.watch<NotesBloc>().state;
 
   @override
-  void updateInput(BuildContext context, String input) => context.read<NotesBloc>().add(UpdateInputEvent(input)); // notesViewMode.add
+  void updateInput(BuildContext context, String input) => context.read<NotesBloc>().add(UpdateInputEvent(input));
 
   @override
-  void addNote(BuildContext context) => context.read<NotesBloc>().add(AddNoteEvent()); // notesViewModel.add
+  void addNote(BuildContext context) => context.read<NotesBloc>().add(AddNoteEvent());
 }

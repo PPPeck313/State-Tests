@@ -1,14 +1,25 @@
 import 'package:flutter_command/flutter_command.dart';
 
+import '../../../common/models/base_counter_view_model.dart';
 import '../../../common/models/counter/counter_state.dart';
-import '../../../common/models/counter/counter_view_model.dart';
 
-class CounterCommands extends CounterViewModel {
+class CounterCommands extends BaseCounterViewModel {
+  CounterState _state;
+
+  @override
+  CounterState get state => _state;
+
   late Command<void, CounterState> decrementCommand;
   late Command<void, CounterState> incrementCommand;
 
-  CounterCommands([super._state = const CounterState()]) {
-    decrementCommand = Command.createSyncNoParam<CounterState>(() => decrement(), initialValue: state);
-    incrementCommand = Command.createSyncNoParam<CounterState>(() => increment(), initialValue: state);
+  CounterCommands([this._state = const CounterState()]) {
+    decrementCommand = Command.createSyncNoParam<CounterState>(() => _state = state.decrement(), initialValue: state);
+    incrementCommand = Command.createSyncNoParam<CounterState>(() => _state = state.increment(), initialValue: state);
   }
+
+  @override
+  void increment() => decrementCommand();
+
+  @override
+  void decrement() => incrementCommand();
 }

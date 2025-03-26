@@ -1,9 +1,10 @@
 import 'package:binder/binder.dart';
 
+import '../../../common/models/base_counter_view_model.dart';
 import '../../../common/models/counter/counter_state.dart';
-import '../../../common/models/counter/counter_view_model.dart';
 
 class CounterLogic with Logic implements BaseCounterViewModel {
+  // maybe composition logic instead
   @override
   CounterState get state => read(counterStateRef);
 

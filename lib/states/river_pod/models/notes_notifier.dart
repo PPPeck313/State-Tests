@@ -1,5 +1,6 @@
-import 'package:flutter_riverpod/all.dart';
-import 'package:state_tests/common/models/note/NotesState.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../common/models/note/notes_state.dart';
 
 class NotesNotifier extends StateNotifier<NotesState> {
   static StateNotifierProvider<NotesNotifier> notesProvider = StateNotifierProvider((ref) => NotesNotifier());

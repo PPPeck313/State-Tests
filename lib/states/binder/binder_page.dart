@@ -17,6 +17,10 @@ class BinderPage extends GenericPageState {
   late NotesLogic notesViewModel;
   late LogicRef<NotesLogic> _notesLogicRef;
 
+  BinderPage(this.counterViewModel, this.notesViewModel);
+
+  BinderPage.def() : this(CounterLogic(), NotesLogic());
+
   BinderPage() {
     _counterLogicRef = LogicRef((scope) => counterViewModel = CounterLogic(scope));
     _notesLogicRef = LogicRef((scope) => notesViewModel = NotesLogic(scope));

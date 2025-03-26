@@ -3,6 +3,9 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:state_tests/states/bloc/bloc_observer.dart';
 
+import 'common/pages/generic_page.dart';
+import 'common/state_type.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -52,7 +55,7 @@ class HomeScreenState extends State<HomeScreen> {
       key: _scaffoldKey,
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(title: Text(stateTypes[currentIndex].name)),
-      body: GenericPage(stateTypes[currentIndex].state),
+      body: GenericPage(stateTypes[currentIndex].page),
       drawer: makeDrawer(stateTypes),
     ),
   );

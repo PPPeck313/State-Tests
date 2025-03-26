@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:state_tests/common/models/counter/counter_view_model.dart';
-import 'package:state_tests/common/models/note/notes_view_model.dart';
 
+import '../models/base_counter_view_model.dart';
+import '../models/base_notes_view_model.dart';
 import '../models/counter/counter_state.dart';
 import '../models/note/notes_state.dart';
 import '../models/note/widgets/notes_list.dart';
@@ -19,20 +19,20 @@ abstract class GenericPageState extends State<StatefulWidget> {
   late TextEditingController _controller;
 
   @protected
-  abstract final BaseCounterViewModel counterViewModel;
+  BaseCounterViewModel? get counterViewModel => null;
 
   @protected
-  abstract final BaseNotesViewModel notesViewModel;
+  BaseNotesViewModel? get notesViewModel => null;
 
-  Widget? getCounterWidget(Widget child) => null;
-  CounterState getCounterState(BuildContext context) => counterViewModel.state;
-  void increment(BuildContext context) => counterViewModel.increment();
-  void decrement(BuildContext context) => counterViewModel.decrement();
+  Widget getCounterWidget(Widget child) => child;
+  CounterState getCounterState(BuildContext context) => counterViewModel?.state ?? CounterState();
+  void increment(BuildContext context) => counterViewModel?.increment();
+  void decrement(BuildContext context) => counterViewModel?.decrement();
 
-  Widget? getNotesWidget(Widget child) => null;
-  NotesState getNotesState(BuildContext context) => notesViewModel.state;
-  void updateInput(BuildContext context, String input) => notesViewModel.updateInput(input);
-  void addNote(BuildContext context) => notesViewModel.addNote();
+  Widget getNotesWidget(Widget child) => child;
+  NotesState getNotesState(BuildContext context) => notesViewModel?.state ?? NotesState();
+  void updateInput(BuildContext context, String input) => notesViewModel?.updateInput(input);
+  void addNote(BuildContext context) => notesViewModel?.addNote();
 
   @override
   void initState() {
@@ -56,7 +56,7 @@ abstract class GenericPageState extends State<StatefulWidget> {
           makeCreateNoteButton(),
           makeUpdateInputTextField(),
           Divider(),
-          getNotesWidget(makeNotesList(context)) ?? makeNotesList(context),
+          getNotesWidget(makeNotesList(context)),
         ],
       ),
     ),
@@ -64,7 +64,7 @@ abstract class GenericPageState extends State<StatefulWidget> {
 
   Widget makeCounter() => Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [makeSubtractButton(), getCounterWidget(makeCounterText()) ?? makeCounterText(), makeAddButton()],
+    children: [makeSubtractButton(), getCounterWidget(makeCounterText()), makeAddButton()],
   );
 
   Widget makeSubtractButton() => FloatingActionButton(

@@ -13,11 +13,13 @@ class MobXPage extends GenericPageState {
   @override
   final NotesStoreX notesViewModel;
 
-  MobXPage() : counterViewModel = CounterStoreX(), notesViewModel = NotesStoreX();
+  MobXPage(this.counterViewModel, this.notesViewModel);
+
+  MobXPage.def() : this(CounterStoreX(), NotesStoreX());
 
   @override
-  Widget? getCounterWidget(Widget child) => Observer(builder: (_) => child);
+  Widget getCounterWidget(Widget child) => Observer(builder: (_) => child);
 
   @override
-  Widget? getNotesWidget(Widget child) => Observer(builder: (_) => child);
+  Widget getNotesWidget(Widget child) => Observer(builder: (_) => child);
 }

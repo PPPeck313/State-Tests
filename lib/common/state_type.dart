@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:state_tests/common/pages/generic_page.dart';
+import 'package:state_tests/states/viewmodel/view_model_page.dart';
 
 import '../gen/assets.gen.dart';
 import '../states/binder/binder_page.dart';
@@ -21,7 +22,8 @@ enum StateType {
   mobX('MX'),
   rebuilder('Rb'),
   redux('Rd'),
-  riverPod('Rp');
+  riverPod('Rp'),
+  viewModel('Vm');
 
   final String abbreviation;
 
@@ -31,24 +33,26 @@ enum StateType {
     binder => BinderPage(),
     bloc => BlocPage(),
     cubit => CubitPage(),
-    command => CommandPage(),
-    getX => GetXPage(),
-    mobX => MobXPage(),
-    rebuilder => RebuilderPage(),
-    redux => ReduxPage(),
+    command => CommandPage.def(),
+    getX => GetXPage.def(),
+    mobX => MobXPage.def(),
+    rebuilder => RebuilderPage.def(),
+    redux => ReduxPage.def(),
     riverPod => RiverPodPage(),
+    viewModel => ViewModelPage(),
   };
 
   Image get logo =>
       switch (this) {
         binder => Assets.images.binderLogo,
-        bloc => Assets.images.binderLogo,
-        cubit => Assets.images.binderLogo,
-        command => Assets.images.binderLogo,
-        getX => Assets.images.binderLogo,
-        mobX => Assets.images.binderLogo,
-        rebuilder => Assets.images.binderLogo,
-        redux => Assets.images.binderLogo,
-        riverPod => Assets.images.binderLogo,
+        bloc => Assets.images.blocLogo,
+        cubit => Assets.images.cubitLogo,
+        command => Assets.images.commandLogo,
+        getX => Assets.images.getxLogo,
+        mobX => Assets.images.mobxLogo,
+        rebuilder => Assets.images.rebuilderLogo,
+        redux => Assets.images.reduxLogo,
+        riverPod => Assets.images.riverpodLogo,
+        viewModel => Assets.images.binderLogo,
       }.image();
 }
