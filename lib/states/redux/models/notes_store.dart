@@ -5,14 +5,9 @@ import '../../../common/models/base_notes_view_model.dart';
 import '../../../common/models/note/notes_event.dart';
 import '../../../common/models/note/notes_state.dart';
 
-class NotesStore implements BaseNotesViewModel {
-  Store<NotesState> store;
-
-  @override
-  NotesState get state => store.state;
-
+class NotesStore extends Store<NotesState> implements BaseNotesViewModel {
   NotesStore([NotesState state = const NotesState()])
-    : store = Store<NotesState>(
+    : super(
         (NotesState state, dynamic action) => switch (action) {
           UpdateInputEvent _ => state.updateInput(action.input),
           AddNoteEvent _ => state.addNote(),
@@ -24,8 +19,8 @@ class NotesStore implements BaseNotesViewModel {
       );
 
   @override
-  NotesState updateInput(String input) => store.dispatch(UpdateInputEvent(input));
+  NotesState updateInput(String input) => dispatch(UpdateInputEvent(input));
 
   @override
-  NotesState addNote() => store.dispatch(AddNoteEvent());
+  NotesState addNote() => dispatch(AddNoteEvent());
 }

@@ -9,41 +9,33 @@ import 'models/counter_logic.dart';
 import 'models/notes_logic.dart';
 
 class BinderPage extends GenericPageState {
-  @override
-  late CounterLogic counterViewModel;
-  late LogicRef<CounterLogic> _counterLogicRef;
+  final CounterLogicController _counterLogicController;
 
-  @override
-  late NotesLogic notesViewModel;
-  late LogicRef<NotesLogic> _notesLogicRef;
+  final NotesLogicController _notesLogicController;
 
-  BinderPage(this.counterViewModel, this.notesViewModel);
+  BinderPage(this._counterLogicController, this._notesLogicController);
 
-  BinderPage.def() : this(CounterLogic(), NotesLogic());
-
-  BinderPage() {
-    _counterLogicRef = LogicRef((scope) => counterViewModel = CounterLogic(scope));
-    _notesLogicRef = LogicRef((scope) => notesViewModel = NotesLogic(scope));
-  }
+  BinderPage.def() : this(CounterLogicController(), NotesLogicController());
 
   @override
   Widget build(BuildContext context) => BinderScope(child: super.build(context));
 
   @override
-  CounterState getCounterState(BuildContext context) => context.watch(counterViewModel.counterStateRef);
+  CounterState getCounterState(BuildContext context) => context.watch(_counterLogicController.stateRef);
 
   @override
-  void decrement(BuildContext context) => context.use(_counterLogicRef).decrement();
+  void decrement(BuildContext context) => context.use(_counterLogicController.logicRef).decrement();
 
   @override
-  void increment(BuildContext context) => context.use(_counterLogicRef).increment();
+  void increment(BuildContext context) => context.use(_counterLogicController.logicRef).increment();
 
   @override
-  NotesState getNotesState(BuildContext context) => context.watch(notesViewModel.notesStateRef);
+  NotesState getNotesState(BuildContext context) => context.watch(_notesLogicController.stateRef);
 
   @override
-  void updateInput(BuildContext context, String input) => context.use(_notesLogicRef).updateInput(input);
+  void updateInput(BuildContext context, String input) =>
+      context.use(_notesLogicController.logicRef).updateInput(input);
 
   @override
-  void addNote(BuildContext context) => context.use(_notesLogicRef).addNote();
+  void addNote(BuildContext context) => context.use(_notesLogicController.logicRef).addNote();
 }

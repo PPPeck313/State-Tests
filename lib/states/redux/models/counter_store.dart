@@ -5,14 +5,9 @@ import '../../../common/models/base_counter_view_model.dart';
 import '../../../common/models/counter/counter_event.dart';
 import '../../../common/models/counter/counter_state.dart';
 
-class CounterStore implements BaseCounterViewModel {
-  Store<CounterState> store;
-
-  @override
-  CounterState get state => store.state;
-
+class CounterStore extends Store<CounterState> implements BaseCounterViewModel {
   CounterStore([CounterState state = const CounterState()])
-    : store = Store<CounterState>(
+    : super(
         (CounterState state, dynamic action) => switch (action) {
           DecrementEvent _ => state.decrement(),
           IncrementEvent _ => state.increment(),
@@ -24,8 +19,8 @@ class CounterStore implements BaseCounterViewModel {
       );
 
   @override
-  void decrement() => store.dispatch(DecrementEvent());
+  void decrement() => dispatch(DecrementEvent());
 
   @override
-  void increment() => store.dispatch(IncrementEvent());
+  void increment() => dispatch(IncrementEvent());
 }
