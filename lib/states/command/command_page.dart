@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_command/flutter_command.dart';
 
-import '../../common/pages/generic_page.dart';
+import '../../common/widgets/generic_page.dart';
 import 'models/counter_commands.dart';
 import 'models/notes_commands.dart';
 

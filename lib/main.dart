@@ -3,8 +3,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:state_tests/states/bloc/bloc_observer.dart';
 
-import 'common/pages/generic_page.dart';
 import 'common/state_type.dart';
+import 'common/widgets/generic_page.dart';
 
 void main() => runApp(MyApp());
 

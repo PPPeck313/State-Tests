@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:state_tests/common/pages/generic_page.dart';
+import 'package:state_tests/common/widgets/generic_page.dart';
 import 'package:state_tests/states/viewmodel/view_model_page.dart';
 
 import '../gen/assets.gen.dart';

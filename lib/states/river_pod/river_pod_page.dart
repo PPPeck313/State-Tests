@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../common/pages/generic_page.dart';
+import '../../common/widgets/generic_page.dart';
 
 class RiverPodPage extends GenericPageState {
   @override

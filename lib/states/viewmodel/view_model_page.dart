@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../../common/pages/generic_page.dart';
+import '../../common/widgets/generic_page.dart';
 import '../redux/models/counter_store.dart';
 import '../redux/models/notes_store.dart';
 

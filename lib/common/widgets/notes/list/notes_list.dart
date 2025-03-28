@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../../notes_state.dart';
+import '../../../models/note/notes_state.dart';
 import 'note_cell.dart';
 
 class NotesList extends StatelessWidget {

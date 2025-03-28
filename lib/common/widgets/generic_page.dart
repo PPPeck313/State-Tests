@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../models/base_counter_view_model.dart';
 import '../models/base_notes_view_model.dart';
 import '../models/counter/counter_state.dart';
-import '../models/counter/widgets/counter.dart';
 import '../models/note/notes_state.dart';
-import '../models/note/widgets/notes.dart';
+import 'counter/counter.dart';
+import 'notes/notes.dart';
 
 class GenericPage extends StatefulWidget {
   final GenericPageState _statePage;

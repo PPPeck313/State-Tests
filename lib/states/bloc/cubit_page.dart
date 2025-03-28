@@ -6,7 +6,7 @@ import 'package:state_tests/states/bloc/models/notes_cubit.dart';
 
 import '../../common/models/counter/counter_state.dart';
 import '../../common/models/note/notes_state.dart';
-import '../../common/pages/generic_page.dart';
+import '../../common/widgets/generic_page.dart';
 import 'models/notes_bloc.dart';
 
 class CubitPage extends GenericPageState {

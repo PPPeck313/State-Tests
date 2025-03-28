@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../counter_state.dart';
+import '../../models/counter/counter_state.dart';
 import 'counter_button.dart';
 
 class Counter extends StatelessWidget {
