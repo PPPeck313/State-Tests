@@ -37,10 +37,6 @@
 /bin/internal/engine.version
 
 # Flutter repo-specific
-*.g.dart
-*.gen.dart
-*.mapper.dart
-
 /bin/cache/
 /bin/internal/bootstrap.bat
 /bin/internal/bootstrap.sh
@@ -90,6 +86,7 @@ unlinked_spec.ds
 **/android/key.properties
 *.jks
 local.properties
+**/.cxx/
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
