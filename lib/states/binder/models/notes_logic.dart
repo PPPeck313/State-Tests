@@ -12,7 +12,7 @@ class NotesLogicController {
   NotesLogicController._internal(this.stateRef) : logicRef = LogicRef((scope) => NotesLogic(scope, stateRef));
 }
 
-class NotesLogic extends BaseNotesViewModel with Logic {
+class NotesLogic with Logic implements BaseNotesViewModel {
   @override
   NotesState get state => read(stateRef);
 

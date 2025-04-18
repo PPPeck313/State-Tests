@@ -3,7 +3,7 @@ import 'package:state_tests/common/models/base_notes_view_model.dart';
 
 import '../../../common/models/note/notes_state.dart';
 
-class NotesCommands extends BaseNotesViewModel {
+class NotesCommands implements BaseNotesViewModel {
   NotesState _state;
 
   @override

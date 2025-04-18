@@ -16,24 +16,8 @@ class GenericPage extends StatefulWidget {
   GenericPageState createState() => _statePage;
 }
 
-abstract class GenericPageState extends State<StatefulWidget> {
+abstract class GenericPageState extends State<GenericPage> with GenericPageStateBehavior {
   late TextEditingController _controller;
-
-  @protected
-  BaseCounterViewModel? get counterViewModel => null;
-
-  @protected
-  BaseNotesViewModel? get notesViewModel => null;
-
-  Widget getCounterStateWidget(Widget counter) => counter;
-  CounterState getCounterState(BuildContext context) => counterViewModel?.state ?? CounterState();
-  void increment(BuildContext context) => counterViewModel?.increment();
-  void decrement(BuildContext context) => counterViewModel?.decrement();
-
-  Widget getNotesStateWidget(Widget notes) => notes;
-  NotesState getNotesState(BuildContext context) => notesViewModel?.state ?? NotesState();
-  void updateInput(BuildContext context, String input) => notesViewModel?.updateInput(input);
-  void addNote(BuildContext context) => notesViewModel?.addNote();
 
   @override
   void initState() {
@@ -59,4 +43,22 @@ abstract class GenericPageState extends State<StatefulWidget> {
       ),
     ),
   );
+}
+
+abstract mixin class GenericPageStateBehavior {
+  @protected
+  BaseCounterViewModel? get counterViewModel => null;
+
+  @protected
+  BaseNotesViewModel? get notesViewModel => null;
+
+  Widget getCounterStateWidget(Widget counter) => counter;
+  CounterState getCounterState(BuildContext context) => counterViewModel?.state ?? CounterState();
+  void increment(BuildContext context) => counterViewModel?.increment();
+  void decrement(BuildContext context) => counterViewModel?.decrement();
+
+  Widget getNotesStateWidget(Widget notes) => notes;
+  NotesState getNotesState(BuildContext context) => notesViewModel?.state ?? NotesState();
+  void updateInput(BuildContext context, String input) => notesViewModel?.updateInput(input);
+  void addNote(BuildContext context) => notesViewModel?.addNote();
 }

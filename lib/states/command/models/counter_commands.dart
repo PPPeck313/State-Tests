@@ -3,7 +3,7 @@ import 'package:flutter_command/flutter_command.dart';
 import '../../../common/models/base_counter_view_model.dart';
 import '../../../common/models/counter/counter_state.dart';
 
-class CounterCommands extends BaseCounterViewModel {
+class CounterCommands implements BaseCounterViewModel {
   CounterState _state;
 
   @override

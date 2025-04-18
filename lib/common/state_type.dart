@@ -14,20 +14,16 @@ import '../states/redux/redux_page.dart';
 import '../states/river_pod/river_pod_page.dart';
 
 enum StateType {
-  binder('Bi'),
-  bloc('Bl'),
-  cubit('Cu'),
-  command('Co'),
-  getX('GX'),
-  mobX('MX'),
-  rebuilder('Rb'),
-  redux('Rd'),
-  riverPod('Rp'),
-  viewModel('Vm');
-
-  final String abbreviation;
-
-  const StateType(this.abbreviation);
+  binder,
+  bloc,
+  cubit,
+  command,
+  getX,
+  mobX,
+  rebuilder,
+  redux,
+  riverPod,
+  viewModel;
 
   GenericPageState get page => switch (this) {
     binder => BinderPage.def(),
@@ -38,8 +34,8 @@ enum StateType {
     mobX => MobXPage.def(),
     rebuilder => RebuilderPage.def(),
     redux => ReduxPage.def(),
-    riverPod => RiverPodPage(),
-    viewModel => ViewModelPage(),
+    riverPod => RiverPodPage.def(),
+    viewModel => ViewModelPage.def(),
   };
 
   Image get logo =>

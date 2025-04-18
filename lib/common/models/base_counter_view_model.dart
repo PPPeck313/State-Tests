@@ -1,6 +1,6 @@
 import 'counter/counter_state.dart';
 
-abstract class BaseCounterViewModel {
+abstract interface class BaseCounterViewModel {
   CounterState get state;
 
   void increment();

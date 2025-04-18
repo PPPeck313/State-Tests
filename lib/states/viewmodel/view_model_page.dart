@@ -6,10 +6,14 @@ import '../redux/models/notes_store.dart';
 
 class ViewModelPage extends GenericPageState {
   @override
-  final CounterStore counterViewModel = CounterStore();
+  final CounterStore counterViewModel;
 
   @override
-  final NotesStore notesViewModel = NotesStore();
+  final NotesStore notesViewModel;
+
+  ViewModelPage(this.counterViewModel, this.notesViewModel);
+
+  ViewModelPage.def() : this(CounterStore(), NotesStore());
 
   @override
   void decrement(BuildContext context) => setState(() {

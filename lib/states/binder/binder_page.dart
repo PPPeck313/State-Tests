@@ -18,7 +18,16 @@ class BinderPage extends GenericPageState {
   BinderPage.def() : this(CounterLogicController(), NotesLogicController());
 
   @override
-  Widget build(BuildContext context) => BinderScope(child: super.build(context));
+  Widget build(BuildContext context) => BinderScope(
+    // overrides: [_counterLogicController.stateRef.overrideWith(CounterState())],
+    child: super.build(context),
+  );
+
+  // @override
+  // Widget getCounterStateWidget(Widget counter) => Consumer(
+  //   watchable: _counterLogicController.stateRef.select((counter) => counter.count),
+  //   builder: (BuildContext context, value, Widget? child) => super.getCounterStateWidget(counter),
+  // );
 
   @override
   CounterState getCounterState(BuildContext context) => context.watch(_counterLogicController.stateRef);
@@ -28,6 +37,12 @@ class BinderPage extends GenericPageState {
 
   @override
   void increment(BuildContext context) => context.use(_counterLogicController.logicRef).increment();
+
+  // @override
+  // Widget getNotesStateWidget(Widget notes) => Consumer(
+  //   watchable: _notesLogicController.stateRef,
+  //   builder: (BuildContext context, value, Widget? child) => super.getCounterStateWidget(notes),
+  // );
 
   @override
   NotesState getNotesState(BuildContext context) => context.watch(_notesLogicController.stateRef);
