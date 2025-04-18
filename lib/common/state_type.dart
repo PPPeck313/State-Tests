@@ -3,7 +3,6 @@ import 'package:state_tests/common/widgets/generic_page.dart';
 import 'package:state_tests/states/viewmodel/view_model_page.dart';
 
 import '../gen/assets.gen.dart';
-import '../states/binder/binder_page.dart';
 import '../states/bloc/bloc_page.dart';
 import '../states/bloc/cubit_page.dart';
 import '../states/command/command_page.dart';
@@ -14,7 +13,6 @@ import '../states/redux/redux_page.dart';
 import '../states/river_pod/river_pod_page.dart';
 
 enum StateType {
-  binder,
   bloc,
   cubit,
   command,
@@ -26,7 +24,6 @@ enum StateType {
   viewModel;
 
   GenericPageState get page => switch (this) {
-    binder => BinderPage.def(),
     bloc => BlocPage(),
     cubit => CubitPage(),
     command => CommandPage.def(),
@@ -40,7 +37,6 @@ enum StateType {
 
   Image get logo =>
       switch (this) {
-        binder => Assets.images.binderLogo,
         bloc => Assets.images.blocLogo,
         cubit => Assets.images.cubitLogo,
         command => Assets.images.commandLogo,
