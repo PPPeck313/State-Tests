@@ -10,26 +10,24 @@ import 'models/counter_bloc.dart';
 import 'models/notes_bloc.dart';
 
 class BlocPage extends GenericPageState {
-  // @override
-  // Widget build(BuildContext context) => MultiBlocProvider(
-  //   providers: [
-  //     BlocProvider(create: (BuildContext _) => CounterBloc()),
-  //     BlocProvider(create: (BuildContext _) => NotesBloc()),
-  //   ],
-  //   child: super.build(context),
-  // );
+  @override
+  Widget build(BuildContext context) => MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (BuildContext _) => CounterBloc()),
+      BlocProvider(create: (BuildContext _) => NotesBloc()),
+    ],
+    child: super.build(context),
+  );
 
   @override
-  Widget getCounterStateWidget(Widget counter) => BlocBuilder<CounterBloc, CounterState>(builder: (_, _) => counter);
+  Widget getCounterStateWidget(Widget Function(CounterState) child) =>
+      BlocBuilder<CounterBloc, CounterState>(builder: (context, _) => child(context.watch<CounterBloc>().state));
 
   @override
-  CounterState getCounterState(BuildContext context) => context.watch<CounterBloc>().state;
+  void decrement(BuildContext context) => context.read<CounterBloc>().add(DecrementEvent());
 
   @override
-  void decrement(BuildContext context) => context.read()<CounterBloc>().add(DecrementEvent());
-
-  @override
-  void increment(BuildContext context) => context.read()<CounterBloc>().add(IncrementEvent());
+  void increment(BuildContext context) => context.read<CounterBloc>().add(IncrementEvent());
 
   @override
   Widget getNotesStateWidget(Widget notes) => BlocBuilder<NotesBloc, NotesState>(builder: (_, _) => notes);

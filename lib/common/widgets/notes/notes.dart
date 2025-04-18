@@ -36,7 +36,7 @@ class Notes extends StatelessWidget {
       ),
       TextField(
         controller: _controller,
-        onChanged: (value) => {updateInputFunction(context, value)},
+        onChanged: (value) => updateInputFunction(context, value),
         decoration: InputDecoration.collapsed(hintText: 'Add a note'),
       ),
       Divider(),

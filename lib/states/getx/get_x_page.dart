@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
+import '../../common/models/counter/counter_state.dart';
 import '../../common/widgets/generic_page.dart';
 import 'models/counter_controller.dart';
 import 'models/notes_controller.dart';
@@ -16,8 +17,9 @@ class GetXPage extends GenericPageState {
 
   GetXPage.def() : this(Get.put(CounterController()), Get.put(NotesController()));
 
+  // Obx needs immediate visibility over .obs usage
   @override
-  Widget getCounterStateWidget(Widget counter) => Obx(() => counter);
+  Widget getCounterStateWidget(Widget Function(CounterState) child) => Obx(() => child(counterViewModel.state));
 
   @override
   Widget getNotesStateWidget(Widget notes) => Obx(() => notes);

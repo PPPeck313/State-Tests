@@ -19,11 +19,10 @@ class RebuilderPage extends GenericPageState {
 
   // Local/Scoped state = inherited widget
   @override
-  CounterState getCounterState(BuildContext context) => counterViewModel.injectedState.of(context);
-
-  @override
-  Widget getCounterStateWidget(Widget counter) =>
-      counterViewModel.injectedState.inherited(builder: (_) => counter, stateOverride: () => counterViewModel.state);
+  Widget getCounterStateWidget(Widget Function(CounterState) child) => counterViewModel.injectedState.inherited(
+    builder: (context) => child(counterViewModel.injectedState.of(context)),
+    stateOverride: () => counterViewModel.state,
+  );
 
   @override
   NotesState getNotesState(BuildContext context) => notesViewModel.injectedState.of(context);

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
+import '../../common/extensions/_string.dart';
 import '../../states/bloc/bloc_observer.dart';
 import '../state_type.dart';
 import 'generic_page.dart';
@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  int currentIndex = 0;
+  StateType currentStateType = StateType.bloc;
 
   @override
   void initState() {
@@ -35,8 +35,8 @@ class HomeScreenState extends State<HomeScreen> {
     child: Scaffold(
       key: _scaffoldKey,
       backgroundColor: Theme.of(context).primaryColor,
-      appBar: AppBar(title: Text(stateTypes[currentIndex].name)),
-      body: GenericPage(stateTypes[currentIndex].page),
+      appBar: AppBar(title: Text(currentStateType.name.toCapitalized)),
+      body: GenericPage(currentStateType.page, key: Key(currentStateType.name)),
       drawer: makeDrawer(stateTypes),
     ),
   );
@@ -52,18 +52,18 @@ class HomeScreenState extends State<HomeScreen> {
             child: Text('State Tests', style: TextStyle(color: Colors.white, fontSize: 28)),
           ),
         ),
-        ...stateTypes.mapIndexed(makeDrawerListTile),
+        ...stateTypes.map(makeDrawerListTile),
       ],
     ),
   );
 
-  Widget makeDrawerListTile(int index, StateType stateType) => ListTile(
+  Widget makeDrawerListTile(StateType stateType) => ListTile(
     title: Row(children: [stateType.logo, Padding(padding: EdgeInsets.only(left: 8.0), child: Text(stateType.name))]),
-    onTap: () => onDrawerItemClicked(index),
+    onTap: () => onDrawerItemClicked(stateType),
   );
 
-  void onDrawerItemClicked(int index) {
+  void onDrawerItemClicked(StateType stateType) {
     _scaffoldKey.currentState?.openEndDrawer();
-    setState(() => currentIndex = index);
+    setState(() => currentStateType = stateType);
   }
 }

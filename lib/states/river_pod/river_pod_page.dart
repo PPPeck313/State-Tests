@@ -17,21 +17,13 @@ class RiverPodPage extends GenericPageState {
 
   RiverPodPage(this.counterViewModel, this.notesViewModel);
 
-  late WidgetRef counterRef;
   late WidgetRef notesRef;
 
   RiverPodPage.def() : this(CounterProvider(), NotesProvider());
 
   @override
-  CounterState getCounterState(BuildContext context) => counterRef.watch(counterViewModel.provider);
-
-  @override
-  Widget getCounterStateWidget(Widget counter) => Consumer(
-    builder: (context, ref, child) {
-      counterRef = ref;
-      return counter;
-    },
-  );
+  Widget getCounterStateWidget(Widget Function(CounterState) child) =>
+      Consumer(builder: (context, ref, _) => child(ref.watch(counterViewModel.provider)));
 
   @override
   NotesState getNotesState(BuildContext context) => notesRef.watch(notesViewModel.provider);

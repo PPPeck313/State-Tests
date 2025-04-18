@@ -10,20 +10,18 @@ import '../../common/widgets/generic_page.dart';
 import 'models/notes_bloc.dart';
 
 class CubitPage extends GenericPageState {
-  // @override
-  // Widget build(BuildContext context) => MultiBlocProvider(
-  //   providers: [
-  //     BlocProvider(create: (BuildContext _) => CounterCubit()),
-  //     BlocProvider(create: (BuildContext _) => NotesCubit()),
-  //   ],
-  //   child: super.build(context),
-  // );
+  @override
+  Widget build(BuildContext context) => MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (BuildContext _) => CounterCubit()),
+      BlocProvider(create: (BuildContext _) => NotesCubit()),
+    ],
+    child: super.build(context),
+  );
 
   @override
-  Widget getCounterStateWidget(Widget counter) => BlocBuilder<CounterCubit, CounterState>(builder: (_, _) => counter);
-
-  @override
-  CounterState getCounterState(BuildContext context) => context.watch<CounterCubit>().state;
+  Widget getCounterStateWidget(Widget Function(CounterState) child) =>
+      BlocBuilder<CounterCubit, CounterState>(builder: (context, _) => child(context.watch<CounterCubit>().state));
 
   @override
   void decrement(BuildContext context) => context.read<CounterCubit>().decrement();

@@ -8,9 +8,7 @@ class CounterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FloatingActionButton(
-    onPressed: () {
-      setStateFunction(context);
-    },
+    onPressed: () => setStateFunction(context),
     backgroundColor: Colors.white,
     child: Icon(icon, color: Colors.black),
   );
