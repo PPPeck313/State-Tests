@@ -6,8 +6,7 @@ import 'list/notes_list.dart';
 class Notes extends StatelessWidget {
   final TextEditingController _controller;
 
-  final Widget Function(Widget) getStateWidgetFunction;
-  final NotesState Function(BuildContext) getStateFunction;
+  final Widget Function(Widget Function(NotesState) notesFunction) getStateWidgetFunction;
 
   final void Function(BuildContext, String) updateInputFunction;
   final void Function(BuildContext) addNoteFunction;
@@ -15,7 +14,6 @@ class Notes extends StatelessWidget {
   const Notes(
     this._controller,
     this.getStateWidgetFunction,
-    this.getStateFunction,
     this.updateInputFunction,
     this.addNoteFunction, {
     super.key,
@@ -40,7 +38,7 @@ class Notes extends StatelessWidget {
         decoration: InputDecoration.collapsed(hintText: 'Add a note'),
       ),
       Divider(),
-      NotesList(getStateFunction(context)),
+      NotesList(getStateWidgetFunction),
     ],
   );
 }

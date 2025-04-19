@@ -1,5 +1,5 @@
 sealed class CounterEvent {}
 
-class DecrementEvent extends CounterEvent {}
+final class DecrementEvent extends CounterEvent {}
 
-class IncrementEvent extends CounterEvent {}
+final class IncrementEvent extends CounterEvent {}

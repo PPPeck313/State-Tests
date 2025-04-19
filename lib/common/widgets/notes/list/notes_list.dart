@@ -4,17 +4,19 @@ import '../../../models/note/notes_state.dart';
 import 'note_cell.dart';
 
 class NotesList extends StatelessWidget {
-  final NotesState notesState;
+  final Widget Function(Widget Function(NotesState) notesFunction) getStateWidgetFunction;
 
-  const NotesList(this.notesState, {super.key});
+  const NotesList(this.getStateWidgetFunction, {super.key});
 
   @override
   Widget build(BuildContext context) => getList();
 
   Widget getList() => Expanded(
-    child: ListView.builder(
-      itemBuilder: (context, index) => NoteCell(text: (notesState.notes[index])),
-      itemCount: notesState.notes.length,
+    child: getStateWidgetFunction(
+      (state) => ListView.builder(
+        itemBuilder: (context, index) => NoteCell(text: (state.notes[index])),
+        itemCount: state.notes.length,
+      ),
     ),
   );
 }

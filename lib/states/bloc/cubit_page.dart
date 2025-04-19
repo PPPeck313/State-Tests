@@ -6,22 +6,21 @@ import 'package:state_tests/states/bloc/models/notes_cubit.dart';
 
 import '../../common/models/counter/counter_state.dart';
 import '../../common/models/note/notes_state.dart';
-import '../../common/widgets/generic_page.dart';
-import 'models/notes_bloc.dart';
+import '../../common/widgets/page/stateless_page.dart';
 
-class CubitPage extends GenericPageState {
+class CubitPage extends StatelessPage {
   @override
-  Widget build(BuildContext context) => MultiBlocProvider(
+  Widget buildPage(BuildContext context, TextEditingController controller) => MultiBlocProvider(
     providers: [
       BlocProvider(create: (BuildContext _) => CounterCubit()),
       BlocProvider(create: (BuildContext _) => NotesCubit()),
     ],
-    child: super.build(context),
+    child: super.buildPage(context, controller),
   );
 
   @override
-  Widget getCounterStateWidget(Widget Function(CounterState) child) =>
-      BlocBuilder<CounterCubit, CounterState>(builder: (context, _) => child(context.watch<CounterCubit>().state));
+  Widget getCounterWidget(Widget Function(CounterState) counter) =>
+      BlocBuilder<CounterCubit, CounterState>(builder: (context, _) => counter(context.watch<CounterCubit>().state));
 
   @override
   void decrement(BuildContext context) => context.read<CounterCubit>().decrement();
@@ -30,10 +29,8 @@ class CubitPage extends GenericPageState {
   void increment(BuildContext context) => context.read<CounterCubit>().increment();
 
   @override
-  Widget getNotesStateWidget(Widget notes) => BlocBuilder<NotesBloc, NotesState>(builder: (_, _) => notes);
-
-  @override
-  NotesState getNotesState(BuildContext context) => context.watch<NotesBloc>().state;
+  Widget getNotesWidget(Widget Function(NotesState) notes) =>
+      BlocBuilder<NotesCubit, NotesState>(builder: (context, _) => notes(context.watch<NotesCubit>().state));
 
   @override
   void updateInput(BuildContext context, String input) => context.read<NotesCubit>().updateInput(input);

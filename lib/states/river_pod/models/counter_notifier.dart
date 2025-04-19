@@ -3,18 +3,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../common/models/base_counter_view_model.dart';
 import '../../../common/models/counter/counter_state.dart';
 
-part 'counter_provider.g.dart';
+part 'counter_notifier.g.dart';
 
 @riverpod
-class CounterProvider extends _$CounterProvider implements BaseCounterViewModel {
-  final Provider<CounterState> provider;
-
-  CounterProvider([CounterState state = const CounterState()]) : provider = Provider((ref) => state) {
-    this.state = state;
-  }
-
+class CounterNotifier extends _$CounterNotifier implements BaseCounterViewModel {
   @override
-  CounterState build() => state;
+  CounterState build() => CounterState();
 
   @override
   void decrement() => state = state.decrement();

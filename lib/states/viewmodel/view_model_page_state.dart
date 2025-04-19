@@ -1,19 +1,19 @@
 import 'package:flutter/widgets.dart';
+import 'package:state_tests/common/widgets/page/stateful_page.dart';
 
-import '../../common/widgets/generic_page.dart';
 import '../redux/models/counter_store.dart';
 import '../redux/models/notes_store.dart';
 
-class ViewModelPage extends GenericPageState {
+class ViewModelPageState extends StatefulPageState {
   @override
   final CounterStore counterViewModel;
 
   @override
   final NotesStore notesViewModel;
 
-  ViewModelPage(this.counterViewModel, this.notesViewModel);
+  ViewModelPageState(this.counterViewModel, this.notesViewModel);
 
-  ViewModelPage.def() : this(CounterStore(), NotesStore());
+  ViewModelPageState.def() : this(CounterStore(), NotesStore());
 
   @override
   void decrement(BuildContext context) => setState(() {

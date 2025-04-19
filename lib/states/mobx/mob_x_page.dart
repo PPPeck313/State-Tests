@@ -3,11 +3,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../common/models/counter/counter_state.dart';
-import '../../common/widgets/generic_page.dart';
+import '../../common/models/note/notes_state.dart';
+import '../../common/widgets/page/stateless_page.dart';
 import 'models/counter_store_x.dart';
 import 'models/notes_store_x.dart';
 
-class MobXPage extends GenericPageState {
+class MobXPage extends StatelessPage {
   @override
   final CounterStoreX counterViewModel;
 
@@ -20,9 +21,9 @@ class MobXPage extends GenericPageState {
 
   // Observer needs immediate visibility over .obs usage
   @override
-  Widget getCounterStateWidget(Widget Function(CounterState) child) =>
-      Observer(builder: (_) => child(counterViewModel.state));
+  Widget getCounterWidget(Widget Function(CounterState) counter) =>
+      Observer(builder: (_) => counter(counterViewModel.state));
 
   @override
-  Widget getNotesStateWidget(Widget notes) => Observer(builder: (_) => notes);
+  Widget getNotesWidget(Widget Function(NotesState) notes) => Observer(builder: (_) => notes(notesViewModel.state));
 }

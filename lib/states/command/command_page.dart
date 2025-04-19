@@ -3,11 +3,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_command/flutter_command.dart';
 
 import '../../common/models/counter/counter_state.dart';
-import '../../common/widgets/generic_page.dart';
+import '../../common/models/note/notes_state.dart';
+import '../../common/widgets/page/stateless_page.dart';
 import 'models/counter_commands.dart';
 import 'models/notes_commands.dart';
 
-class CommandPage extends GenericPageState {
+class CommandPage extends StatelessPage {
   @override
   final CounterCommands counterViewModel;
 
@@ -19,14 +20,14 @@ class CommandPage extends GenericPageState {
   CommandPage.def() : this(CounterCommands(), NotesCommands());
 
   @override
-  Widget getCounterStateWidget(Widget Function(CounterState) child) => [
+  Widget getCounterWidget(Widget Function(CounterState) counter) => [
     counterViewModel.decrementCommand,
     counterViewModel.incrementCommand,
-  ].toCommandsWidget(child(counterViewModel.state));
+  ].toCommandsWidget(counter(counterViewModel.state));
 
   @override
-  Widget getNotesStateWidget(Widget notes) =>
-      [notesViewModel.updateInputCommand, notesViewModel.addNoteCommand].toCommandsWidget(notes);
+  Widget getNotesWidget(Widget Function(NotesState) notes) =>
+      [notesViewModel.updateInputCommand, notesViewModel.addNoteCommand].toCommandsWidget(notes(notesViewModel.state));
 }
 
 extension CommandListExtensions on List<Command<dynamic, dynamic>> {

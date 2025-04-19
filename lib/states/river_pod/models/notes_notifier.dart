@@ -3,18 +3,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../common/models/base_notes_view_model.dart';
 import '../../../common/models/note/notes_state.dart';
 
-part 'notes_provider.g.dart';
+part 'notes_notifier.g.dart';
 
 @riverpod
-class NotesProvider extends _$NotesProvider implements BaseNotesViewModel {
-  final Provider<NotesState> provider;
-
-  NotesProvider([NotesState state = const NotesState()]) : provider = Provider((ref) => state) {
-    this.state = state;
-  }
-
+class NotesNotifier extends _$NotesNotifier implements BaseNotesViewModel {
   @override
-  NotesState build() => state;
+  NotesState build() => NotesState();
 
   @override
   void addNote() => state = state.addNote();

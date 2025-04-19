@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../common/extensions/_string.dart';
 import '../../states/bloc/bloc_observer.dart';
 import '../state_type.dart';
-import 'generic_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -36,7 +35,7 @@ class HomeScreenState extends State<HomeScreen> {
       key: _scaffoldKey,
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(title: Text(currentStateType.name.toCapitalized)),
-      body: GenericPage(currentStateType.page, key: Key(currentStateType.name)),
+      body: currentStateType.page,
       drawer: makeDrawer(stateTypes),
     ),
   );
