@@ -6,7 +6,7 @@ import '../../common/widgets/page/stateless_page.dart';
 import 'models/counter_store_x.dart';
 import 'models/notes_store_x.dart';
 
-class MobXPage extends StatelessPage {
+class MobXPage extends StatelessViewModelFittedPage {
   @override
   final CounterStoreX counterViewModel;
 

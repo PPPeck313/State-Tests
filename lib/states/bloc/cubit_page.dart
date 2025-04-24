@@ -10,8 +10,9 @@ import 'package:state_tests/states/viewmodel/models/notes_view_model.dart';
 import '../../common/models/counter/counter_state.dart';
 import '../../common/models/note/notes_state.dart';
 import '../../common/widgets/page/page_behavior.dart';
+import '../../common/widgets/page/stateless_page.dart';
 
-class CubitPage extends HookWidget with PageScopedBehavior {
+class CubitPage extends StatelessScopedPage {
   CubitPage({super.key});
 
   @override

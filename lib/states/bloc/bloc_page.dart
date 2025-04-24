@@ -9,10 +9,11 @@ import '../../common/models/counter/counter_event.dart';
 import '../../common/models/counter/counter_state.dart';
 import '../../common/models/note/notes_event.dart';
 import '../../common/models/note/notes_state.dart';
+import '../../common/widgets/page/stateless_page.dart';
 import 'models/counter_bloc.dart';
 import 'models/notes_bloc.dart';
 
-class BlocPage extends HookWidget with PageScopedBehavior {
+class BlocPage extends StatelessScopedPage {
   BlocPage({super.key});
 
   @override
