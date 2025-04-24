@@ -14,6 +14,7 @@ class CounterCommands extends ValueNotifier<CounterState> implements BaseCounter
   CounterCommands([super._value = const CounterState()]) {
     decrementCommand = Command.createSyncNoParam<CounterState>(() => value = state.decrement(), initialValue: state)
       ..addListener(() => notifyListeners());
+
     incrementCommand = Command.createSyncNoParam<CounterState>(() => value = state.increment(), initialValue: state)
       ..addListener(() => notifyListeners());
   }
