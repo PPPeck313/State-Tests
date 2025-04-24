@@ -15,13 +15,16 @@ import 'models/counter_bloc.dart';
 import 'models/notes_bloc.dart';
 
 class BlocPage extends HookWidget with PageScopedBehavior {
-  @override
-  final TextEditingController controller = useTextEditingController();
-
   BlocPage({super.key});
 
   @override
-  Widget build(BuildContext context) => pageStarter(counterPolicy, notesPolicy, controller);
+  Widget build(BuildContext context) => MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (BuildContext _) => CounterBloc()),
+      BlocProvider(create: (BuildContext _) => NotesBloc()),
+    ],
+    child: pageStarter(counterPolicy, notesPolicy, useTextEditingController()),
+  );
 
   @override
   Widget getCounterWidget(Widget Function(ScopedArgs<CounterState>) wFun) => BlocBuilder<CounterBloc, CounterState>(

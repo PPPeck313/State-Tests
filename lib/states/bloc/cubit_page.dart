@@ -14,13 +14,16 @@ import '../../common/widgets/counter/counter.dart';
 import '../../common/widgets/page/page_behavior.dart';
 
 class CubitPage extends HookWidget with PageScopedBehavior {
-  @override
-  final TextEditingController controller = useTextEditingController();
-
   CubitPage({super.key});
 
   @override
-  Widget build(BuildContext context) => pageStarter(counterPolicy, notesPolicy, controller);
+  Widget build(BuildContext context) => MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (BuildContext _) => CounterCubit()),
+      BlocProvider(create: (BuildContext _) => NotesCubit()),
+    ],
+    child: pageStarter(counterPolicy, notesPolicy, useTextEditingController()),
+  );
 
   @override
   Widget getCounterWidget(Widget Function(ScopedArgs<CounterState>) wFun) => BlocBuilder<CounterCubit, CounterState>(

@@ -7,14 +7,10 @@ import 'package:state_tests/common/widgets/builder/builder_policy.dart';
 import '../../models/counter/base_counter_view_model.dart';
 import '../../models/note/base_notes_view_model.dart';
 import '../counter/counter.dart';
-import '../notes/notes.dart';
 
 part 'page_behavior.g.dart';
 
 abstract mixin class PageBehavior<A, B> {
-  @protected
-  TextEditingController get controller;
-
   @protected
   Widget getCounterWidget(Widget Function(A) wFun);
 
@@ -70,6 +66,6 @@ Widget pageStarter(
 ) => Scaffold(
   body: Padding(
     padding: const EdgeInsets.fromLTRB(8.0, 32.0, 8.0, 8.0),
-    child: Column(children: [Counter(counterPolicy), Notes(controller, notesPolicy)]),
+    child: Column(children: [Counter(counterPolicy)]),
   ),
 );

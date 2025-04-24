@@ -20,15 +20,15 @@ class Counter extends StatelessWidget {
   @override
   Widget build(BuildContext context) => switch (_policy) {
     Fitted<CounterState, BaseCounterViewModel> f => counterFrame(
-      CounterButton.negative(Fun0Args<void>(f.viewModel.increment)),
+      CounterButton.negative(Fun0Args<void>(f.viewModel.decrement)),
       f.fittedObserver((state) => counterText(state.count)),
-      CounterButton.positive(Fun0Args<void>(f.viewModel.decrement)),
+      CounterButton.positive(Fun0Args<void>(f.viewModel.increment)),
     ),
     Scoped<CounterState, BaseCounterViewModel> s => s.scopedObserver(
       (args) => counterFrame(
-        CounterButton.negative(args.functions[increment] as Fun0Args<void>),
+        CounterButton.negative(args.functions[decrement] as Fun0Args<void>),
         counterText(args.state.count),
-        CounterButton.positive(args.functions[decrement] as Fun0Args<void>),
+        CounterButton.positive(args.functions[increment] as Fun0Args<void>),
       ),
     ),
   };

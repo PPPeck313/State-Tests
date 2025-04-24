@@ -13,13 +13,11 @@ import '../../common/widgets/page/page_behavior.dart';
 import 'models/counter_notifier.dart';
 
 class RiverPodPage extends HookConsumerWidget with PageScopedBehavior {
-  @override
-  final TextEditingController controller = useTextEditingController();
-
   RiverPodPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => pageStarter(counterPolicy, notesPolicy, controller);
+  Widget build(BuildContext context, WidgetRef ref) =>
+      pageStarter(counterPolicy, notesPolicy, useTextEditingController());
 
   @override
   Widget getCounterWidget(Widget Function(ScopedArgs<CounterState>) wFun) => Consumer(

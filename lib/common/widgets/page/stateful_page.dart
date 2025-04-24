@@ -14,8 +14,5 @@ final class StatefulPage extends StatefulHookWidget {
 
 abstract class StatefulPageState extends State<StatefulHookWidget> with PageScopedBehavior {
   @override
-  final TextEditingController controller = useTextEditingController();
-
-  @override
-  Widget build(BuildContext context) => pageStarter(counterPolicy, notesPolicy, controller);
+  Widget build(BuildContext context) => pageStarter(counterPolicy, notesPolicy, useTextEditingController());
 }
