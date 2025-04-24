@@ -5,14 +5,17 @@ import '../../../common/models/note/base_notes_view_model.dart';
 class NotesViewModel implements BaseNotesViewModel {
   NotesState _state;
 
+  final void Function(String)? _updateInput;
+  final void Function()? _addNote;
+
   @override
   NotesState get state => _state;
 
-  NotesViewModel([this._state = const NotesState()]);
+  NotesViewModel([this._state = const NotesState(), this._updateInput, this._addNote]);
 
   @override
-  NotesState updateInput(String input) => _state = _state.updateInput(input);
+  void updateInput(String input) => _updateInput == null ? (_state = _state.updateInput(input)) : _updateInput(input);
 
   @override
-  NotesState addNote() => _state = _state.addNote();
+  void addNote() => _addNote == null ? (_state = _state.addNote()) : _addNote();
 }

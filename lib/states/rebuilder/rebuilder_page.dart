@@ -18,8 +18,8 @@ class RebuilderPage extends StatelessPage {
 
   // Local/Scoped state = inherited widget
   @override
-  Widget getCounterWidget(Widget Function() wFun) => OnReactive(() => wFun());
+  Widget getCounterWidget(Widget Function(void) widget) => OnReactive(() => widget(null));
 
   @override
-  Widget getNotesWidget(Widget Function() wFun) => OnReactive(() => wFun());
+  Widget getNotesWidget(Widget Function(void) widget) => OnReactive(() => widget(null));
 }

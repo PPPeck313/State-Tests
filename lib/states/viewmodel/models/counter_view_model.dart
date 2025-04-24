@@ -4,14 +4,17 @@ import '../../../common/models/counter/counter_state.dart';
 class CounterViewModel implements BaseCounterViewModel {
   CounterState _state;
 
+  final void Function()? _decrementFun;
+  final void Function()? _incrementFun;
+
   @override
   CounterState get state => _state;
 
-  CounterViewModel([this._state = const CounterState()]);
+  CounterViewModel([this._state = const CounterState(), this._decrementFun, this._incrementFun]);
 
   @override
-  void increment() => _state = _state.increment();
+  void decrement() => _decrementFun == null ? (_state = _state.decrement()) : _decrementFun();
 
   @override
-  void decrement() => _state = _state.decrement();
+  void increment() => _incrementFun == null ? (_state = _state.increment()) : _incrementFun();
 }

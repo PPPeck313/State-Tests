@@ -19,8 +19,8 @@ class MobXPage extends StatelessPage {
 
   // Observer needs immediate visibility over .obs usage
   @override
-  Widget getCounterWidget(Widget Function() wFun) => Observer(builder: (_) => wFun());
+  Widget getCounterWidget(Widget Function(void) widget) => Observer(builder: (_) => widget(null));
 
   @override
-  Widget getNotesWidget(Widget Function() wFun) => Observer(builder: (_) => wFun());
+  Widget getNotesWidget(Widget Function(void) widget) => Observer(builder: (_) => widget(null));
 }

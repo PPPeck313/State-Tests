@@ -17,8 +17,8 @@ class GetXPage extends StatelessPage {
   GetXPage.def({Key? key}) : this(Get.put(CounterController()), Get.put(NotesController()), key: key);
 
   @override
-  Widget getCounterWidget(Widget Function() wFun) => Obx(() => wFun());
+  Widget getCounterWidget(Widget Function(void) widget) => Obx(() => widget(null));
 
   @override
-  Widget getNotesWidget(Widget Function() wFun) => Obx(() => wFun());
+  Widget getNotesWidget(Widget Function(void) widget) => Obx(() => widget(null));
 }

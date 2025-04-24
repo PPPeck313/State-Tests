@@ -19,20 +19,20 @@ class ReduxPage extends StatelessPage {
   ReduxPage.def({Key? key}) : this(CounterStore(), NotesStore(), key: key);
 
   @override
-  Widget getCounterWidget(Widget Function() wFun) => StoreProvider<CounterState>(
+  Widget getCounterWidget(Widget Function(void) widget) => StoreProvider<CounterState>(
     store: counterViewModel,
     child: StoreConnector<CounterState, CounterState>(
       converter: (store) => store.state,
-      builder: (context, state) => wFun(),
+      builder: (context, state) => widget(null),
     ),
   );
 
   @override
-  Widget getNotesWidget(Widget Function() wFun) => StoreProvider<CounterState>(
+  Widget getNotesWidget(Widget Function(void) widget) => StoreProvider<CounterState>(
     store: counterViewModel,
     child: StoreConnector<NotesState, NotesState>(
       converter: (store) => store.state,
-      builder: (context, state) => wFun(),
+      builder: (context, state) => widget(null),
     ),
   );
 }

@@ -18,12 +18,12 @@ class CommandPage extends StatelessPage {
   CommandPage.def({Key? key}) : this(CounterCommands(), NotesCommands(), key: key);
 
   @override
-  Widget getCounterWidget(Widget Function() wFun) =>
-      [counterViewModel.decrementCommand, counterViewModel.incrementCommand].toCommandsWidget(wFun());
+  Widget getCounterWidget(Widget Function(void) widget) =>
+      [counterViewModel.decrementCommand, counterViewModel.incrementCommand].toCommandsWidget(widget(null));
 
   @override
-  Widget getNotesWidget(Widget Function() wFun) =>
-      [notesViewModel.updateInputCommand, notesViewModel.addNoteCommand].toCommandsWidget(wFun());
+  Widget getNotesWidget(Widget Function(void) widget) =>
+      [notesViewModel.updateInputCommand, notesViewModel.addNoteCommand].toCommandsWidget(widget(null));
 }
 
 extension CommandListExtensions on List<Command<dynamic, dynamic>> {

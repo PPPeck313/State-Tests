@@ -1,45 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-import 'package:state_tests/common/models/counter/counter_state.dart';
-import 'package:state_tests/common/models/note/notes_state.dart';
-import 'package:state_tests/common/widgets/builder/builder_policy.dart';
 
 import '../../models/counter/base_counter_view_model.dart';
 import '../../models/note/base_notes_view_model.dart';
+import '../builder/builder_type.dart';
 import '../counter/counter.dart';
 
 part 'page_behavior.g.dart';
 
 abstract mixin class PageBehavior<A, B> {
   @protected
-  Widget getCounterWidget(A wFun);
+  Widget getCounterWidget(A widget);
 
   @protected
-  BuilderPolicy<CounterState, BaseCounterViewModel> get counterPolicy;
+  BuilderType<BaseCounterViewModel> get counterBuilder;
 
   @protected
-  Widget getNotesWidget(B wFun);
+  Widget getNotesWidget(B widget);
 
   @protected
-  BuilderPolicy<NotesState, BaseNotesViewModel> get notesPolicy;
+  BuilderType<BaseNotesViewModel> get notesBuilder;
 }
 
 mixin PageScopedBehavior
-    implements PageBehavior<Widget Function(ScopedArgs<CounterState>), Widget Function(ScopedArgs<NotesState>)> {
+    implements PageBehavior<Widget Function(BaseCounterViewModel), Widget Function(BaseNotesViewModel)> {
   @override
-  Widget getCounterWidget(Widget Function(ScopedArgs<CounterState>) wFun);
+  Widget getCounterWidget(Widget Function(BaseCounterViewModel) widget);
 
   @override
-  BuilderPolicy<CounterState, BaseCounterViewModel> get counterPolicy => Scoped(getCounterWidget);
+  BuilderType<BaseCounterViewModel> get counterBuilder => Scoped(getCounterWidget);
 
   @override
-  Widget getNotesWidget(Widget Function(ScopedArgs<NotesState>) wFun);
+  Widget getNotesWidget(Widget Function(BaseNotesViewModel) widget);
 
   @override
-  BuilderPolicy<NotesState, BaseNotesViewModel> get notesPolicy => Scoped(getNotesWidget);
+  BuilderType<BaseNotesViewModel> get notesBuilder => Scoped(getNotesWidget);
 }
 
-mixin PageViewModelFittedBehavior implements PageBehavior<Widget Function(), Widget Function()> {
+mixin PageViewModelFittedBehavior implements PageBehavior<Widget Function(void), Widget Function(void)> {
   @protected
   BaseCounterViewModel get counterViewModel;
 
@@ -47,22 +45,22 @@ mixin PageViewModelFittedBehavior implements PageBehavior<Widget Function(), Wid
   BaseNotesViewModel get notesViewModel;
 
   @override
-  BuilderPolicy<CounterState, BaseCounterViewModel> get counterPolicy => Fitted(getCounterWidget, counterViewModel);
+  BuilderType<BaseCounterViewModel> get counterBuilder => Fitted(getCounterWidget, counterViewModel);
 
   @override
-  Widget getCounterWidget(Widget Function() wFun);
+  Widget getCounterWidget(Widget Function(void) widget);
 
   @override
-  BuilderPolicy<NotesState, BaseNotesViewModel> get notesPolicy => Fitted(getNotesWidget, notesViewModel);
+  BuilderType<BaseNotesViewModel> get notesBuilder => Fitted(getNotesWidget, notesViewModel);
 
   @override
-  Widget getNotesWidget(Widget Function() wFun);
+  Widget getNotesWidget(Widget Function(void) widget);
 }
 
 @swidget
 Widget pageStarter(
-  BuilderPolicy<CounterState, BaseCounterViewModel> counterPolicy,
-  BuilderPolicy<NotesState, BaseNotesViewModel> notesPolicy,
+  BuilderType<BaseCounterViewModel> counterPolicy,
+  BuilderType<BaseNotesViewModel> notesPolicy,
   TextEditingController controller,
 ) => Scaffold(
   body: Padding(

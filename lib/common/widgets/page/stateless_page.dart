@@ -7,5 +7,5 @@ abstract class StatelessPage extends HookWidget with PageViewModelFittedBehavior
   StatelessPage({super.key});
 
   @override
-  Widget build(BuildContext context) => pageStarter(counterPolicy, notesPolicy, useTextEditingController());
+  Widget build(BuildContext context) => pageStarter(counterBuilder, notesBuilder, useTextEditingController());
 }
