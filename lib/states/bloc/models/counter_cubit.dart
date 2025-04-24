@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 
-import '../../../common/models/base_counter_view_model.dart';
+import '../../../common/models/counter/base_counter_view_model.dart';
 import '../../../common/models/counter/counter_state.dart';
 
 class CounterCubit extends Cubit<CounterState> implements BaseCounterViewModel {

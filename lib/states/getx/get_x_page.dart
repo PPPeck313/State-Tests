@@ -14,14 +14,13 @@ class GetXPage extends StatelessPage {
   @override
   final NotesController notesViewModel;
 
-  GetXPage(this.counterViewModel, this.notesViewModel);
+  GetXPage(this.counterViewModel, this.notesViewModel, {super.key});
 
-  GetXPage.def() : this(Get.put(CounterController()), Get.put(NotesController()));
-
-  // Obx needs immediate visibility over .obs usage
-  @override
-  Widget getCounterWidget(Widget Function(CounterState) counter) => Obx(() => counter(counterViewModel.state));
+  GetXPage.def({Key? key}) : this(Get.put(CounterController()), Get.put(NotesController()), key: key);
 
   @override
-  Widget getNotesWidget(Widget Function(NotesState) notes) => Obx(() => notes(notesViewModel.state));
+  Widget getCounterWidget(Widget Function(CounterState) wFun) => Obx(() => wFun(counterViewModel.state));
+
+  @override
+  Widget getNotesWidget(Widget Function(NotesState) wFun) => Obx(() => wFun(notesViewModel.state));
 }

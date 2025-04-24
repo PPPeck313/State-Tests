@@ -3,11 +3,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'page_behavior.dart';
 
-abstract class StatelessPage extends HookWidget with PageBehavior {
-  final TextEditingController controller = useTextEditingController();
-
+abstract class StatelessPage extends HookWidget with PageViewModelFittedBehavior {
   StatelessPage({super.key});
 
   @override
-  Widget build(BuildContext context) => buildPage(context, controller);
+  final TextEditingController controller = useTextEditingController();
+
+  @override
+  Widget build(BuildContext context) => pageStarter(counterPolicy, notesPolicy, controller);
 }

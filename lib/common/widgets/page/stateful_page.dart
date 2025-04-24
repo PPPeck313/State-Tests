@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:state_tests/common/widgets/page/page_behavior.dart';
 
@@ -11,9 +12,10 @@ final class StatefulPage extends StatefulHookWidget {
   State<StatefulHookWidget> createState() => pageState;
 }
 
-class StatefulPageState extends State<StatefulHookWidget> with PageBehavior {
+abstract class StatefulPageState extends State<StatefulHookWidget> with PageScopedBehavior {
+  @override
   final TextEditingController controller = useTextEditingController();
 
   @override
-  Widget build(BuildContext context) => buildPage(context, controller);
+  Widget build(BuildContext context) => pageStarter(counterPolicy, notesPolicy, controller);
 }

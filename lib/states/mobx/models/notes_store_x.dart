@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
 
-import '../../../common/models/base_notes_view_model.dart';
+import '../../../common/models/note/base_notes_view_model.dart';
 import '../../../common/models/note/notes_state.dart';
 
 part 'notes_store_x.g.dart';

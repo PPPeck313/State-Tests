@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../common/models/base_notes_view_model.dart';
+import '../../../common/models/note/base_notes_view_model.dart';
 import '../../../common/models/note/notes_event.dart';
 import '../../../common/models/note/notes_state.dart';
 

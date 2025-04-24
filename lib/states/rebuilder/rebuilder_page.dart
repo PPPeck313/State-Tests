@@ -9,19 +9,19 @@ import 'models/notes_rebuilder.dart';
 
 class RebuilderPage extends StatelessPage {
   @override
-  CounterRebuilder counterViewModel;
+  final CounterRebuilder counterViewModel;
 
   @override
-  NotesRebuilder notesViewModel;
+  final NotesRebuilder notesViewModel;
 
-  RebuilderPage(this.counterViewModel, this.notesViewModel);
+  RebuilderPage(this.counterViewModel, this.notesViewModel, {super.key});
 
-  RebuilderPage.def() : this(CounterRebuilder(), NotesRebuilder());
+  RebuilderPage.def({Key? key}) : this(CounterRebuilder(), NotesRebuilder(), key: key);
 
   // Local/Scoped state = inherited widget
   @override
-  Widget getCounterWidget(Widget Function(CounterState) counter) => OnReactive(() => counter(counterViewModel.state));
+  Widget getCounterWidget(Widget Function(CounterState) wFun) => OnReactive(() => wFun(counterViewModel.state));
 
   @override
-  Widget getNotesWidget(Widget Function(NotesState) notes) => OnReactive(() => notes(notesViewModel.state));
+  Widget getNotesWidget(Widget Function(NotesState) wFun) => OnReactive(() => wFun(notesViewModel.state));
 }

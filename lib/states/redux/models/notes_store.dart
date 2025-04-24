@@ -1,7 +1,7 @@
 import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
 
-import '../../../common/models/base_notes_view_model.dart';
+import '../../../common/models/note/base_notes_view_model.dart';
 import '../../../common/models/note/notes_event.dart';
 import '../../../common/models/note/notes_state.dart';
 

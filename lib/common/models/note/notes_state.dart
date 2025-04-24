@@ -1,9 +1,11 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
+import '../reactive_state.dart';
+
 part 'notes_state.mapper.dart';
 
 @MappableClass()
-final class NotesState with NotesStateMappable {
+final class NotesState with NotesStateMappable implements ReactiveState {
   final List<String> notes = const [];
   final String input;
 

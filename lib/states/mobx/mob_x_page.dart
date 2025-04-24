@@ -15,15 +15,14 @@ class MobXPage extends StatelessPage {
   @override
   final NotesStoreX notesViewModel;
 
-  MobXPage(this.counterViewModel, this.notesViewModel);
+  MobXPage(this.counterViewModel, this.notesViewModel, {super.key});
 
-  MobXPage.def() : this(CounterStoreX(), NotesStoreX());
+  MobXPage.def({Key? key}) : this(CounterStoreX(), NotesStoreX(), key: key);
 
   // Observer needs immediate visibility over .obs usage
   @override
-  Widget getCounterWidget(Widget Function(CounterState) counter) =>
-      Observer(builder: (_) => counter(counterViewModel.state));
+  Widget getCounterWidget(Widget Function(CounterState) wFun) => Observer(builder: (_) => wFun(counterViewModel.state));
 
   @override
-  Widget getNotesWidget(Widget Function(NotesState) notes) => Observer(builder: (_) => notes(notesViewModel.state));
+  Widget getNotesWidget(Widget Function(NotesState) wFun) => Observer(builder: (_) => wFun(notesViewModel.state));
 }

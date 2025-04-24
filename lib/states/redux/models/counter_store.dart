@@ -1,7 +1,7 @@
 import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
 
-import '../../../common/models/base_counter_view_model.dart';
+import '../../../common/models/counter/base_counter_view_model.dart';
 import '../../../common/models/counter/counter_event.dart';
 import '../../../common/models/counter/counter_state.dart';
 

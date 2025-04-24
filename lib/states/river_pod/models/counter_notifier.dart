@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../common/models/base_counter_view_model.dart';
+import '../../../common/models/counter/base_counter_view_model.dart';
 import '../../../common/models/counter/counter_state.dart';
 
 part 'counter_notifier.g.dart';

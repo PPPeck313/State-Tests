@@ -1,10 +1,11 @@
-//needs to be a new object for Binder, Bloc, Cubit, Command, RiverPod
 import 'package:dart_mappable/dart_mappable.dart';
+
+import '../reactive_state.dart';
 
 part 'counter_state.mapper.dart';
 
 @MappableClass()
-final class CounterState with CounterStateMappable {
+final class CounterState with CounterStateMappable implements ReactiveState {
   final int count;
 
   const CounterState({this.count = 0});

@@ -1,6 +1,6 @@
 import 'package:states_rebuilder/scr/state_management/rm.dart';
 
-import '../../../common/models/base_notes_view_model.dart';
+import '../../../common/models/note/base_notes_view_model.dart';
 import '../../../common/models/note/notes_state.dart';
 
 class NotesRebuilder implements BaseNotesViewModel {
