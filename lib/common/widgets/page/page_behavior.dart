@@ -9,17 +9,7 @@ import '../../models/note/base_notes_view_model.dart';
 import '../counter/counter.dart';
 import '../notes/notes.dart';
 
-@swidget
-Widget pageStarter(
-  BuilderPolicy<CounterState, BaseCounterViewModel> counterPolicy,
-  BuilderPolicy<NotesState, BaseNotesViewModel> notesPolicy,
-  TextEditingController controller,
-) => Scaffold(
-  body: Padding(
-    padding: const EdgeInsets.fromLTRB(8.0, 32.0, 8.0, 8.0),
-    child: Column(children: [Counter(counterPolicy), Notes(controller, notesPolicy)]),
-  ),
-);
+part 'page_behavior.g.dart';
 
 abstract mixin class PageBehavior<A, B> {
   @protected
@@ -71,3 +61,15 @@ mixin PageViewModelFittedBehavior implements PageBehavior<CounterState, NotesSta
   @override
   Widget getNotesWidget(Widget Function(NotesState) wFun);
 }
+
+@swidget
+Widget pageStarter(
+  BuilderPolicy<CounterState, BaseCounterViewModel> counterPolicy,
+  BuilderPolicy<NotesState, BaseNotesViewModel> notesPolicy,
+  TextEditingController controller,
+) => Scaffold(
+  body: Padding(
+    padding: const EdgeInsets.fromLTRB(8.0, 32.0, 8.0, 8.0),
+    child: Column(children: [Counter(counterPolicy), Notes(controller, notesPolicy)]),
+  ),
+);

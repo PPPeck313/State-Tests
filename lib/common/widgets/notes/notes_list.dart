@@ -3,6 +3,8 @@ import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 
 import '../../models/note/notes_state.dart';
 
+part 'notes_list.g.dart';
+
 class NotesList extends StatelessWidget {
   final NotesState state;
 
@@ -17,8 +19,7 @@ class NotesList extends StatelessWidget {
       itemCount: state.notes.length,
     ),
   );
-
-  @swidget
-  Widget noteCell(String text) =>
-      Padding(padding: const EdgeInsets.symmetric(vertical: 8.0), child: Text('Note: $text'));
 }
+
+@swidget
+Widget noteCell(String text) => Padding(padding: const EdgeInsets.symmetric(vertical: 8.0), child: Text('Note: $text'));

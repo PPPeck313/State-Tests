@@ -7,6 +7,8 @@ import 'package:state_tests/common/widgets/builder/typed_function.dart';
 
 import 'counter_button.dart';
 
+part 'counter.g.dart';
+
 class Counter extends StatelessWidget {
   static const String decrement = 'decrement';
   static const String increment = 'increment';
@@ -30,11 +32,11 @@ class Counter extends StatelessWidget {
       ),
     ),
   };
-
-  @swidget
-  Widget counterFrame(CounterButton negativeButton, Widget text, CounterButton positiveButton) =>
-      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [negativeButton, text, positiveButton]);
-
-  @swidget
-  Widget counterText(int count) => Text('$count', style: TextStyle(fontSize: 60.0));
 }
+
+@swidget
+Widget counterFrame(CounterButton negativeButton, Widget text, CounterButton positiveButton) =>
+    Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [negativeButton, text, positiveButton]);
+
+@swidget
+Widget counterText(int count) => Text('$count', style: TextStyle(fontSize: 60.0));
