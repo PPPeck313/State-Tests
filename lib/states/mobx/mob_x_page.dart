@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import '../../common/models/counter/counter_state.dart';
-import '../../common/models/note/notes_state.dart';
 import '../../common/widgets/page/stateless_page.dart';
 import 'models/counter_store_x.dart';
 import 'models/notes_store_x.dart';
@@ -21,8 +19,8 @@ class MobXPage extends StatelessPage {
 
   // Observer needs immediate visibility over .obs usage
   @override
-  Widget getCounterWidget(Widget Function(CounterState) wFun) => Observer(builder: (_) => wFun(counterViewModel.state));
+  Widget getCounterWidget(Widget Function() wFun) => Observer(builder: (_) => wFun());
 
   @override
-  Widget getNotesWidget(Widget Function(NotesState) wFun) => Observer(builder: (_) => wFun(notesViewModel.state));
+  Widget getNotesWidget(Widget Function() wFun) => Observer(builder: (_) => wFun());
 }

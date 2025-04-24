@@ -12,19 +12,20 @@ part 'page_behavior.g.dart';
 
 abstract mixin class PageBehavior<A, B> {
   @protected
-  Widget getCounterWidget(Widget Function(A) wFun);
+  Widget getCounterWidget(A wFun);
 
   @protected
   BuilderPolicy<CounterState, BaseCounterViewModel> get counterPolicy;
 
   @protected
-  Widget getNotesWidget(Widget Function(B) wFun);
+  Widget getNotesWidget(B wFun);
 
   @protected
   BuilderPolicy<NotesState, BaseNotesViewModel> get notesPolicy;
 }
 
-mixin PageScopedBehavior implements PageBehavior<ScopedArgs<CounterState>, ScopedArgs<NotesState>> {
+mixin PageScopedBehavior
+    implements PageBehavior<Widget Function(ScopedArgs<CounterState>), Widget Function(ScopedArgs<NotesState>)> {
   @override
   Widget getCounterWidget(Widget Function(ScopedArgs<CounterState>) wFun);
 
@@ -38,7 +39,7 @@ mixin PageScopedBehavior implements PageBehavior<ScopedArgs<CounterState>, Scope
   BuilderPolicy<NotesState, BaseNotesViewModel> get notesPolicy => Scoped(getNotesWidget);
 }
 
-mixin PageViewModelFittedBehavior implements PageBehavior<CounterState, NotesState> {
+mixin PageViewModelFittedBehavior implements PageBehavior<Widget Function(), Widget Function()> {
   @protected
   BaseCounterViewModel get counterViewModel;
 
@@ -49,13 +50,13 @@ mixin PageViewModelFittedBehavior implements PageBehavior<CounterState, NotesSta
   BuilderPolicy<CounterState, BaseCounterViewModel> get counterPolicy => Fitted(getCounterWidget, counterViewModel);
 
   @override
-  Widget getCounterWidget(Widget Function(CounterState) wFun);
+  Widget getCounterWidget(Widget Function() wFun);
 
   @override
   BuilderPolicy<NotesState, BaseNotesViewModel> get notesPolicy => Fitted(getNotesWidget, notesViewModel);
 
   @override
-  Widget getNotesWidget(Widget Function(NotesState) wFun);
+  Widget getNotesWidget(Widget Function() wFun);
 }
 
 @swidget

@@ -24,7 +24,7 @@ class Notes extends StatelessWidget {
     Fitted<NotesState, BaseNotesViewModel> f => notesFrame(
       addNoteButton(_controller, Fun1Arg<void, String>(f.viewModel.updateInput)),
       noteEditText(_controller, Fun0Args<void>(f.viewModel.addNote)),
-      f.fittedObserver((state) => NotesList(state)),
+      f.fittedObserver(() => NotesList(f.viewModel.state)),
     ),
     Scoped<NotesState, BaseNotesViewModel> s => s.scopedObserver(
       (args) => notesFrame(

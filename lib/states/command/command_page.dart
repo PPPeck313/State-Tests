@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_command/flutter_command.dart';
-import 'package:state_tests/common/models/counter/counter_state.dart';
 
-import '../../common/models/note/notes_state.dart';
 import '../../common/widgets/page/stateless_page.dart';
 import 'models/counter_commands.dart';
 import 'models/notes_commands.dart';
@@ -20,14 +18,12 @@ class CommandPage extends StatelessPage {
   CommandPage.def({Key? key}) : this(CounterCommands(), NotesCommands(), key: key);
 
   @override
-  Widget getCounterWidget(Widget Function(CounterState) wFun) => [
-    counterViewModel.decrementCommand,
-    counterViewModel.incrementCommand,
-  ].toCommandsWidget(wFun(counterViewModel.state));
+  Widget getCounterWidget(Widget Function() wFun) =>
+      [counterViewModel.decrementCommand, counterViewModel.incrementCommand].toCommandsWidget(wFun());
 
   @override
-  Widget getNotesWidget(Widget Function(NotesState) wFun) =>
-      [notesViewModel.updateInputCommand, notesViewModel.addNoteCommand].toCommandsWidget(wFun(notesViewModel.state));
+  Widget getNotesWidget(Widget Function() wFun) =>
+      [notesViewModel.updateInputCommand, notesViewModel.addNoteCommand].toCommandsWidget(wFun());
 }
 
 extension CommandListExtensions on List<Command<dynamic, dynamic>> {

@@ -6,7 +6,7 @@ import '../../models/reactive_state.dart';
 sealed class BuilderPolicy<S extends ReactiveState, VM extends ReactiveViewModel> {}
 
 final class Fitted<S extends ReactiveState, VM extends ReactiveViewModel> extends BuilderPolicy<S, VM> {
-  Widget Function(Widget Function(S)) fittedObserver;
+  Widget Function(Widget Function()) fittedObserver;
   VM viewModel;
 
   Fitted(this.fittedObserver, this.viewModel);

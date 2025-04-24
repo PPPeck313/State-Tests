@@ -21,7 +21,7 @@ class Counter extends StatelessWidget {
   Widget build(BuildContext context) => switch (_policy) {
     Fitted<CounterState, BaseCounterViewModel> f => counterFrame(
       CounterButton.negative(Fun0Args<void>(f.viewModel.decrement)),
-      f.fittedObserver((state) => counterText(state.count)),
+      f.fittedObserver(() => counterText(f.viewModel.state.count)),
       CounterButton.positive(Fun0Args<void>(f.viewModel.increment)),
     ),
     Scoped<CounterState, BaseCounterViewModel> s => s.scopedObserver(
