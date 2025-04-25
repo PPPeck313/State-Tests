@@ -1,7 +1,8 @@
-import 'package:flutter/widgets.dart';
-import 'package:state_tests/common/widgets/page/stateful_page.dart';
-import 'package:state_tests/states/viewmodel/models/counter_view_model.dart';
-import 'package:state_tests/states/viewmodel/models/notes_view_model.dart';
+import 'package:flutter/material.dart';
+
+import '../../common/widgets/screen/page/stateful_page.dart';
+import 'models/counter_view_model.dart';
+import 'models/notes_view_model.dart';
 
 class ViewModelPageState extends StatefulPageState {
   final CounterViewModel counterViewModel;

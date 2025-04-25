@@ -6,17 +6,13 @@ part 'notes_state.mapper.dart';
 
 @MappableClass()
 final class NotesState with NotesStateMappable implements ReactiveState {
-  final List<String> notes = const [];
+  final List<String> notes;
   final String input;
 
-  const NotesState({this.input = ''});
+  const NotesState({this.notes = const [], this.input = ''});
 }
 
 extension NotesStateExtensions on NotesState {
   NotesState updateInput(String input) => copyWith(input: input);
-
-  NotesState addNote() {
-    notes.add(input);
-    return copyWith(input: '');
-  }
+  NotesState addNote() => input.isNotEmpty ? copyWith(notes: [...notes, input], input: '') : this;
 }

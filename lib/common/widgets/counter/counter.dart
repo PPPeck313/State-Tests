@@ -14,8 +14,8 @@ class Counter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => switch (_builder) {
-    Fitted<BaseCounterViewModel> f => counterFrame(f.viewModel, f.obs((_) => counterText(f.viewModel.state.count))),
-    Scoped<BaseCounterViewModel> s => s.obs((vM) => counterFrame(vM, counterText(vM.state.count))),
+    Fitted<BaseCounterViewModel> f => CounterFrame(f.viewModel, f.obs((_) => CounterText(f.viewModel.state.count))),
+    Scoped<BaseCounterViewModel> s => s.obs((vM) => CounterFrame(vM, CounterText(vM.state.count))),
   };
 }
 

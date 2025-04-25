@@ -15,7 +15,7 @@ class NotesList extends StatelessWidget {
 
   Widget getList() => Expanded(
     child: ListView.builder(
-      itemBuilder: (context, index) => noteCell((state.notes[index])),
+      itemBuilder: (context, index) => NoteCell((state.notes[index])),
       itemCount: state.notes.length,
     ),
   );

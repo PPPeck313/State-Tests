@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:states_rebuilder/scr/state_management/listeners/on_reactive.dart';
 
-import '../../common/widgets/page/stateless_page.dart';
+import '../../common/widgets/screen/page/stateless_page.dart';
 import 'models/counter_rebuilder.dart';
 import 'models/notes_rebuilder.dart';
 

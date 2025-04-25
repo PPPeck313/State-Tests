@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:state_tests/common/widgets/notes/notes.dart';
 
-import '../../models/counter/base_counter_view_model.dart';
-import '../../models/note/base_notes_view_model.dart';
-import '../builder/builder_type.dart';
-import '../counter/counter.dart';
+import '../../../models/counter/base_counter_view_model.dart';
+import '../../../models/note/base_notes_view_model.dart';
+import '../../builder/builder_type.dart';
+import '../../counter/counter.dart';
 
 part 'page_behavior.g.dart';
 
@@ -62,9 +63,11 @@ Widget pageStarter(
   BuilderType<BaseCounterViewModel> counterPolicy,
   BuilderType<BaseNotesViewModel> notesPolicy,
   TextEditingController controller,
-) => Scaffold(
-  body: Padding(
-    padding: const EdgeInsets.fromLTRB(8.0, 32.0, 8.0, 8.0),
-    child: Column(children: [Counter(counterPolicy)]),
-  ),
+) => Column(
+  mainAxisSize: MainAxisSize.min,
+  children: [
+    Counter(counterPolicy),
+    Padding(padding: const EdgeInsets.only(top: 16.0, bottom: 32.0), child: Divider()),
+    Notes(controller, notesPolicy),
+  ],
 );

@@ -5,7 +5,7 @@ import 'package:state_tests/common/models/note/notes_state.dart';
 import 'package:state_tests/states/viewmodel/models/counter_view_model.dart';
 import 'package:state_tests/states/viewmodel/models/notes_view_model.dart';
 
-import '../../common/widgets/page/stateless_page.dart';
+import '../../common/widgets/screen/page/stateless_page.dart';
 import 'models/counter_commands.dart';
 import 'models/notes_commands.dart';
 

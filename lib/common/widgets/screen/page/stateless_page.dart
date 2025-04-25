@@ -7,12 +7,12 @@ abstract class StatelessViewModelFittedPage extends HookWidget with PageViewMode
   StatelessViewModelFittedPage({super.key});
 
   @override
-  Widget build(BuildContext context) => pageStarter(counterBuilder, notesBuilder, useTextEditingController());
+  Widget build(BuildContext context) => PageStarter(counterBuilder, notesBuilder, useTextEditingController());
 }
 
 abstract class StatelessScopedPage extends HookWidget with PageScopedBehavior {
   StatelessScopedPage({super.key});
 
   @override
-  Widget build(BuildContext context) => pageStarter(counterBuilder, notesBuilder, useTextEditingController());
+  Widget build(BuildContext context) => PageStarter(counterBuilder, notesBuilder, useTextEditingController());
 }

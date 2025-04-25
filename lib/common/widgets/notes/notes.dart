@@ -16,18 +16,18 @@ class Notes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => switch (_builder) {
-    Fitted<BaseNotesViewModel> f => notesFrame(_controller, f.viewModel, f.obs((_) => NotesList(f.viewModel.state))),
-    Scoped<BaseNotesViewModel> s => s.obs((vM) => notesFrame(_controller, vM, NotesList(vM.state))),
+    Fitted<BaseNotesViewModel> f => NotesFrame(_controller, f.viewModel, f.obs((_) => NotesList(f.viewModel.state))),
+    Scoped<BaseNotesViewModel> s => s.obs((vM) => NotesFrame(_controller, vM, NotesList(vM.state))),
   };
 }
 
 @swidget
 Widget notesFrame(TextEditingController controller, BaseNotesViewModel viewModel, Widget notesList) => Column(
+  mainAxisSize: MainAxisSize.min,
   children: [
-    Padding(padding: const EdgeInsets.only(top: 32.0), child: addNoteButton(controller, viewModel.addNote)),
-    noteEditText(controller, viewModel.updateInput),
-    Divider(),
-    notesList,
+    NoteEditText(controller, viewModel.updateInput),
+    Padding(padding: const EdgeInsets.only(top: 16.0), child: AddNoteButton(controller, viewModel.addNote)),
+    //notesList,
   ],
 );
 
@@ -35,7 +35,13 @@ Widget notesFrame(TextEditingController controller, BaseNotesViewModel viewModel
 Widget noteEditText(TextEditingController controller, void Function(String) updateInput) => TextField(
   controller: controller,
   onChanged: (value) => updateInput(value),
-  decoration: InputDecoration.collapsed(hintText: 'Add a note'),
+  decoration: InputDecoration(
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
+    filled: true,
+    hintStyle: TextStyle(color: Colors.grey),
+    hintText: 'Add a note',
+    fillColor: Colors.white,
+  ),
 );
 
 @swidget

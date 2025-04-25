@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-import '../../common/widgets/page/stateless_page.dart';
+import '../../common/widgets/screen/page/stateless_page.dart';
 import 'models/counter_controller.dart';
 import 'models/notes_controller.dart';
 

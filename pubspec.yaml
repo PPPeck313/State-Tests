@@ -24,6 +24,7 @@ dependencies:
   flutter_riverpod: ^2.6.1
   functional_widget_annotation: ^0.10.0
   get: ^4.7.2
+  google_fonts: ^6.2.1
   hooks_riverpod: ^2.6.1
   json_annotation: any
   meta: ^1.15.0

@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:state_tests/common/widgets/page/page_behavior.dart';
 import 'package:state_tests/states/viewmodel/models/counter_view_model.dart';
 import 'package:state_tests/states/viewmodel/models/notes_view_model.dart';
 
@@ -9,7 +8,8 @@ import '../../common/models/counter/counter_event.dart';
 import '../../common/models/counter/counter_state.dart';
 import '../../common/models/note/notes_event.dart';
 import '../../common/models/note/notes_state.dart';
-import '../../common/widgets/page/stateless_page.dart';
+import '../../common/widgets/screen/page/page_behavior.dart';
+import '../../common/widgets/screen/page/stateless_page.dart';
 import 'models/counter_bloc.dart';
 import 'models/notes_bloc.dart';
 
@@ -22,7 +22,7 @@ class BlocPage extends StatelessScopedPage {
       BlocProvider(create: (BuildContext _) => CounterBloc()),
       BlocProvider(create: (BuildContext _) => NotesBloc()),
     ],
-    child: pageStarter(counterBuilder, notesBuilder, useTextEditingController()),
+    child: PageStarter(counterBuilder, notesBuilder, useTextEditingController()),
   );
 
   @override

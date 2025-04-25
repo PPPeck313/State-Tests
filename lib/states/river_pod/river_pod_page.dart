@@ -5,7 +5,7 @@ import 'package:state_tests/states/river_pod/models/notes_notifier.dart';
 import 'package:state_tests/states/viewmodel/models/counter_view_model.dart';
 import 'package:state_tests/states/viewmodel/models/notes_view_model.dart';
 
-import '../../common/widgets/page/page_behavior.dart';
+import '../../common/widgets/screen/page/page_behavior.dart';
 import 'models/counter_notifier.dart';
 
 class RiverPodPage extends HookConsumerWidget with PageScopedBehavior {
@@ -13,7 +13,7 @@ class RiverPodPage extends HookConsumerWidget with PageScopedBehavior {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) =>
-      pageStarter(counterBuilder, notesBuilder, useTextEditingController());
+      PageStarter(counterBuilder, notesBuilder, useTextEditingController());
 
   @override
   Widget getCounterWidget(Widget Function(CounterViewModel) widget) => Consumer(

@@ -1,0 +1,96 @@
+import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:state_tests/common/extensions/_build_context.dart';
+import 'package:state_tests/common/extensions/_string.dart';
+import 'package:state_tests/common/widgets/counter/counter.dart';
+import 'package:state_tests/common/widgets/counter/counter_button.dart';
+import 'package:state_tests/common/widgets/notes/notes.dart';
+import 'package:state_tests/common/widgets/notes/notes_list.dart';
+import 'package:state_tests/common/widgets/screen/home_drawer.dart';
+
+import '../../../states/bloc/bloc_observer.dart';
+import '../builder/state_type.dart';
+
+part 'home_screen.g.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  HomeScreenState createState() => HomeScreenState();
+}
+
+class HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  StateType _currentStateType = StateType.bloc;
+  String? _widgetTree;
+
+  @override
+  void initState() {
+    super.initState();
+    Bloc.observer = SimpleBlocObserver();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_widgetTree == null) setState(() => _widgetTree = printHomeTree(context, _currentStateType));
+    });
+
+    return MaterialApp(
+      home: HomeScaffold(StateType.values, _scaffoldKey, _widgetTree, _currentStateType, (stateType) {
+        _scaffoldKey.currentState?.openEndDrawer();
+        setState(() {
+          _currentStateType = stateType;
+          _widgetTree = null;
+        });
+      }),
+      theme: ThemeData(primarySwatch: Colors.blue, visualDensity: VisualDensity.adaptivePlatformDensity),
+    );
+  }
+}
+
+String printHomeTree(BuildContext context, StateType stateType) => context.print(
+  matcher: (type) => type == stateType.page.runtimeType,
+  printOptions: PrintOptions(
+    detailedMode: false,
+    filterMatcher: (type) => NodeMatchers.stateMatcher(type),
+    truncateMatcher: (type) => [CounterButton, CounterText, AddNoteButton, NoteEditText, NotesList].contains(type),
+  ),
+);
+
+@swidget
+Widget homeScaffold(
+  List<StateType> stateTypes,
+  GlobalKey<ScaffoldState> scaffoldKey,
+  String? widgetTree,
+  StateType currentStateType,
+  Function(StateType) setState,
+) => DefaultTabController(
+  length: stateTypes.length,
+  child: Scaffold(
+    key: scaffoldKey,
+    appBar: AppBar(title: Text(currentStateType.name.toCapitalized)),
+    body: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            currentStateType.page,
+            Padding(padding: const EdgeInsets.symmetric(vertical: 8.0), child: Divider()),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: Text(widgetTree.orEmpty, style: GoogleFonts.robotoMono(fontSize: 12)),
+            ),
+          ],
+        ),
+      ),
+    ),
+    drawer: HomeDrawer(stateTypes, setState),
+  ),
+);

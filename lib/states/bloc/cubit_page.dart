@@ -9,8 +9,8 @@ import 'package:state_tests/states/viewmodel/models/notes_view_model.dart';
 
 import '../../common/models/counter/counter_state.dart';
 import '../../common/models/note/notes_state.dart';
-import '../../common/widgets/page/page_behavior.dart';
-import '../../common/widgets/page/stateless_page.dart';
+import '../../common/widgets/screen/page/page_behavior.dart';
+import '../../common/widgets/screen/page/stateless_page.dart';
 
 class CubitPage extends StatelessScopedPage {
   CubitPage({super.key});
@@ -21,7 +21,7 @@ class CubitPage extends StatelessScopedPage {
       BlocProvider(create: (BuildContext _) => CounterCubit()),
       BlocProvider(create: (BuildContext _) => NotesCubit()),
     ],
-    child: pageStarter(counterBuilder, notesBuilder, useTextEditingController()),
+    child: PageStarter(counterBuilder, notesBuilder, useTextEditingController()),
   );
 
   @override
