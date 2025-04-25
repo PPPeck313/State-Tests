@@ -1,72 +1,77 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:state_tests/common/extensions/_string.dart';
 
-class DebugPadding extends StatelessWidget {
-  final EdgeInsets padding;
-  final Widget child;
-  final Color color;
+part 'debug_padding.g.dart';
 
-  const DebugPadding({super.key, required this.padding, required this.child, this.color = Colors.redAccent});
+class MyPadding extends StatelessWidget {
+  final Widget? child;
+  final EdgeInsetsGeometry padding;
+
+  const MyPadding({super.key, required this.padding, this.child});
 
   @override
-  Widget build(BuildContext context) => Stack(
-    children: [
-      Padding(padding: padding, child: child),
-      Positioned.fill(
-        child: IgnorePointer(child: CustomPaint(painter: _DebugPaddingPainter(padding: padding, color: color))),
-      ),
-    ],
-  );
+  Widget build(BuildContext context) =>
+      kDebugMode ? DebugPadding(padding: padding as EdgeInsets, child: child) : Padding(padding: padding, child: child);
 }
 
-class _DebugPaddingPainter extends CustomPainter {
-  final EdgeInsets padding;
-  final Color color;
-  final TextStyle textStyle = const TextStyle(fontSize: 12, color: Colors.white, backgroundColor: Colors.black87);
+@swidget
+Widget debugPadding({required EdgeInsets padding, Widget? child}) => Container(
+  decoration: BoxDecoration(border: Border.all(color: Colors.red, width: 2)),
+  child: Stack(
+    children: [
+      PaddingText(Up(padding.top)),
+      PaddingText(Down(padding.bottom)),
+      PaddingText(Left(padding.left)),
+      PaddingText(Right(padding.right)),
+      Container(
+        padding: padding,
+        child: Container(color: Colors.red.withOpacity(0.1), child: child ?? SizedBox.shrink()),
+      ),
+    ],
+  ),
+);
 
-  _DebugPaddingPainter({required this.padding, required this.color});
+@swidget
+Widget paddingText(DirectionType direction) =>
+    direction.padding > 0
+        ? Positioned(
+          top: direction is Down ? null : 0,
+          bottom: direction is Up ? null : 0,
+          left: direction is Right ? null : 0,
+          right: direction is Left ? null : 0,
+          child: Center(
+            child: Text(
+              '${direction.leftArrow}${direction.padding}${direction.rightArrow}',
+              style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 12, height: 1.0),
+            ),
+          ),
+        )
+        : SizedBox.shrink();
 
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint =
-        Paint()
-          ..color = color.withOpacity(0.3)
-          ..style = PaintingStyle.fill;
+sealed class DirectionType {
+  final double padding;
 
-    // Top
-    if (padding.top > 0) {
-      canvas.drawRect(Rect.fromLTWH(0, 0, size.width, padding.top), paint);
-      _drawText(canvas, 'top: ${padding.top}', Offset(5, 2));
-    }
+  final String arrowCode;
+  String get leftArrow => this is! Right ? arrowCode.decodeUnicode : '';
+  String get rightArrow => this is Right ? arrowCode.decodeUnicode : '';
 
-    // Bottom
-    if (padding.bottom > 0) {
-      canvas.drawRect(Rect.fromLTWH(0, size.height - padding.bottom, size.width, padding.bottom), paint);
-      _drawText(canvas, 'bottom: ${padding.bottom}', Offset(5, size.height - padding.bottom + 2));
-    }
+  const DirectionType(this.padding, this.arrowCode);
+}
 
-    // Left
-    if (padding.left > 0) {
-      canvas.drawRect(Rect.fromLTWH(0, 0, padding.left, size.height), paint);
-      _drawText(canvas, 'left: ${padding.left}', Offset(2, size.height / 2 - 6));
-    }
+final class Up extends DirectionType {
+  Up(double padding) : super(padding, '02191');
+}
 
-    // Right
-    if (padding.right > 0) {
-      canvas.drawRect(Rect.fromLTWH(size.width - padding.right, 0, padding.right, size.height), paint);
-      _drawText(canvas, 'right: ${padding.right}', Offset(size.width - padding.right + 2, size.height / 2 - 6));
-    }
-  }
+final class Down extends DirectionType {
+  Down(double padding) : super(padding, '02193');
+}
 
-  void _drawText(Canvas canvas, String text, Offset offset) {
-    final textPainter = TextPainter(
-      text: TextSpan(text: text, style: textStyle),
-      textDirection: TextDirection.ltr,
-      maxLines: 1,
-    );
-    textPainter.layout();
-    textPainter.paint(canvas, offset);
-  }
+final class Right extends DirectionType {
+  Right(double padding) : super(padding, '02192');
+}
 
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
+final class Left extends DirectionType {
+  Left(double padding) : super(padding, '02190');
 }

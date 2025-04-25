@@ -4,7 +4,11 @@ extension StringExtension on String {
 
   String get decodeUnicode => String.fromCharCode(int.parse(replaceFirst('U+', ''), radix: 16));
 
-  String get toSimpleWidget => replaceAll(RegExp(r'\(.*\)'), '');
+  String get bold => '<b>$this</b>';
+  String get preserve => '<pre>$this</pre>';
+
+  String get toSimpleWidget => replaceAll(RegExp(r'\(.*\)'), '').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+
   String toDetailedWidget(String indent, String tab) {
     final buffer = StringBuffer();
     int angleDepth = 0;
@@ -18,6 +22,8 @@ extension StringExtension on String {
         ',' => (angleDepth == 0) ? ',\n$indent$tab' : char,
         '(' => '(\n$indent$tab ',
         ')' => '\n$indent)',
+        '<' => '&lt;',
+        '>' => '&gt;',
         _ => char,
       });
     }

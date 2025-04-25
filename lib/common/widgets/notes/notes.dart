@@ -3,6 +3,7 @@ import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 
 import '../../models/note/base_notes_view_model.dart';
 import '../builder/builder_type.dart';
+import '../debug/debug_padding.dart';
 import 'notes_list.dart';
 
 part 'notes.g.dart';
@@ -22,13 +23,16 @@ class Notes extends StatelessWidget {
 }
 
 @swidget
-Widget notesFrame(TextEditingController controller, BaseNotesViewModel viewModel, Widget notesList) => Column(
-  mainAxisSize: MainAxisSize.min,
-  children: [
-    NoteEditText(controller, viewModel.updateInput),
-    Padding(padding: const EdgeInsets.only(top: 16.0), child: AddNoteButton(controller, viewModel.addNote)),
-    //notesList,
-  ],
+Widget notesFrame(TextEditingController controller, BaseNotesViewModel viewModel, Widget notesList) => MyPadding(
+  padding: const EdgeInsets.symmetric(vertical: 16.0),
+  child: Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      NoteEditText(controller, viewModel.updateInput),
+      AddNoteButton(controller, viewModel.addNote),
+      notesList,
+    ],
+  ),
 );
 
 @swidget

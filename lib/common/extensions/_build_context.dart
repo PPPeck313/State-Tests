@@ -4,14 +4,14 @@ import 'package:state_tests/common/extensions/_string.dart';
 String _printWidgetTree(BuildContext context, PrintOptions printOptions) {
   final StringBuffer buffer = StringBuffer()..writeln('Widget Tree:');
   _printNodes(buffer, context as Element, 0, printOptions);
-  return buffer.toString();
+  return buffer.toString().preserve;
 }
 
 String _printWidgetSubtree(BuildContext context, bool Function(Type type) matcher, PrintOptions printOptions) {
   final StringBuffer buffer = StringBuffer();
   Element? targetElement = _findElement(context as Element, matcher);
   targetElement == null ? buffer.write('Widget not found.') : _printNodes(buffer, targetElement, 0, printOptions);
-  return buffer.toString();
+  return buffer.toString().preserve;
 }
 
 Element? _findElement(Element element, bool Function(Type type) matcher) {
@@ -37,13 +37,14 @@ void _printNode(StringBuffer buffer, Element element, int depth, bool detailedMo
   String tab = ' ';
   String indent = tab * (depth - 1);
 
-  String depthNumber = depth > 0 ? '$depth.' : '';
-  String depthLine = detailedMode ? '$indent$depthNumber'.replaceAll(' ', '—') : '$indent$depthNumber';
+  String depthNumber = depth > 0 ? '$depth.'.bold : '';
+  String depthPrefix = '$indent$depthNumber'.replaceAll(' ', '—');
 
-  String detailedNode = '$depthLine${element.widget.toString()}';
-  String adjustedNode = detailedMode ? detailedNode.toDetailedWidget(indent, tab) : detailedNode.toSimpleWidget;
+  String widgetName = element.widget.toString();
+  String node = detailedMode ? widgetName.toDetailedWidget(indent, tab) : widgetName.toSimpleWidget;
+  String prefixedNode = '$depthPrefix${depth == 0 ? node.bold : node}';
 
-  buffer.writeln(adjustedNode);
+  buffer.writeln(prefixedNode);
 }
 
 extension BuildContextExtensions on BuildContext {

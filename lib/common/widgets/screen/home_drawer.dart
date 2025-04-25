@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 
 import '../builder/state_type.dart';
+import '../debug/debug_padding.dart';
 
 part 'home_drawer.g.dart';
 
@@ -24,6 +25,6 @@ Widget homeDrawerHeader() => DrawerHeader(
 
 @swidget
 Widget drawerCell(StateType stateType, void Function(StateType) setState) => ListTile(
-  title: Row(children: [stateType.logo, Padding(padding: EdgeInsets.only(left: 8.0), child: Text(stateType.name))]),
+  title: Row(children: [stateType.logo, MyPadding(padding: EdgeInsets.only(left: 8.0), child: Text(stateType.name))]),
   onTap: () => setState(stateType),
 );

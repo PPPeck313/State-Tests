@@ -6,6 +6,7 @@ import '../../../models/counter/base_counter_view_model.dart';
 import '../../../models/note/base_notes_view_model.dart';
 import '../../builder/builder_type.dart';
 import '../../counter/counter.dart';
+import '../../debug/debug_padding.dart';
 
 part 'page_behavior.g.dart';
 
@@ -67,7 +68,7 @@ Widget pageStarter(
   mainAxisSize: MainAxisSize.min,
   children: [
     Counter(counterPolicy),
-    Padding(padding: const EdgeInsets.only(top: 16.0, bottom: 32.0), child: Divider()),
+    MyPadding(padding: const EdgeInsets.symmetric(vertical: 16.0), child: Divider()),
     Notes(controller, notesPolicy),
   ],
 );

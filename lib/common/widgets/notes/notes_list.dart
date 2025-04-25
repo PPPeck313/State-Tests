@@ -13,13 +13,22 @@ class NotesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) => getList();
 
-  Widget getList() => Expanded(
-    child: ListView.builder(
-      itemBuilder: (context, index) => NoteCell((state.notes[index])),
-      itemCount: state.notes.length,
-    ),
+  Widget getList() => Column(
+    children: [
+      ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) => NoteCell(state.notes.length - index, state.notes.reversed.elementAt(index)),
+        itemCount: state.notes.length,
+        padding: EdgeInsets.zero,
+      ),
+    ],
   );
 }
 
 @swidget
-Widget noteCell(String text) => Padding(padding: const EdgeInsets.symmetric(vertical: 8.0), child: Text('Note: $text'));
+Widget noteCell(int index, String text) => Text.rich(
+  TextSpan(
+    children: [TextSpan(text: 'Note $index: ', style: TextStyle(fontWeight: FontWeight.bold)), TextSpan(text: text)],
+  ),
+);
