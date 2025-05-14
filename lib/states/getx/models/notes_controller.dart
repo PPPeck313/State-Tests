@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-import '../../../common/models/note/base_notes_view_model.dart';
-import '../../../common/models/note/notes_state.dart';
+import 'package:state_tests/common/models/note/base_notes_view_model.dart';
+import 'package:state_tests/common/models/note/notes_state.dart';
 
 class NotesController extends GetxController implements BaseNotesViewModel {
   final Rx<NotesState> xState;

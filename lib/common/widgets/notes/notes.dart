@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 
-import '../../models/note/base_notes_view_model.dart';
-import '../builder/builder_type.dart';
-import '../debug/debug_padding.dart';
-import 'notes_list.dart';
+import 'package:state_tests/common/models/note/base_notes_view_model.dart';
+import 'package:state_tests/common/widgets/builder/builder_type.dart';
+import 'package:state_tests/common/widgets/debug/debug_padding.dart';
+import 'package:state_tests/common/widgets/notes/notes_list.dart';
 
 part 'notes.g.dart';
 

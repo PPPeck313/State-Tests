@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/reactive_state.dart';
+import 'package:state_tests/common/models/reactive_state.dart';
 
 sealed class BuilderType<VM extends ReactiveViewModel> {
   covariant Widget Function(Widget Function(void) builder) obs;

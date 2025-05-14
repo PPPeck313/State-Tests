@@ -1,6 +1,6 @@
 import 'package:state_tests/common/models/note/notes_state.dart';
 
-import '../../../common/models/note/base_notes_view_model.dart';
+import 'package:state_tests/common/models/note/base_notes_view_model.dart';
 
 class NotesViewModel implements BaseNotesViewModel {
   NotesState _state;

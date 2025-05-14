@@ -1,6 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 
-import '../reactive_state.dart';
+import 'package:state_tests/common/models/reactive_state.dart';
 
 part 'notes_state.mapper.dart';
 

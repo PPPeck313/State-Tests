@@ -1,17 +1,17 @@
 import 'package:flutter/widgets.dart';
 import 'package:state_tests/common/widgets/screen/page/stateful_page.dart';
 
-import '../../../gen/assets.gen.dart';
-import '../../../states/bloc/bloc_page.dart';
-import '../../../states/bloc/cubit_page.dart';
-import '../../../states/command/command_page.dart';
-import '../../../states/default/inherited/inherited_page_state.dart';
-import '../../../states/default/set_state_page_state.dart';
-import '../../../states/getx/get_x_page.dart';
-import '../../../states/mobx/mob_x_page.dart';
-import '../../../states/rebuilder/rebuilder_page.dart';
-import '../../../states/redux/redux_page.dart';
-import '../../../states/river_pod/river_pod_page.dart';
+import 'package:state_tests/gen/assets.gen.dart';
+import 'package:state_tests/states/bloc/bloc_page.dart';
+import 'package:state_tests/states/bloc/cubit_page.dart';
+import 'package:state_tests/states/command/command_page.dart';
+import 'package:state_tests/states/default/inherited/inherited_page_state.dart';
+import 'package:state_tests/states/default/set_state_page_state.dart';
+import 'package:state_tests/states/getx/get_x_page.dart';
+import 'package:state_tests/states/mobx/mob_x_page.dart';
+import 'package:state_tests/states/rebuilder/rebuilder_page.dart';
+import 'package:state_tests/states/redux/redux_page.dart';
+import 'package:state_tests/states/river_pod/river_pod_page.dart';
 
 enum StateType {
   bloc,
@@ -34,8 +34,8 @@ enum StateType {
     rebuilder => RebuilderPage.def(),
     redux => ReduxPage.def(),
     riverPod => RiverPodPage(),
-    setState => StatefulPage(SetStatePageState.def()),
-    inherited => StatefulPage(InheritedPageState.def()),
+    setState => StatefulPage(SetStatePageState.def(), key: Key(setState.name)),
+    inherited => StatefulPage(InheritedPageState.def(), key: Key(inherited.name)),
   };
 
   Image get logo =>

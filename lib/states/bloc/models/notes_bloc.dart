@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../common/models/note/base_notes_view_model.dart';
-import '../../../common/models/note/notes_event.dart';
-import '../../../common/models/note/notes_state.dart';
+import 'package:state_tests/common/models/note/base_notes_view_model.dart';
+import 'package:state_tests/common/models/note/notes_event.dart';
+import 'package:state_tests/common/models/note/notes_state.dart';
 
 class NotesBloc extends Bloc<NotesEvent, NotesState> implements BaseNotesViewModel {
   NotesBloc([super.initialState = const NotesState()]) {

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_command/flutter_command.dart';
 import 'package:state_tests/common/models/note/base_notes_view_model.dart';
 
-import '../../../common/models/note/notes_state.dart';
+import 'package:state_tests/common/models/note/notes_state.dart';
 
 class NotesCommands extends ValueNotifier<NotesState> implements BaseNotesViewModel {
   @override

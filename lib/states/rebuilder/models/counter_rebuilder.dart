@@ -1,7 +1,7 @@
 import 'package:states_rebuilder/scr/state_management/rm.dart';
 
-import '../../../common/models/counter/base_counter_view_model.dart';
-import '../../../common/models/counter/counter_state.dart';
+import 'package:state_tests/common/models/counter/base_counter_view_model.dart';
+import 'package:state_tests/common/models/counter/counter_state.dart';
 
 class CounterRebuilder implements BaseCounterViewModel {
   final Injected<CounterState> injectedState;

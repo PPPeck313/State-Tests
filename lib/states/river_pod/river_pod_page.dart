@@ -3,10 +3,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:state_tests/states/river_pod/models/notes_notifier.dart';
 
-import '../../common/widgets/screen/page/page_behavior.dart';
-import '../counter_view_model.dart';
-import '../notes_view_model.dart';
-import 'models/counter_notifier.dart';
+import 'package:state_tests/common/widgets/screen/page/page_behavior.dart';
+import 'package:state_tests/states/counter_view_model.dart';
+import 'package:state_tests/states/notes_view_model.dart';
+import 'package:state_tests/states/river_pod/models/counter_notifier.dart';
 
 class RiverPodPage extends HookConsumerWidget with ProvidedContextScopeBehavior {
   RiverPodPage({super.key});

@@ -10,9 +10,9 @@ import 'package:state_tests/common/widgets/notes/notes.dart';
 import 'package:state_tests/common/widgets/notes/notes_list.dart';
 import 'package:state_tests/common/widgets/screen/home_drawer.dart';
 
-import '../../../states/bloc/bloc_observer.dart';
-import '../builder/state_type.dart';
-import '../debug/debug_padding.dart';
+import 'package:state_tests/states/bloc/bloc_observer.dart';
+import 'package:state_tests/common/widgets/builder/state_type.dart';
+import 'package:state_tests/common/widgets/debug/debug_padding.dart';
 
 part 'home_screen.g.dart';
 
@@ -100,7 +100,7 @@ Widget widgetTreePrint(String? widgetTree) => MyPadding(
   child: Row(
     children: [
       widgetTree != null
-          ? Html(data: widgetTree, style: {"b": Style(fontWeight: FontWeight.bold), "*": Style(fontSize: FontSize(11))})
+          ? Html(data: widgetTree, style: {'b': Style(fontWeight: FontWeight.bold), '*': Style(fontSize: FontSize(11))})
           : SizedBox.shrink(),
     ],
   ),

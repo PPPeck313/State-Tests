@@ -1,9 +1,9 @@
 import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
 
-import '../../../common/models/note/base_notes_view_model.dart';
-import '../../../common/models/note/notes_event.dart';
-import '../../../common/models/note/notes_state.dart';
+import 'package:state_tests/common/models/note/base_notes_view_model.dart';
+import 'package:state_tests/common/models/note/notes_event.dart';
+import 'package:state_tests/common/models/note/notes_state.dart';
 
 class NotesStore extends Store<NotesState> implements BaseNotesViewModel {
   NotesStore([NotesState state = const NotesState()])

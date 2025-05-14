@@ -3,11 +3,11 @@ import 'package:flutter/widgets.dart';
 import 'package:state_tests/common/models/counter/counter_state.dart';
 import 'package:state_tests/common/models/note/notes_state.dart';
 
-import '../../common/widgets/screen/page/stateless_page.dart';
-import '../counter_view_model.dart';
-import '../notes_view_model.dart';
-import 'models/counter_commands.dart';
-import 'models/notes_commands.dart';
+import 'package:state_tests/common/widgets/screen/page/stateless_page.dart';
+import 'package:state_tests/states/counter_view_model.dart';
+import 'package:state_tests/states/notes_view_model.dart';
+import 'package:state_tests/states/command/models/counter_commands.dart';
+import 'package:state_tests/states/command/models/notes_commands.dart';
 
 class CommandPage extends StatelessProvidedScopePage {
   final CounterCommands counterViewModel;

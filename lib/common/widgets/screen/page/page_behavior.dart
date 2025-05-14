@@ -3,11 +3,11 @@ import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:state_tests/common/models/reactive_state.dart';
 import 'package:state_tests/common/widgets/notes/notes.dart';
 
-import '../../../models/counter/base_counter_view_model.dart';
-import '../../../models/note/base_notes_view_model.dart';
-import '../../builder/builder_type.dart';
-import '../../counter/counter.dart';
-import '../../debug/debug_padding.dart';
+import 'package:state_tests/common/models/counter/base_counter_view_model.dart';
+import 'package:state_tests/common/models/note/base_notes_view_model.dart';
+import 'package:state_tests/common/widgets/builder/builder_type.dart';
+import 'package:state_tests/common/widgets/counter/counter.dart';
+import 'package:state_tests/common/widgets/debug/debug_padding.dart';
 
 part 'page_behavior.g.dart';
 

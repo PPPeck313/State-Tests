@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:state_tests/common/extensions/_scope.dart';
 
-import '../../common/widgets/screen/page/stateful_page.dart';
-import '../counter_view_model.dart';
-import '../notes_view_model.dart';
+import 'package:state_tests/common/widgets/screen/page/stateful_page.dart';
+import 'package:state_tests/states/counter_view_model.dart';
+import 'package:state_tests/states/notes_view_model.dart';
 
 class SetStatePageState extends StatefulProvidedScopePageState {
   final CounterViewModel counterViewModel;

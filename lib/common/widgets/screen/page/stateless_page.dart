@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import 'page_behavior.dart';
+import 'package:state_tests/common/widgets/screen/page/page_behavior.dart';
 
 abstract class StatelessViewModelScopePage extends HookWidget with ViewModelScopeBehavior {
   StatelessViewModelScopePage({super.key});

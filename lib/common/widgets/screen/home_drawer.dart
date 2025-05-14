@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 
-import '../builder/state_type.dart';
-import '../debug/debug_padding.dart';
+import 'package:state_tests/common/widgets/builder/state_type.dart';
+import 'package:state_tests/common/widgets/debug/debug_padding.dart';
 
 part 'home_drawer.g.dart';
 

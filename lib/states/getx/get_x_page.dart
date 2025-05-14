@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-import '../../common/widgets/screen/page/stateless_page.dart';
-import 'models/counter_controller.dart';
-import 'models/notes_controller.dart';
+import 'package:state_tests/common/widgets/screen/page/stateless_page.dart';
+import 'package:state_tests/states/getx/models/counter_controller.dart';
+import 'package:state_tests/states/getx/models/notes_controller.dart';
 
 class GetXPage extends StatelessViewModelScopePage {
   @override

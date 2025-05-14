@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 
-import '../../models/note/notes_state.dart';
+import 'package:state_tests/common/models/note/notes_state.dart';
 
 part 'notes_list.g.dart';
 

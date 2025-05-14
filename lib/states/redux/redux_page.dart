@@ -1,11 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
-import '../../common/models/counter/counter_state.dart';
-import '../../common/models/note/notes_state.dart';
-import '../../common/widgets/screen/page/stateless_page.dart';
-import 'models/counter_store.dart';
-import 'models/notes_store.dart';
+import 'package:state_tests/common/models/counter/counter_state.dart';
+import 'package:state_tests/common/models/note/notes_state.dart';
+import 'package:state_tests/common/widgets/screen/page/stateless_page.dart';
+import 'package:state_tests/states/redux/models/counter_store.dart';
+import 'package:state_tests/states/redux/models/notes_store.dart';
 
 class ReduxPage extends StatelessViewModelScopePage {
   @override
@@ -28,8 +28,8 @@ class ReduxPage extends StatelessViewModelScopePage {
   );
 
   @override
-  Widget getNotesWidget(Widget Function(void) widget) => StoreProvider<CounterState>(
-    store: counterViewModel,
+  Widget getNotesWidget(Widget Function(void) widget) => StoreProvider<NotesState>(
+    store: notesViewModel,
     child: StoreConnector<NotesState, NotesState>(
       converter: (store) => store.state,
       builder: (context, state) => widget(null),
