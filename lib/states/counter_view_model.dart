@@ -1,5 +1,5 @@
-import '../../../common/models/counter/base_counter_view_model.dart';
-import '../../../common/models/counter/counter_state.dart';
+import '../common/models/counter/base_counter_view_model.dart';
+import '../common/models/counter/counter_state.dart';
 
 class CounterViewModel implements BaseCounterViewModel {
   CounterState _state;

@@ -1,11 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:state_tests/common/widgets/screen/page/stateful_page.dart';
-import 'package:state_tests/states/viewmodel/view_model_page_state.dart';
 
 import '../../../gen/assets.gen.dart';
 import '../../../states/bloc/bloc_page.dart';
 import '../../../states/bloc/cubit_page.dart';
 import '../../../states/command/command_page.dart';
+import '../../../states/default/inherited/inherited_page_state.dart';
+import '../../../states/default/set_state_page_state.dart';
 import '../../../states/getx/get_x_page.dart';
 import '../../../states/mobx/mob_x_page.dart';
 import '../../../states/rebuilder/rebuilder_page.dart';
@@ -21,7 +22,8 @@ enum StateType {
   rebuilder,
   redux,
   riverPod,
-  viewModel;
+  setState,
+  inherited;
 
   Widget get page => switch (this) {
     bloc => BlocPage(),
@@ -32,7 +34,8 @@ enum StateType {
     rebuilder => RebuilderPage.def(),
     redux => ReduxPage.def(),
     riverPod => RiverPodPage(),
-    viewModel => StatefulPage(ViewModelPageState.def()),
+    setState => StatefulPage(SetStatePageState.def()),
+    inherited => StatefulPage(InheritedPageState.def()),
   };
 
   Image get logo =>
@@ -45,6 +48,7 @@ enum StateType {
         rebuilder => Assets.images.rebuilderLogo,
         redux => Assets.images.reduxLogo,
         riverPod => Assets.images.riverpodLogo,
-        viewModel => Assets.images.viewmodelLogo,
+        setState => Assets.images.defaultLogo,
+        inherited => Assets.images.defaultLogo,
       }.image();
 }

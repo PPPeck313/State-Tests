@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:state_tests/common/models/reactive_state.dart';
 import 'package:state_tests/common/widgets/notes/notes.dart';
 
 import '../../../models/counter/base_counter_view_model.dart';
@@ -10,36 +11,21 @@ import '../../debug/debug_padding.dart';
 
 part 'page_behavior.g.dart';
 
-abstract mixin class PageBehavior<A, B> {
+abstract mixin class PageBehavior<C, N> {
   @protected
-  Widget getCounterWidget(A widget);
+  Widget getCounterWidget(Widget Function(C) widget);
 
   @protected
   BuilderType<BaseCounterViewModel> get counterBuilder;
 
   @protected
-  Widget getNotesWidget(B widget);
+  Widget getNotesWidget(Widget Function(N) widget);
 
   @protected
   BuilderType<BaseNotesViewModel> get notesBuilder;
 }
 
-mixin PageScopedBehavior
-    implements PageBehavior<Widget Function(BaseCounterViewModel), Widget Function(BaseNotesViewModel)> {
-  @override
-  Widget getCounterWidget(Widget Function(BaseCounterViewModel) widget);
-
-  @override
-  BuilderType<BaseCounterViewModel> get counterBuilder => Scoped(getCounterWidget);
-
-  @override
-  Widget getNotesWidget(Widget Function(BaseNotesViewModel) widget);
-
-  @override
-  BuilderType<BaseNotesViewModel> get notesBuilder => Scoped(getNotesWidget);
-}
-
-mixin PageViewModelFittedBehavior implements PageBehavior<Widget Function(void), Widget Function(void)> {
+mixin ViewModelScopeBehavior implements PageBehavior<void, void> {
   @protected
   BaseCounterViewModel get counterViewModel;
 
@@ -47,16 +33,47 @@ mixin PageViewModelFittedBehavior implements PageBehavior<Widget Function(void),
   BaseNotesViewModel get notesViewModel;
 
   @override
-  BuilderType<BaseCounterViewModel> get counterBuilder => Fitted(getCounterWidget, counterViewModel);
-
-  @override
   Widget getCounterWidget(Widget Function(void) widget);
 
   @override
-  BuilderType<BaseNotesViewModel> get notesBuilder => Fitted(getNotesWidget, notesViewModel);
+  BuilderType<BaseCounterViewModel> get counterBuilder => ViewModelScope(getCounterWidget, counterViewModel);
 
   @override
   Widget getNotesWidget(Widget Function(void) widget);
+
+  @override
+  BuilderType<BaseNotesViewModel> get notesBuilder => ViewModelScope(getNotesWidget, notesViewModel);
+}
+
+abstract mixin class ContextScopeBehavior<C extends ReactiveViewModel, N extends ReactiveViewModel>
+    implements PageBehavior<C, N> {}
+
+mixin ProvidedContextScopeBehavior implements ContextScopeBehavior<BaseCounterViewModel, BaseNotesViewModel> {
+  @override
+  Widget getCounterWidget(Widget Function(BaseCounterViewModel) widget);
+
+  @override
+  BuilderType<BaseCounterViewModel> get counterBuilder => ProvidedContextScope(getCounterWidget);
+
+  @override
+  Widget getNotesWidget(Widget Function(BaseNotesViewModel) widget);
+
+  @override
+  BuilderType<BaseNotesViewModel> get notesBuilder => ProvidedContextScope(getNotesWidget);
+}
+
+mixin DefaultContextScopeBehavior implements ContextScopeBehavior<BaseCounterViewModel, BaseNotesViewModel> {
+  @override
+  Widget getCounterWidget(Widget Function(BaseCounterViewModel) widget, {BuildContext scope});
+
+  @override
+  BuilderType<BaseCounterViewModel> get counterBuilder => DefaultContextScope(getCounterWidget);
+
+  @override
+  Widget getNotesWidget(Widget Function(BaseNotesViewModel) widget, {BuildContext scope});
+
+  @override
+  BuilderType<BaseNotesViewModel> get notesBuilder => DefaultContextScope(getNotesWidget);
 }
 
 @swidget

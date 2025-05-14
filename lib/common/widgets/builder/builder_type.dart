@@ -3,20 +3,27 @@ import 'package:flutter/material.dart';
 import '../../models/reactive_state.dart';
 
 sealed class BuilderType<VM extends ReactiveViewModel> {
-  covariant Widget Function(Widget Function(void)) obs;
+  covariant Widget Function(Widget Function(void) builder) obs;
 
   BuilderType(this.obs);
 }
 
-final class Fitted<VM extends ReactiveViewModel> extends BuilderType<VM> {
+final class ViewModelScope<VM extends ReactiveViewModel> extends BuilderType<VM> {
   VM viewModel;
 
-  Fitted(super.obs, this.viewModel);
+  ViewModelScope(super.obs, this.viewModel);
 }
 
-final class Scoped<VM extends ReactiveViewModel> extends BuilderType<VM> {
+final class ProvidedContextScope<VM extends ReactiveViewModel> extends BuilderType<VM> {
   @override
-  Widget Function(Widget Function(VM)) obs;
+  Widget Function(Widget Function(VM) builder) obs;
 
-  Scoped(this.obs) : super(obs);
+  ProvidedContextScope(this.obs) : super(obs);
+}
+
+final class DefaultContextScope<VM extends ReactiveViewModel> extends BuilderType<VM> {
+  @override
+  Widget Function(Widget Function(VM) builder, {BuildContext scope}) obs;
+
+  DefaultContextScope(this.obs) : super(obs);
 }

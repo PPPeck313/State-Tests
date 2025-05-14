@@ -7,7 +7,7 @@ import '../../common/widgets/screen/page/stateless_page.dart';
 import 'models/counter_store.dart';
 import 'models/notes_store.dart';
 
-class ReduxPage extends StatelessViewModelFittedPage {
+class ReduxPage extends StatelessViewModelScopePage {
   @override
   final CounterStore counterViewModel;
 

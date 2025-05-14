@@ -5,7 +5,7 @@ import '../../common/widgets/screen/page/stateless_page.dart';
 import 'models/counter_rebuilder.dart';
 import 'models/notes_rebuilder.dart';
 
-class RebuilderPage extends StatelessViewModelFittedPage {
+class RebuilderPage extends StatelessViewModelScopePage {
   @override
   final CounterRebuilder counterViewModel;
 

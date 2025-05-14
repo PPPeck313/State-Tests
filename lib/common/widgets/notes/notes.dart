@@ -17,8 +17,18 @@ class Notes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => switch (_builder) {
-    Fitted<BaseNotesViewModel> f => NotesFrame(_controller, f.viewModel, f.obs((_) => NotesList(f.viewModel.state))),
-    Scoped<BaseNotesViewModel> s => s.obs((vM) => NotesFrame(_controller, vM, NotesList(vM.state))),
+    ViewModelScope<BaseNotesViewModel> scope => NotesFrame(
+      _controller,
+      scope.viewModel,
+      scope.obs((_) => NotesList(scope.viewModel.state)),
+    ),
+    ProvidedContextScope<BaseNotesViewModel> scope => scope.obs(
+      (viewModel) => NotesFrame(_controller, viewModel, NotesList(viewModel.state)),
+    ),
+    DefaultContextScope<BaseNotesViewModel> scope => scope.obs(
+      scope: context,
+      (viewModel) => NotesFrame(_controller, viewModel, NotesList(viewModel.state)),
+    ),
   };
 }
 

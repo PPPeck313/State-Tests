@@ -3,15 +3,15 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'page_behavior.dart';
 
-abstract class StatelessViewModelFittedPage extends HookWidget with PageViewModelFittedBehavior {
-  StatelessViewModelFittedPage({super.key});
+abstract class StatelessViewModelScopePage extends HookWidget with ViewModelScopeBehavior {
+  StatelessViewModelScopePage({super.key});
 
   @override
   Widget build(BuildContext context) => PageStarter(counterBuilder, notesBuilder, useTextEditingController());
 }
 
-abstract class StatelessScopedPage extends HookWidget with PageScopedBehavior {
-  StatelessScopedPage({super.key});
+abstract class StatelessProvidedScopePage extends HookWidget with ProvidedContextScopeBehavior {
+  StatelessProvidedScopePage({super.key});
 
   @override
   Widget build(BuildContext context) => PageStarter(counterBuilder, notesBuilder, useTextEditingController());

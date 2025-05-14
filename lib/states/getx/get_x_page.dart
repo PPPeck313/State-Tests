@@ -5,7 +5,7 @@ import '../../common/widgets/screen/page/stateless_page.dart';
 import 'models/counter_controller.dart';
 import 'models/notes_controller.dart';
 
-class GetXPage extends StatelessViewModelFittedPage {
+class GetXPage extends StatelessViewModelScopePage {
   @override
   final CounterController counterViewModel;
 
