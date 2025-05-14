@@ -1,7 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:state_tests/common/extensions/_string.dart';
+import 'package:state_tests/common/widgets/debug/debug_manager.dart';
 
 part 'debug_padding.g.dart';
 
@@ -13,7 +13,9 @@ class MyPadding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      kDebugMode ? DebugPadding(padding: padding as EdgeInsets, child: child) : Padding(padding: padding, child: child);
+      DebugManager().isDebugEnabled
+          ? DebugPadding(padding: padding as EdgeInsets, child: child)
+          : Padding(padding: padding, child: child);
 }
 
 @swidget

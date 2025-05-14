@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:states_rebuilder/scr/state_management/listeners/on_reactive.dart';
-
 import 'package:state_tests/common/widgets/screen/page/stateless_page.dart';
 import 'package:state_tests/states/rebuilder/models/counter_rebuilder.dart';
 import 'package:state_tests/states/rebuilder/models/notes_rebuilder.dart';
+import 'package:states_rebuilder/scr/state_management/listeners/on_reactive.dart';
 
 class RebuilderPage extends StatelessViewModelScopePage {
   @override
@@ -16,7 +15,6 @@ class RebuilderPage extends StatelessViewModelScopePage {
 
   RebuilderPage.def({Key? key}) : this(CounterRebuilder(), NotesRebuilder(), key: key);
 
-  // Local/Scoped state = inherited widget
   @override
   Widget getCounterWidget(Widget Function(void) widget) => OnReactive(() => widget(null));
 
