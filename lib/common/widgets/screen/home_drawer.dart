@@ -24,12 +24,19 @@ Widget homeDrawerHeader() => DrawerHeader(
 );
 
 @swidget
-Widget drawerCell(StateType stateType, void Function(StateType) setStateType) => ListTile(
-  title: Row(
-    children: [
-      stateType.logo,
-      MyPadding(padding: EdgeInsets.only(left: 8.0), child: Text(stateType.name.toCapitalized)),
-    ],
-  ),
-  onTap: () => setStateType(stateType),
+Widget drawerCell(StateType stateType, void Function(StateType) setStateType) => Column(
+  children: [
+    ListTile(
+      title: Row(
+        children: [
+          stateType.logo,
+          MyPadding(padding: EdgeInsets.only(left: 8.0), child: Text(stateType.name.toCapitalized)),
+        ],
+      ),
+      onTap: () => setStateType(stateType),
+    ),
+    stateType.hasDivider
+        ? Divider(height: 10, color: Colors.blue, thickness: 1, indent: 15, endIndent: 15)
+        : SizedBox.shrink(),
+  ],
 );

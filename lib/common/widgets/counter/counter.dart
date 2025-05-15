@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:state_tests/common/models/counter/base_counter_view_model.dart';
-
 import 'package:state_tests/common/widgets/builder/builder_type.dart';
 import 'package:state_tests/common/widgets/counter/counter_button.dart';
 
@@ -14,7 +13,7 @@ class Counter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => switch (_builder) {
-    ViewModelScope<BaseCounterViewModel> scope => CounterFrame(
+    ObserverScope<BaseCounterViewModel> scope => CounterFrame(
       scope.viewModel,
       scope.obs((_) => CounterText(scope.viewModel.state.count)),
     ),

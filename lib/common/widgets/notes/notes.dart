@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-
 import 'package:state_tests/common/models/note/base_notes_view_model.dart';
 import 'package:state_tests/common/widgets/builder/builder_type.dart';
 import 'package:state_tests/common/widgets/debug/debug_padding.dart';
@@ -17,7 +16,7 @@ class Notes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => switch (_builder) {
-    ViewModelScope<BaseNotesViewModel> scope => NotesFrame(
+    ObserverScope<BaseNotesViewModel> scope => NotesFrame(
       _controller,
       scope.viewModel,
       scope.obs((_) => NotesList(scope.viewModel.state)),

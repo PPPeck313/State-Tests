@@ -13,7 +13,7 @@ import 'package:state_tests/common/widgets/debug/debug_padding.dart';
 import 'package:state_tests/common/widgets/notes/notes.dart';
 import 'package:state_tests/common/widgets/notes/notes_list.dart';
 import 'package:state_tests/common/widgets/screen/home_drawer.dart';
-import 'package:state_tests/states/bloc/bloc_observer.dart';
+import 'package:state_tests/states/context/provided/bloc/bloc_observer.dart';
 
 part 'home_screen.g.dart';
 

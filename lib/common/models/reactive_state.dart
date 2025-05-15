@@ -1,5 +1,5 @@
 abstract interface class ReactiveState {}
 
-abstract interface class ReactiveViewModel {
-  dynamic get state;
+abstract interface class ReactiveViewModel<S extends ReactiveState> {
+  S get state;
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:state_tests/common/widgets/screen/page/page_behavior.dart';
@@ -12,12 +11,13 @@ final class StatefulPage extends StatefulHookWidget {
   State<StatefulHookWidget> createState() => pageState;
 }
 
-abstract class StatefulProvidedScopePageState extends State<StatefulHookWidget> with ProvidedContextScopeBehavior {
+abstract class StatefulProvidedContextScopePageState extends State<StatefulHookWidget>
+    with ProvidedContextScopeBehavior {
   @override
   Widget build(BuildContext context) => PageStarter(counterBuilder, notesBuilder, useTextEditingController());
 }
 
-abstract class StatefulDefaultScopePageState extends State<StatefulHookWidget> with DefaultContextScopeBehavior {
+abstract class StatefulDefaultContextScopePageState extends State<StatefulHookWidget> with DefaultContextScopeBehavior {
   @override
   Widget build(BuildContext context) => PageStarter(counterBuilder, notesBuilder, useTextEditingController());
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:state_tests/common/models/reactive_state.dart';
 
 sealed class BuilderType<VM extends ReactiveViewModel> {
@@ -8,10 +7,10 @@ sealed class BuilderType<VM extends ReactiveViewModel> {
   BuilderType(this.obs);
 }
 
-final class ViewModelScope<VM extends ReactiveViewModel> extends BuilderType<VM> {
+final class ObserverScope<VM extends ReactiveViewModel> extends BuilderType<VM> {
   VM viewModel;
 
-  ViewModelScope(super.obs, this.viewModel);
+  ObserverScope(super.obs, this.viewModel);
 }
 
 final class ProvidedContextScope<VM extends ReactiveViewModel> extends BuilderType<VM> {

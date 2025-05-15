@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-import 'package:state_tests/common/models/reactive_state.dart';
-import 'package:state_tests/common/widgets/notes/notes.dart';
-
 import 'package:state_tests/common/models/counter/base_counter_view_model.dart';
 import 'package:state_tests/common/models/note/base_notes_view_model.dart';
+import 'package:state_tests/common/models/reactive_state.dart';
 import 'package:state_tests/common/widgets/builder/builder_type.dart';
 import 'package:state_tests/common/widgets/counter/counter.dart';
 import 'package:state_tests/common/widgets/debug/debug_padding.dart';
+import 'package:state_tests/common/widgets/notes/notes.dart';
 
 part 'page_behavior.g.dart';
 
@@ -25,7 +24,7 @@ abstract mixin class PageBehavior<C, N> {
   BuilderType<BaseNotesViewModel> get notesBuilder;
 }
 
-mixin ViewModelScopeBehavior implements PageBehavior<void, void> {
+mixin ObserverScopeBehavior implements PageBehavior<void, void> {
   @protected
   BaseCounterViewModel get counterViewModel;
 
@@ -36,13 +35,13 @@ mixin ViewModelScopeBehavior implements PageBehavior<void, void> {
   Widget getCounterWidget(Widget Function(void) widget);
 
   @override
-  BuilderType<BaseCounterViewModel> get counterBuilder => ViewModelScope(getCounterWidget, counterViewModel);
+  BuilderType<BaseCounterViewModel> get counterBuilder => ObserverScope(getCounterWidget, counterViewModel);
 
   @override
   Widget getNotesWidget(Widget Function(void) widget);
 
   @override
-  BuilderType<BaseNotesViewModel> get notesBuilder => ViewModelScope(getNotesWidget, notesViewModel);
+  BuilderType<BaseNotesViewModel> get notesBuilder => ObserverScope(getNotesWidget, notesViewModel);
 }
 
 abstract mixin class ContextScopeBehavior<C extends ReactiveViewModel, N extends ReactiveViewModel>
